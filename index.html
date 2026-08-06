@@ -38,8 +38,8 @@ h1 em{font-style:italic;color:var(--accent);}
   font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--accent);}
 .bloco__label::after{content:"";flex:1;height:1px;background:var(--line-light);}
 .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(1rem,2vw,1.6rem);width:100%;}
-.grade--beb{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
-.grade--beb .exp__t{font-size:clamp(1.25rem,2vw,1.55rem);}
+/* bebidas: 3 por fileira, cards do MESMO tamanho dos de comida */
+@media(min-width:760px){.grade--beb{grid-template-columns:repeat(3,1fr);}}
 .fecho{padding:clamp(2.5rem,6vh,4rem) var(--pad) 0;}
 .exp{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:var(--night-2);text-decoration:none;
   transition:transform .5s var(--ease);}
@@ -87,7 +87,7 @@ h1 em{font-style:italic;color:var(--accent);}
   <p class="bloco__label">Bebidas</p>
   <div class="grade grade--beb">
     <a class="exp" href="open-bar.html">
-      <img src="fotos/brinde-pb.jpg" alt="Brinde de taças">
+      <img src="fotos/beb-openbar.jpg" alt="Drinks do open bar no balcão">
       <div class="exp__meta"><p class="exp__t">Open Bar</p><p class="exp__s">Conhecer →</p></div>
     </a>
     <a class="exp" href="open-bar-drinks.html">
@@ -95,11 +95,11 @@ h1 em{font-style:italic;color:var(--accent);}
       <div class="exp__meta"><p class="exp__t">Open Bar de Drinks</p><p class="exp__s">Conhecer →</p></div>
     </a>
     <a class="exp" href="open-bar-caipirinha.html">
-      <img src="fotos/beb-drinks.jpg" alt="Cascata de drinks cítricos">
+      <img src="fotos/beb-caipirinha2.jpg" alt="Caipirinhas com limão e gelo">
       <div class="exp__meta"><p class="exp__t">Open Bar de Caipirinha</p><p class="exp__s">Conhecer →</p></div>
     </a>
     <a class="exp" href="welcome-drinks.html">
-      <img src="fotos/beb-welcome.jpg" alt="Garçom servindo taças de espumante">
+      <img src="fotos/beb-welcome2.jpg" alt="Taças de espumante com flores brancas">
       <div class="exp__meta"><p class="exp__t">Welcome Drinks</p><p class="exp__s">Conhecer →</p></div>
     </a>
     <a class="exp" href="agua-saborizada.html">
