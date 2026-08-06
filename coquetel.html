@@ -34,7 +34,10 @@ a{color:inherit;}
 /* hero */
 .hero{position:relative;min-height:88svh;background:var(--night);display:flex;align-items:flex-end;overflow:hidden;color:var(--cream);}
 .hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.98) contrast(1.03);}
-.hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,9,16,.55),rgba(12,9,16,.18) 40%,rgba(12,9,16,.9) 100%);}
+/* dois gradientes: o horizontal segura a leitura do título sobre o vídeo claro */
+.hero__scrim{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(12,9,16,.9) 0%,rgba(12,9,16,.52) 46%,rgba(12,9,16,.14) 100%),
+             linear-gradient(180deg,rgba(12,9,16,.45),transparent 32%,rgba(12,9,16,.92) 100%);}
 .hero__in{position:relative;z-index:2;width:100%;padding:6rem var(--pad) clamp(2.5rem,7vh,4.5rem);max-width:var(--maxw);margin-inline:auto;}
 .hero__logo{height:32px;width:auto;margin-bottom:2rem;opacity:.95;}
 .hero__kicker{color:var(--accent);display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;}
@@ -115,7 +118,9 @@ a{color:inherit;}
 
 <header class="hero">
   <a class="hero__volta" href="./">‹ Gastronomia</a>
-  <img class="hero__bg" src="fotos/coq/mini-hamburguer-de-picanha-com-queijo-azul-e-c.jpg" alt="Mini hambúrguer de picanha do coquetel volante" fetchpriority="high">
+  <video class="hero__bg" autoplay muted loop playsinline poster="fotos/coq/mini-hamburguer-de-picanha-com-queijo-azul-e-c.jpg" aria-hidden="true">
+    <source src="video/hero-coquetel.mp4" type="video/mp4">
+  </video>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__in">
     <img class="hero__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
