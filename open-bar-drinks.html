@@ -16,15 +16,18 @@
 @font-face{font-family:'Montserrat';font-weight:500;font-display:swap;src:url('assets/fonts/montserrat-500.woff2') format('woff2');}
 
 :root{
-  --paper:#F2EFEA;--paper-2:#E7E1D7;--ink:#1A1714;--ink-soft:#463F37;--ink-mute:#8A7F73;--ink-mute-txt:#564D43;
-  --night:#141019;--night-2:#0C0910;--cream:#F0E8DC;--accent:#C08A57;--accent-txt:#7A5129;--gold:#C08A57;
+  --paper:#F2EFEA;--paper-2:#E7E1D7;--ink:#1A1714;--ink-soft:#5B5249;--ink-mute:#8A7F73;--ink-mute-txt:#6E6357;
+  --night:#141019;--night-2:#0C0910;--cream:#F0E8DC;--accent:#C08A57;--accent-txt:#8F6134;--gold:#C08A57;
   --line-dark:rgba(26,23,20,.14);--line-light:rgba(240,232,220,.16);
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat','Segoe UI',system-ui,sans-serif;
-  --maxw:1360px;--pad:clamp(1.25rem,5vw,4.5rem);--ease:cubic-bezier(.16,1,.3,1);
+  /* 1360 travava tudo numa coluna central: numa tela de 1920 sobravam 560px de
+     margem vazia (~30% do monitor). O max() garante que nada encolhe nas telas
+     que ja cabiam; acima disso o layout acompanha o monitor ate 1840. */
+  --maxw:max(1360px,min(95vw,1840px));--pad:clamp(1.25rem,5vw,4.5rem);--ease:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.65;
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.65;
   text-rendering:optimizeLegibility;overflow-x:hidden;}
 img{display:block;max-width:100%;}
 a{color:inherit;}
@@ -364,69 +367,195 @@ a{color:inherit;}
   .frame__img,.band__img{transform:none;}
 }
 
-/* ===== LEGIBILIDADE (pedido do consultor, 2026-08-08) =====
-   A apresentacao roda em monitor secundario, que lava cinza claro e fonte
-   fina. Peso e contraste do texto ficam TODOS aqui, num bloco so: e o lugar
-   de mexer se pedirem mais (ou menos) reforco. */
-.cat li,.bloco li,.item,.lista li{font-weight:700;}
-.det-bloco li{font-weight:600;}  /* fundo escuro ja tem contraste; 700 borra */
-.num{opacity:.72;}
-.nivel__res,.carrossel__hint,.legenda,.pacote__base,
-.nivel__preco small,.pacote__preco small{color:var(--ink-soft);}
-.sec--dark .num{color:rgba(240,232,220,.72);}
-.overture__sub,.hero__sub,.sec--dark .sec__lead,.sec--dark .nota,
-.band__note,.stage__head p,.head p{color:rgba(240,232,220,.92);}
-.tierbar__opt,.det-tab,.footer__links a{color:rgba(240,232,220,.9);}
-.tierbar__lbl,.det-bloco .meta,.det-preco span,.band__cap,
-.frase__assin,.scrollcue{color:rgba(240,232,220,.8);}
-.stage__hint,.footer__fine,.rodape{color:rgba(240,232,220,.72);}
+/* ===== LEGIBILIDADE (nome dos drinks, 2026-08-08) =====
+   O material e apresentado no computador pra 2-3 clientes olhando a mesma
+   tela, entao nome de drink precisa ler de longe. Os nomes herdavam o
+   font-weight:300 do body numa Cormorant (serifa de haste fina) e sumiam.
+   Peso, corpo e contraste dos nomes ficam TODOS aqui: e o lugar de mexer se
+   pedirem mais (ou menos) reforco. Mesma convencao do buffet-essencial. */
 
-/* 2a rodada (mesmo dia): "ainda ta dificil de visualizar por conta da tela
-   branca". O peso 400 do Montserrat continuava sumindo no monitor secundario.
-   Os textos de EXPLICACAO (nao os rotulos, nao os titulos) vao pra 500, cor
-   cheia, e ganham ~8% de corpo. Isso e o teto do que peso+cor resolvem: se
-   ainda faltar, o proximo passo e tamanho, nao mais preto. */
-.sec__lead,.regras p,.nota,.valor__txt,.legenda__txt,.escopo,
-.pilares p,.destaque p,.det-bloco p{font-weight:500;color:var(--ink);}
-.nota strong,.regras strong,.escopo strong,
-.band__note strong,.sec--dark .nota strong{font-weight:700;}
-.regras p{font-size:1rem;}
-.nota{font-size:.94rem;}
-.legenda__txt{font-size:.86rem;}
-.valor__txt{font-size:1.02rem;}
-/* nos fundos escuros a mesma enfase, mas com creme cheio no lugar do preto */
-.sec--dark .sec__lead,.sec--dark .nota,.band__note,.stage__head p,
-.head p,.det-bloco p,.overture__sub,.hero__sub{font-weight:500;}
-.sec--dark .sec__lead,.sec--dark .nota,.band__note,
-.stage__head p,.head p{color:var(--cream);}
+/* 1. os nomes em si: peso 700 (a fonte 700 existe, nao e negrito sintetico) */
+.drink__nome,.carta li{font-weight:700;}
 
-/* 3a rodada: os CARDS de menu/pacote ("negrita essa parte e aumenta a letra um
-   pouco"). Sao os menores textos da tela dos menus: nome e preco em serif 600,
-   composicao e "inclui" com peso 600 e ~12% de corpo. A composicao vai pra cor
-   cheia porque e o que o cliente compara entre um menu e outro. */
-.nivel__nome,.pacote__nome{font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);}
-.nivel__preco,.pacote__preco{font-weight:600;font-size:1.22rem;}
-.nivel__preco small,.pacote__preco small{font-weight:600;font-size:.6rem;letter-spacing:.1em;}
-.nivel__res,.pacote__res{font-weight:600;font-size:.82rem;color:var(--ink);}
-.nivel__inclui,.pacote__base{font-weight:600;font-size:.75rem;}
-/* 4a rodada: medido card a card contra o cardapio-doces na mesma largura de
-   tela. A largura do card ja era igual (215px); o que estava menor era o texto
-   dentro dele e o recuo. Subiu o que estava ABAIXO do doces (composicao .74 ->
-   .82rem, inclui .7 -> .75rem, preco 1.18 -> 1.22rem, recuo 1.4/1.2 -> 1.5/1.3);
-   o que ja estava maior (nome do menu, "por pessoa", entrelinha) ficou como
-   estava. O doces tambem tira o CAIXA ALTA da composicao, o que faz ele parecer
-   ainda maior; aqui a caixa alta foi mantida de proposito, e o que o consultor
-   aprovou nas rodadas de legibilidade. */
-.nivel,.pacote{padding:1.5rem 1.3rem 1.3rem;}
+/* 2. corpo maior -- peso resolve metade, tamanho resolve o resto */
+.carta li{font-size:1.16rem;line-height:1.35;}
+.drink__nome{font-size:1.42rem;}
 
-/* ===== ESCALA E LARGURA (2026-08-08, ref: cardapio-doces) =====
-   Base era 16px num container de 1360px: em monitor grande sobrava tela vazia
-   dos dois lados e faltava corpo de letra. Subir o font-size do <html> escala
-   TUDO que esta em rem de uma vez (a calibragem de legibilidade das rodadas
-   anteriores sobe junto, mantendo as proporcoes). Nao repetir tamanho a mao. */
-html{font-size:18px;}
-:root{--maxw:1680px;}
-@media(min-width:1600px){:root{--maxw:1800px;}}
+/* 3. a lista respira mais, pra bold nao virar parede de texto */
+.carta li{padding:.62rem 0;}
+.carta__nome{font-size:.72rem;color:var(--ink);font-weight:700;}
+
+/* 4. no card a foto disputa com o texto: ingrediente sai de 62% pra 88% e
+      ganha peso; o veu escuro sobe mais alto pra segurar nome de 2 linhas */
+.drink__ing{color:rgba(240,232,220,.88);font-weight:400;font-size:.72rem;}
+.drink--foto .drink__cap::before{top:-5.5rem;
+  background:linear-gradient(0deg,rgba(8,5,12,.96) 38%,rgba(8,5,12,.72) 68%,transparent);}
+.drink--foto .drink__nome{text-shadow:0 1px 12px rgba(8,5,12,.55);}
+
+/* ===== LEGIBILIDADE - 2a rodada (consultor: "ainda ruim, sem dar zoom") =====
+   MEDIDO antes de mexer: o contraste ja passava em tudo (4,66 a 15,56 num
+   minimo de 4,5), entao escurecer mais nao resolveria. O problema real e
+   TAMANHO: havia uma camada inteira de texto entre 8px e 11px, quase toda em
+   CAIXA ALTA com tracking largo -- que a essa altura apaga a forma da palavra
+   e desgruda as letras. As tres alavancas abaixo, nesta ordem: corpo, caixa
+   alta so onde e rotulo curto, e tracking menor. */
+
+/* 1. PISO DE CORPO: nada informativo abaixo de ~13px */
+.nivel__res,.nivel__inclui,.nivel__preco small,.carta__n,.carrossel__hint,
+.drink__tag,.drink__sa,.legenda,.legenda__txt,.eyebrow,
+.nivel[aria-pressed="true"]::after{font-size:.84rem;}
+.drink__tag,.drink__sa,.nivel[aria-pressed="true"]::after{font-size:.78rem;}
+
+/* 2. TRACKING: caixa alta larga a 9px era o pior caso; corta pela metade */
+.eyebrow{letter-spacing:.16em;}
+.carrossel__hint,.carta__nome{letter-spacing:.12em;}
+.drink__tag,.drink__sa,.carta__n,.nivel__preco small,
+.nivel[aria-pressed="true"]::after{letter-spacing:.08em;}
+
+/* 3. FRASE LONGA SAI DA CAIXA ALTA (rotulo curto continua em caps: e assinatura
+      visual do material). Estas duas sao frases, nao rotulos: */
+.nivel__res,.nivel__inclui{text-transform:none;letter-spacing:.01em;line-height:1.5;font-weight:500;}
+.nivel__res{color:var(--ink);}
+.legenda,.legenda__txt{text-transform:none;letter-spacing:.01em;font-weight:500;color:var(--ink-soft);}
+
+/* 4. O QUE O CLIENTE PROCURA NO CARD: nome e preco. Sobem de patamar. */
+/* o card tem ~247px uteis: acima de ~1.62rem o "Open Extra Premium" quebra em
+   duas linhas e desalinha a fileira. O ganho vem do peso 700, nao do corpo. */
+.nivel__nome{font-size:clamp(1.4rem,2vw,1.62rem);font-weight:700;}
+/* "por pessoa" em linha propria: colado no preco ele quebrava sozinho */
+.nivel__preco{font-size:1.34rem;font-weight:700;display:block;line-height:1.25;}
+.nivel__preco small{display:block;margin-left:0;margin-top:.1rem;font-weight:500;color:var(--ink-soft);}
+
+/* 5. CARD BRANCO: nao e ganho de contraste (ja passava) e sim de SEPARACAO --
+      o bloco descola do creme da pagina e o olho agrupa cada pacote sozinho. */
+.nivel{background:#FFFDFB;border-color:rgba(26,23,20,.22);padding:1.5rem 1.35rem 1.35rem;}
+.nivel[aria-pressed="true"]{background:linear-gradient(160deg,rgba(192,138,87,.14),#FFFDFB 60%);
+  border-color:var(--accent);box-shadow:0 2px 0 var(--accent);}
+
+/* 6. peso nos textos corridos que sobraram em 300 */
+.sec__lead,.nota,.drink__ing,.valor__txt{font-weight:500;}
+.nota{font-size:.98rem;color:var(--ink);}
+
+/* 7. residuos: rotulos que ficaram em peso 300 e os dois ultimos corpos <13px */
+.drink__sa,.drink__tag,.carta__n,.carrossel__hint{font-weight:500;}
+.drink__ing{font-size:.84rem;line-height:1.5;}
+.carta__nome{font-size:.84rem;}
+.drink__tag{color:rgba(240,232,220,.78);}
+
+/* ===== SECAO DOS PACOTES INVERTIDA (pedido 08/08, ref: cardapio de doces) =====
+   A secao 02 saiu do creme e foi pro --night com texto creme, igual a secao de
+   menus do doces. Os corpos e pesos vem dos blocos LEGIBILIDADE acima -- aqui
+   so se remapeia COR, senao a calibracao de tamanho se perde. Toda cor que
+   dependia de --ink/--accent-txt (tokens escuros) morre no fundo escuro. */
+.menus{padding-block:clamp(3.5rem,9vh,7rem) clamp(2.5rem,6vh,4rem);}
+.menus .sec__head{border-color:var(--line-light);}
+
+/* card do pacote: escuro sobre escuro, separado por borda.
+   O SELECIONADO inverte pra claro -- e o destaque mais forte que existe. */
+.menus .nivel{background:rgba(255,255,255,.045);border-color:rgba(240,232,220,.2);color:var(--cream);}
+.menus .nivel:hover{border-color:rgba(240,232,220,.45);background:rgba(255,255,255,.075);}
+.menus .nivel__res{color:var(--cream);}
+.menus .nivel__preco{color:var(--accent);}
+.menus .nivel__preco small,.menus .legenda,.menus .legenda__txt,
+.menus .carrossel__hint{color:rgba(240,232,220,.82);}
+.menus .nivel__inclui{color:var(--accent);border-top-color:rgba(240,232,220,.18);}
+.menus .nivel[aria-pressed="true"]{background:var(--cream);color:var(--ink);
+  border-color:var(--cream);box-shadow:0 3px 0 var(--accent);}
+.menus .nivel[aria-pressed="true"] .nivel__res{color:var(--ink);}
+.menus .nivel[aria-pressed="true"] .nivel__preco{color:var(--accent-txt);}
+.menus .nivel[aria-pressed="true"] .nivel__preco small{color:var(--ink-soft);}
+/* terracota sobre o creme do card selecionado da so 2,46:1 -- reprova */
+.menus .nivel[aria-pressed="true"] .nivel__qtd small{color:var(--ink-soft);}
+/* #8F6134 sobre o creme da so 4,40 (precisa 4,5). #7A5129 da 5,69 e mantem a
+   terracota -- e o mesmo accent-txt do cardapio de buffet. */
+.menus .nivel[aria-pressed="true"] .nivel__inclui{color:#7A5129;border-top-color:var(--line-dark);}
+
+/* lista completa e nota, no escuro */
+.menus .carta__head{border-top-color:var(--cream);}
+.menus .carta__nome{color:var(--cream);}
+.menus .carta__n{color:var(--accent);}
+.menus .carta li{border-bottom-color:rgba(240,232,220,.16);}
+.menus .nota{color:rgba(240,232,220,.92);background:rgba(255,255,255,.05);}
+
+/* ===== TRILHO DE FOTOS PINADO (ref: cristal-apresentacao) =====
+   A secao trava na tela e o track anda na horizontal conforme a rolagem
+   vertical. Feito em CSS sticky + transform, SEM GSAP/Lenis: o material e um
+   HTML unico e autocontido, entao nao vale pendurar 70 KB de biblioteca.
+   A altura do .trilho e calculada no JS a partir da largura real do track. */
+.carrossel{margin-top:clamp(2.5rem,6vh,4rem);}
+.carrossel__head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;margin-bottom:clamp(1.2rem,3vh,2rem);}
+.trilho{position:relative;}
+.trilho__pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden;}
+.trilho .track{overflow:visible;scroll-snap-type:none;padding:0 var(--pad);
+  will-change:transform;gap:clamp(1rem,2vw,1.8rem);}
+/* fotos GRANDES: ocupam a altura util da tela, nao mais um card de 280px */
+.trilho .drink{width:min(86vw,520px);aspect-ratio:1/1.16;}
+.trilho .drink__nome{font-size:clamp(1.5rem,2.6vw,2.05rem);}
+.trilho .drink__ing{font-size:clamp(.86rem,1.1vw,.98rem);}
+.trilho .drink__cap{padding:1.1rem 1.5rem 1.4rem;}
+/* ===== CARD DE PACOTE MAIOR (3a rodada — ref: cards do cardapio de doces) =====
+   Medido no doces a 1280px: card 218x449, padding 27/23, gap interno 9, nome
+   25,6px, preco 22px e -- o que faz a diferenca -- a CONTAGEM em serifada de
+   34px, que ali e a maior coisa do card. O nosso mostrava "10 drinks" como
+   texto corrido de 13px, por isso parecia pequeno mesmo com tudo legivel. */
+.menus .nivel{padding:1.7rem 1.45rem 1.45rem;gap:.56rem;}
+.nivel__qtd{display:block;font-family:var(--serif);font-size:clamp(1.85rem,2.6vw,2.15rem);
+  font-weight:700;line-height:1.05;margin:.2rem 0 .15rem;
+  font-variant-numeric:lining-nums tabular-nums;}
+.nivel__res{font-size:.92rem;line-height:1.45;}
+/* rotulo colado no numero, igual o "por pessoa" do doces. O "deles" na linha
+   de baixo e o que impede o cliente ler 10+6=16: os sem alcool sao os MESMOS
+   drinks preparados sem alcool, nao drinks a mais. */
+/* o <b> segura "10 drinks" inteiro: sem ele o card estreito quebrava entre o
+   numero e a palavra ("10" numa linha, "drinks" na outra). O rotulo desce
+   sozinho pra segunda linha quando nao cabe, e ai fica limpo. */
+.nivel__qtd b{white-space:nowrap;font-weight:inherit;}
+.nivel__qtd small{font-family:var(--sans);font-size:.78rem;letter-spacing:.08em;
+  text-transform:uppercase;font-weight:500;margin-left:.55rem;white-space:nowrap;
+  color:var(--accent);}
+.menus .nivel__inclui{padding-top:.85rem;margin-top:auto;}
+/* o que da a sensacao de "grande" no doces nao e so o corpo da letra: e a
+   ALTURA. La o card tem 449px de altura pra 218 de largura. Com min-height o
+   bloco ganha presenca e o "Inclui" desce pro rodape (margin-top:auto), que e
+   exatamente o arranjo do print. So a partir de 2 colunas -- no celular cada
+   card empilha e altura fixa viraria rolagem a toa. */
+@media(min-width:561px){ .menus .nivel{min-height:clamp(21rem,25vw,25rem);} }
+
+/* ===== APROVEITAMENTO DA TELA (4a rodada) =====
+   Alem do --maxw la em cima: a galeria da secao 01 tinha coluna 1.15/0.85 com a
+   foto da direita em QUADRADO contra uma 4/5 na esquerda. Com align-items:end
+   isso abria 483px de vazio acima dela numa tela de 1920 -- era o "espaco em
+   branco" do print. Colunas mais parelhas + a direita em 3/4 fecham o buraco
+   sem perder a assimetria editorial. */
+/* precisa da media query: solto, este bloco vem DEPOIS do @media(max-width:820px)
+   que empilha a galeria e sobrescrevia ele -- no celular voltavam 2 colunas de
+   ~167px, foto miniatura. */
+@media(min-width:821px){
+  .gal{grid-template-columns:1.1fr .9fr;}
+  .gal--rev{grid-template-columns:.9fr 1.1fr;}
+}
+
+/* trilho: a foto tinha largura fixa (520px => 603 de altura). Num monitor de
+   1080 sobravam ~477px verticais dentro do pin. Agora a ALTURA manda e a
+   largura sai do aspect-ratio, entao a foto cresce junto com a tela. */
+.trilho:not(.trilho--flat) .drink{height:min(80vh,860px);width:auto;}
+
+/* nav invertido enquanto passa por bloco escuro */
+.nav.scrolled.sobre-escuro{background:rgba(20,16,25,.85);border-color:var(--line-light);}
+.nav.scrolled.sobre-escuro .nav__logo{filter:none;}
+.nav.scrolled.sobre-escuro .nav__links a,
+.nav.scrolled.sobre-escuro .nav__burger{color:var(--cream);}
+.nav.scrolled.sobre-escuro .nav__cta{border-color:var(--cream);color:var(--cream);}
+
+/* sem pin (celular / reduced motion): volta a ser rolagem lateral normal */
+.trilho--flat .trilho__pin{position:static;height:auto;overflow-x:auto;}
+.trilho--flat .track{overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important;}
+.trilho--flat .drink{width:min(78vw,420px);scroll-snap-align:start;}
+@media(prefers-reduced-motion:reduce){
+  .trilho__pin{position:static;height:auto;}
+  .trilho .track{overflow-x:auto;transform:none!important;}
+}
 </style>
 </head>
 <body>
@@ -438,29 +567,31 @@ html{font-size:18px;}
   <a href="#topo" aria-label="Início"><img class="nav__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá"></a>
   <div class="nav__right">
     <div class="nav__links">
+      <a href="./">Gastronomia</a>
       <a href="#experiencia">A experiência</a>
       <a href="#pacotes">Pacotes</a>
       <a href="#valores">Valores</a>
       <a href="#regras">Como funciona</a>
     </div>
-    <a class="nav__cta" href="#fechamento">Escolher nosso open</a>
+    <a class="nav__cta" href="#pacotes">Escolher nosso open</a>
     <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
   </div>
 </nav>
 
 <div class="menu" id="menu">
   <div class="menu__in">
+    <a href="./">Gastronomia</a>
     <a href="#experiencia">A experiência</a>
     <a href="#pacotes">Pacotes</a>
     <a href="#valores">Valores</a>
     <a href="#regras">Como funciona</a>
-    <a href="#fechamento">Escolher nosso open</a>
+    <a href="#pacotes">Escolher nosso open</a>
   </div>
 </div>
 
 <!-- ===== ABERTURA ===== -->
 <header class="overture" id="topo">
-  <img class="overture__bg" src="fotos/drinks/hero-drinks.jpg" alt="Drinks servidos no balcão de mármore" fetchpriority="high">
+  <img class="overture__bg" src="fotos/opendrinks/hero-drinks.jpg" alt="Drinks servidos no balcão de mármore" fetchpriority="high">
   <div class="overture__scrim" aria-hidden="true"></div>
   <div class="overture__in">
     <img class="overture__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
@@ -504,13 +635,13 @@ html{font-size:18px;}
   <div class="gal">
     <div class="gal__col">
       <figure class="frame frame--45 reveal">
-        <img class="frame__img" src="fotos/drinks/ind-bandeja-volante.jpg" alt="Bandeja de drinks levada aos convidados" loading="lazy" style="object-position:center 62%">
+        <img class="frame__img" src="fotos/opendrinks/ind-bandeja-volante.jpg" alt="Bandeja de drinks levada aos convidados" loading="lazy" style="object-position:center 62%">
         <figcaption class="frame__cap">A bandeja chega até a mesa</figcaption>
       </figure>
     </div>
     <div class="gal__col gal__col--offset">
-      <figure class="frame frame--11 reveal" data-d="1">
-        <img class="frame__img" src="fotos/drinks/ind-gin-trio.jpg" alt="Drinks à base de gin em taças de vidro" loading="lazy" style="object-position:center 38%">
+      <figure class="frame frame--34 reveal" data-d="1">
+        <img class="frame__img" src="fotos/opendrinks/ind-gin-trio.jpg" alt="Drinks à base de gin em taças de vidro" loading="lazy" style="object-position:center 38%">
         <figcaption class="frame__cap">Drinks à base de gin</figcaption>
       </figure>
     </div>
@@ -530,30 +661,40 @@ html{font-size:18px;}
 </section>
 
 <!-- ===== PACOTES ===== -->
-<section class="menus wrap" id="pacotes">
-  <div class="sec__head">
-    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
-    <h2 class="sec__title reveal">Quatro <em>pacotes</em></h2>
-    <p class="sec__lead reveal" data-d="1">De um pacote pro outro, muda a quantidade de drinks. O jeito de servir é sempre o mesmo.</p>
-  </div>
-  <div class="menus__grid" id="menusGrid" role="group" aria-label="Pacotes de open de drinks"></div>
-
-  <div class="carrossel" id="carrossel">
-    <div class="carrossel__head">
-      <h3 class="carrossel__titulo">Conheça o <em id="carrosselNome"></em></h3>
-      <p class="carrossel__hint">Deslize para o lado →</p>
+<section class="menus sec--dark" id="pacotes">
+  <div class="wrap">
+    <div class="sec__head">
+      <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
+      <h2 class="sec__title reveal">Quatro <em>pacotes</em></h2>
+      <p class="sec__lead reveal" data-d="1">De um pacote pro outro, muda a quantidade de drinks. O jeito de servir é sempre o mesmo.</p>
     </div>
-    <div class="track" id="track"></div>
+    <div class="menus__grid" id="menusGrid" role="group" aria-label="Pacotes de open de drinks"></div>
   </div>
 
-  <div class="carta" id="carta"></div>
-
-  <div class="legenda">
-    <p class="legenda__txt">A bolinha dourada marca os drinks que também existem em versão sem álcool:</p>
-    <span><i class="d d--sa"></i> Também sem álcool</span>
+  <!-- trilho: sai do wrap pra ocupar a tela toda. Fica preso na viewport e as
+       fotos passam de lado conforme a pessoa rola pra baixo (igual o Cristal). -->
+  <div class="carrossel" id="carrossel">
+    <div class="wrap carrossel__head">
+      <h3 class="carrossel__titulo">Conheça o <em id="carrosselNome"></em></h3>
+      <p class="carrossel__hint">Role — as fotos passam de lado</p>
+    </div>
+    <div class="trilho" id="trilho">
+      <div class="trilho__pin">
+        <div class="track" id="track"></div>
+      </div>
+    </div>
   </div>
 
-  <p class="nota">O valor por pessoa diminui conforme o open bar do evento. Tabela completa em <a href="#valores" style="color:var(--accent-txt)">Valores</a>.</p>
+  <div class="wrap">
+    <div class="carta" id="carta"></div>
+
+    <div class="legenda">
+      <p class="legenda__txt">A bolinha dourada marca os drinks que também existem em versão sem álcool:</p>
+      <span><i class="d d--sa"></i> Também sem álcool</span>
+    </div>
+
+    <p class="nota">O valor por pessoa diminui conforme o open bar do evento. Tabela completa em <a href="#valores" style="color:var(--accent)">Valores</a>.</p>
+  </div>
 </section>
 
 <!-- ===== VALORES ===== -->
@@ -611,21 +752,9 @@ html{font-size:18px;}
       <div class="sig__row sig__row--a">Cada drink, uma memória &nbsp;·&nbsp; Cada drink, uma memória &nbsp;·&nbsp; Cada drink, uma memória &nbsp;·&nbsp;</div>
       <div class="sig__row sig__row--b">Cada drink, uma memória &nbsp;·&nbsp; Cada drink, uma memória &nbsp;·&nbsp; Cada drink, uma memória &nbsp;·&nbsp;</div>
     </div>
-    <figure class="sig__hero"><img src="fotos/drinks/torre-tacas.jpg" alt="Torre de taças iluminada na festa" loading="lazy"></figure>
+    <figure class="sig__hero"><img src="fotos/opendrinks/torre-tacas.jpg" alt="Torre de taças iluminada na festa" loading="lazy"></figure>
     <img class="sig__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
     <p class="sig__headline">Daqui a alguns anos, um sabor vai trazer todo mundo de volta pra essa noite.</p>
-  </div>
-</section>
-
-<!-- ===== FECHAMENTO ===== -->
-<section class="valor wrap" id="fechamento">
-  <div class="valor__card reveal">
-    <p class="eyebrow valor__selo">O próximo passo</p>
-    <h2 class="valor__titulo">Escolham a carta. O brinde a gente garante.</h2>
-    <p class="valor__txt">O nosso time monta com vocês a combinação entre o open bar do evento e a carta de drinks, com o valor fechado antes da festa.</p>
-    <a class="btn btn--dark" href="#pacotes">Rever os pacotes
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
   </div>
 </section>
 
@@ -635,6 +764,7 @@ html{font-size:18px;}
   <div class="footer__in">
     <img class="footer__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
     <div class="footer__links">
+      <a href="./">Gastronomia</a>
       <a href="#topo">Topo</a>
       <a href="#pacotes">Pacotes</a>
       <a href="#valores">Valores</a>
@@ -661,12 +791,12 @@ html{font-size:18px;}
    sa = tem versão sem álcool (lista da página "Sem álcool")
    ============================================================ */
 const DRINKS = [
- {id:'bourbon-peach', nome:'Bourbon Peach', t:1, sa:true,  gl:'rocks',  c1:'#E9A15E', c2:'#B25F2A', gar:['hortela'], foto:'fotos/drinks/ind-bourbon-peach.jpg', acervo:true,
+ {id:'bourbon-peach', nome:'Bourbon Peach', t:1, sa:true,  gl:'rocks',  c1:'#E9A15E', c2:'#B25F2A', gar:['hortela'], foto:'fotos/opendrinks/ind-bourbon-peach.jpg', acervo:true,
   ing:'Whiskey Bourbon, limão, xarope de pêssego, hortelã e zest de limão siciliano',
   saIng:'Na versão sem álcool: whiskey zero álcool'},
- {id:'cosmopolitan',  nome:'Cosmopolitan', t:1, sa:false, gl:'coupe',  c1:'#E85A74', c2:'#B03050', gar:['zest'], foto:'fotos/drinks/ind-cosmopolitan.jpg', acervo:true,
+ {id:'cosmopolitan',  nome:'Cosmopolitan', t:1, sa:false, gl:'coupe',  c1:'#E85A74', c2:'#B03050', gar:['zest'], foto:'fotos/opendrinks/ind-cosmopolitan.jpg', acervo:true,
   ing:'Vodka, limão, licor de laranja, suco de cranberry e zest de laranja'},
- {id:'gt-classico',   nome:'Gin Tônica Clássico', t:1, sa:true, gl:'balloon', c1:'#E3E8E4', c2:'#9FB0AA', gar:['alecrim','rodela-siciliano'], foto:'fotos/drinks/stock-gt-classico.jpg',
+ {id:'gt-classico',   nome:'Gin Tônica Clássico', t:1, sa:true, gl:'balloon', c1:'#E3E8E4', c2:'#9FB0AA', gar:['alecrim','rodela-siciliano'], foto:'fotos/opendrinks/stock-gt-classico.jpg',
   ing:'Gin, tônica, limão siciliano, zest de laranja e alecrim',
   saIng:'Na versão sem álcool: gin zero álcool'},
  {id:'gt-maracuja',   nome:'Gin Tônica Maracujá', t:1, sa:true, gl:'balloon', c1:'#EEC45C', c2:'#C08A2E', gar:['alecrim'],
@@ -677,36 +807,36 @@ const DRINKS = [
   saIng:'Na versão sem álcool: gin zero álcool'},
  {id:'julep',         nome:'Strawberry Julep Cremoso', t:1, sa:false, gl:'rocks', c1:'#E86464', c2:'#A83232', gar:['hortela'], foam:'#F3E9D8',
   ing:'Whiskey Bourbon, limão, morango, xarope de açúcar, hortelã e espuma de gengibre'},
- {id:'ny-sour',       nome:'New York Sour', t:1, sa:false, gl:'rocks', c1:'#D99A4E', c2:'#9C5A20', gar:[], float:'#7A2436', foto:'fotos/drinks/ind-ny-sour.jpg', acervo:true,
+ {id:'ny-sour',       nome:'New York Sour', t:1, sa:false, gl:'rocks', c1:'#D99A4E', c2:'#9C5A20', gar:[], float:'#7A2436', foto:'fotos/opendrinks/ind-ny-sour.jpg', acervo:true,
   ing:'Whiskey Bourbon, limão, xarope de açúcar e float de vinho tinto'},
- {id:'moscow-mule',   nome:'Moscow Mule', t:1, sa:true, gl:'mule', c1:'#E8D9B8', c2:'#C89A5E', gar:['rodela-limao'], foam:'#F3E9D8', foto:'fotos/drinks/mule-oficial.jpg', acervo:true,
+ {id:'moscow-mule',   nome:'Moscow Mule', t:1, sa:true, gl:'mule', c1:'#E8D9B8', c2:'#C89A5E', gar:['rodela-limao'], foam:'#F3E9D8', foto:'fotos/opendrinks/mule-oficial.jpg', acervo:true,
   ing:'Vodka, limão, xarope de gengibre, água com gás e espuma de gengibre',
   saIng:'Na versão sem álcool: só sai a vodka'},
- {id:'negroni',       nome:'Negroni', t:1, sa:false, gl:'rocks', c1:'#C74436', c2:'#7E1F1F', gar:['rodela-laranja'], foto:'fotos/drinks/ind-negroni.jpg', acervo:true,
+ {id:'negroni',       nome:'Negroni', t:1, sa:false, gl:'rocks', c1:'#C74436', c2:'#7E1F1F', gar:['rodela-laranja'], foto:'fotos/opendrinks/ind-negroni.jpg', acervo:true,
   ing:'Gin, campari, vermute e zest de laranja'},
- {id:'mojito',        nome:'Mojito', t:1, sa:true, gl:'high', c1:'#D6E6C6', c2:'#8FBF7F', gar:['hortela'], bub:true, foto:'fotos/drinks/ind-mojito.jpg', acervo:true,
+ {id:'mojito',        nome:'Mojito', t:1, sa:true, gl:'high', c1:'#D6E6C6', c2:'#8FBF7F', gar:['hortela'], bub:true, foto:'fotos/opendrinks/ind-mojito.jpg', acervo:true,
   ing:'Rum, limão, xarope de açúcar, hortelã e água com gás',
   saIng:'Na versão sem álcool: só sai o rum'},
- {id:'aperol',        nome:'Aperol Spritz', t:2, sa:false, gl:'wine', c1:'#F09A3E', c2:'#D95F1E', gar:['rodela-laranja','alecrim'], bub:true, foto:'fotos/drinks/ind-aperol.jpg', acervo:true,
+ {id:'aperol',        nome:'Aperol Spritz', t:2, sa:false, gl:'wine', c1:'#F09A3E', c2:'#D95F1E', gar:['rodela-laranja','alecrim'], bub:true, foto:'fotos/opendrinks/ind-aperol.jpg', acervo:true,
   ing:'Aperol, espumante brut, água com gás, laranja bahia e alecrim'},
- {id:'cuba-libre',    nome:'Cuba Libre', t:2, sa:false, gl:'high', c1:'#7A4A2C', c2:'#3A2314', gar:['rodela-limao'], bub:true, foto:'fotos/drinks/ind-cuba-libre.jpg', acervo:true,
+ {id:'cuba-libre',    nome:'Cuba Libre', t:2, sa:false, gl:'high', c1:'#7A4A2C', c2:'#3A2314', gar:['rodela-limao'], bub:true, foto:'fotos/opendrinks/ind-cuba-libre.jpg', acervo:true,
   ing:'Rum, limão e coca-cola'},
  {id:'caip-limao',    nome:'Caipirinha de Limão', t:3, sa:true, gl:'rocks', c1:'#D8E8A8', c2:'#9BB855', gar:['rodela-limao'],
-  foto:'fotos/drinks/ind-caipirinha.jpg', acervo:true,
+  foto:'fotos/opendrinks/ind-caipirinha.jpg', acervo:true,
   ing:'Vodka ou cachaça, limão e cordial de limão',
   saIng:'Na versão sem álcool: água com gás no lugar do destilado'},
  {id:'caip-siciliano',nome:'Caipirinha de Limão Siciliano', t:3, sa:true, gl:'rocks', c1:'#F0E08A', c2:'#C9AE3F', gar:['rodela-siciliano'],
   ing:'Vodka ou cachaça, limão siciliano e cordial de limão',
   saIng:'Na versão sem álcool: água com gás no lugar do destilado'},
  {id:'caip-morango',  nome:'Caipirinha de Morango', t:3, sa:true, gl:'rocks', c1:'#E86470', c2:'#B0303E', gar:['morango','alecrim'],
-  foto:'fotos/drinks/caipirinha-morango.webp', acervo:true,
+  foto:'fotos/opendrinks/caipirinha-morango.webp', acervo:true,
   ing:'Vodka ou cachaça, morango, cordial de morango e alecrim',
   saIng:'Na versão sem álcool: água com gás no lugar do destilado'},
  {id:'caip-maracuja', nome:'Caipirinha de Maracujá', t:3, sa:true, gl:'rocks', c1:'#F2C75E', c2:'#C58A26', gar:['alecrim'],
   ing:'Vodka ou cachaça, maracujá, cordial de maracujá e alecrim',
   saIng:'Na versão sem álcool: água com gás no lugar do destilado'},
  {id:'caip-uva',      nome:'Caipirinha de Uva', t:3, sa:true, gl:'rocks', c1:'#A56BB4', c2:'#5F3470', gar:['uvas'],
-  foto:'fotos/drinks/caipirinha-uva.webp', acervo:true,
+  foto:'fotos/opendrinks/caipirinha-uva.webp', acervo:true,
   ing:'Vodka ou cachaça, uva niágara e cordial de uva',
   saIng:'Na versão sem álcool: água com gás no lugar do destilado'},
  {id:'caip-vinho',    nome:'Caipirinha de Vinho', t:3, sa:true, gl:'rocks', c1:'#B03A50', c2:'#5E1626', gar:['rodela-limao'],
@@ -714,13 +844,13 @@ const DRINKS = [
   saIng:'Na versão sem álcool: suco de uva integral no lugar do vinho'},
  {id:'penicillin',    nome:'Penicillin', t:3, sa:false, gl:'rocks', c1:'#E3B65C', c2:'#8E5E1E', gar:['rodela-limao'],
   ing:'Whisky Scotch, limão, xarope de gengibre e mel'},
- {id:'carajillo',     nome:'Carajillo', t:4, sa:false, gl:'rocks', c1:'#C9A876', c2:'#33200F', gar:['cafe'], foto:'fotos/drinks/ind-carajillo.jpg', acervo:true,
+ {id:'carajillo',     nome:'Carajillo', t:4, sa:false, gl:'rocks', c1:'#C9A876', c2:'#33200F', gar:['cafe'], foto:'fotos/opendrinks/ind-carajillo.jpg', acervo:true,
   ing:'Licor 43 e café espresso'},
- {id:'garibaldi',     nome:'Garibaldi', t:4, sa:false, gl:'high', c1:'#F0813C', c2:'#C23A2A', gar:['rodela-laranja'], foto:'fotos/drinks/ind-garibaldi.jpg', acervo:true,
+ {id:'garibaldi',     nome:'Garibaldi', t:4, sa:false, gl:'high', c1:'#F0813C', c2:'#C23A2A', gar:['rodela-laranja'], foto:'fotos/opendrinks/ind-garibaldi.jpg', acervo:true,
   ing:'Campari, suco de laranja e laranja bahia'},
- {id:'margarita',     nome:'Margarita', t:4, sa:false, gl:'coupe', c1:'#DDE8B8', c2:'#A8BC62', gar:['rodela-limao'], sal:true, foto:'fotos/drinks/ind-margarita.jpg', acervo:true,
+ {id:'margarita',     nome:'Margarita', t:4, sa:false, gl:'coupe', c1:'#DDE8B8', c2:'#A8BC62', gar:['rodela-limao'], sal:true, foto:'fotos/opendrinks/ind-margarita.jpg', acervo:true,
   ing:'Tequila, limão, licor de laranja e sal'},
- {id:'whiskey-sour',  nome:'Whiskey Sour', t:4, sa:false, gl:'rocks', c1:'#DFA452', c2:'#9E641E', gar:['zest'], foam:'#F3E9D8', foto:'fotos/drinks/ind-whiskey-sour.jpg', acervo:true,
+ {id:'whiskey-sour',  nome:'Whiskey Sour', t:4, sa:false, gl:'rocks', c1:'#DFA452', c2:'#9E641E', gar:['zest'], foam:'#F3E9D8', foto:'fotos/opendrinks/ind-whiskey-sour.jpg', acervo:true,
   ing:'Whiskey Bourbon, limão, xarope de açúcar e zest de limão siciliano'},
 ];
 
@@ -753,7 +883,7 @@ PACOTES.forEach(p=>{
   b.type='button'; b.className='nivel'; b.dataset.id=p.id; b.setAttribute('aria-pressed','false');
   b.innerHTML = `<p class="nivel__nome">${p.nome}</p>
     <p class="nivel__preco">a partir de ${p.de}<small>por pessoa</small></p>
-    <p class="nivel__res">${doPacote.length} drinks<br>${nSA} também sem álcool</p>`
+    <p class="nivel__res"><span class="nivel__qtd"><b>${doPacote.length} drinks</b><small>com álcool</small></span>${nSA} deles também sem álcool</p>`
     + (p.inclui ? `<p class="nivel__inclui">${p.inclui}</p>` : `<p class="nivel__inclui">O pacote que abre a experiência</p>`);
   b.addEventListener('click',()=>selecionar(p.id,true));
   grid.appendChild(b);
@@ -804,11 +934,54 @@ function selecionar(id, rolar){
 
   const alvos = [document.getElementById('track'), document.getElementById('carta')];
   alvos.forEach(el=>el.classList.add('trocando'));
-  setTimeout(()=>{ render(p); renderValores(); alvos.forEach(el=>el.classList.remove('trocando')); }, 160);
+  setTimeout(()=>{ render(p); renderValores(); medirTrilho(); alvos.forEach(el=>el.classList.remove('trocando')); }, 160);
 
   if(rolar) document.getElementById('carrossel').scrollIntoView({behavior:'smooth', block:'start'});
 }
+
+/* ---- trilho pinado: a rolagem vertical vira deslocamento horizontal ----
+   O .trilho recebe altura = tela + o quanto o track passa da largura da tela.
+   Enquanto essa altura corre, o .trilho__pin fica grudado (sticky) e o track
+   anda em translate. Sem bibliotecas: e o mesmo efeito do Cristal em CSS+JS.
+   Precisa remedir sempre que o pacote muda (numero de fotos muda). */
+const trilho = document.getElementById('trilho');
+const trilhoTrack = document.getElementById('track');
+let trilhoDist = 0;
+
+/* Quanto a foto anda de lado pra cada pixel rolado. 1 = igual ao Cristal (que
+   tem 7 itens); aqui o Luxo tem 16 drinks e no 1:1 a secao pedia 8.200px de
+   rolagem. 1.4 encurta o percurso sem o movimento ficar seco. UNICO numero a
+   mexer se pedirem "mais rapido" ou "mais devagar". */
+const VEL_TRILHO = 1.7;
+
+function medirTrilho(){
+  const cards = trilhoTrack.children;
+  trilhoTrack.style.transform = 'none';
+  const semPin = matchMedia('(max-width:900px)').matches
+              || matchMedia('(prefers-reduced-motion:reduce)').matches;
+  trilho.classList.toggle('trilho--flat', semPin);
+  if(!cards.length || semPin){ trilho.style.height = ''; trilhoDist = 0; return; }
+  const pad = parseFloat(getComputedStyle(trilhoTrack).paddingLeft) || 0;
+  const a = cards[0].getBoundingClientRect();
+  const b = cards[cards.length - 1].getBoundingClientRect();
+  trilhoDist = Math.max(0, Math.round((b.right - a.left) + pad * 2 - innerWidth));
+  trilho.style.height = (innerHeight + Math.round(trilhoDist / VEL_TRILHO)) + 'px';
+  moverTrilho();
+}
+
+function moverTrilho(){
+  if(!trilhoDist) return;
+  const percurso = trilho.offsetHeight - innerHeight;
+  if(percurso <= 0) return;
+  const p = Math.min(1, Math.max(0, -trilho.getBoundingClientRect().top / percurso));
+  trilhoTrack.style.transform = 'translate3d(' + (-p * trilhoDist).toFixed(1) + 'px,0,0)';
+}
+
+addEventListener('scroll', moverTrilho, {passive:true});
+addEventListener('resize', medirTrilho);
+
 selecionar(atual,false);
+medirTrilho();
 
 /* ---- valores: preco por pacote x open bar do evento ---- */
 const OPEN_BARS = [
@@ -859,9 +1032,18 @@ function toggleBar(){
 
 /* ---- nav + progresso ---- */
 const nav = document.getElementById('nav'), prog = document.getElementById('progress');
+/* o nav "scrolled" e claro; sobre bloco escuro ele tem que inverter, senao
+   vira uma barra branca em cima do fundo night */
+const blocosEscuros = [...document.querySelectorAll('.sec--dark,.band,.sig,.frase')];
+function navSobreEscuro(){
+  const limite = nav.offsetHeight || 72;
+  nav.classList.toggle('sobre-escuro',
+    blocosEscuros.some(b=>{ const r=b.getBoundingClientRect(); return r.top<=limite && r.bottom>=0; }));
+}
 function onScroll(){
   const y = window.scrollY;
   nav.classList.toggle('scrolled', y > window.innerHeight*0.8);
+  navSobreEscuro();
   const h = document.documentElement.scrollHeight - window.innerHeight;
   prog.style.width = (h>0 ? (y/h)*100 : 0) + '%';
   toggleBar();
