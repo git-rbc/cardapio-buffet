@@ -442,11 +442,24 @@ a{color:inherit;}
    e ScrollTrigger carregaram E o usuario nao pediu menos movimento.
    Nao estilizar nada de movimento fora deste bloco. */
 
+/* O ScrollTrigger NAO convive com `scroll-behavior:smooth` no <html> (que esta
+   la em cima, e o que faz os links do menu deslizarem). Pra medir, ele salta pro
+   topo da pagina e volta; com o smooth ligado esses saltos viram animacao e ele
+   mede no lugar errado. Sintoma real: trocar de menu dentro do trilho jogava o
+   `start` de 4118 pra -400, a trava soltava e o hero aparecia por baixo.
+   Sem motion o smooth continua valendo; com motion, quem desliza e o JS. */
+html.motion{scroll-behavior:auto;}
+
 /* trilho: o palco (titulo + fotos) prende na tela e a rolagem empurra a fila.
    O recorte (overflow) fica no PALCO, que esta parado. Se ficasse no .track, que e
    o elemento que anda, a janela de recorte andaria junto e so uma foto apareceria. */
 html.motion .carrossel__palco{height:100vh;height:100svh;display:flex;flex-direction:column;
   justify-content:center;gap:clamp(.8rem,2.2vh,1.5rem);overflow:hidden;perspective:1500px;
+  /* o palco ocupa a tela inteira e tem DUAS barras fixas por cima: o nav (83px)
+     no topo e a tierbar do menu exibido (59px) embaixo. Sem estes recuos o
+     titulo some atras do nav e a legenda da foto fica atras da tierbar.
+     Medidos na tela; se alguma das barras mudar de altura, revisar aqui. */
+  padding-block:5rem 4rem;
   /* de ponta a ponta da tela, pra foto entrar pela borda e nao pela margem do texto */
   width:100vw;margin-inline:calc(50% - 50vw);
   /* titulo e primeira foto tem que nascer na MESMA margem do resto da pagina:
@@ -454,9 +467,20 @@ html.motion .carrossel__palco{height:100vh;height:100svh;display:flex;flex-direc
   --recuo:calc(max(0px,(100vw - var(--maxw))/2) + var(--pad));}
 html.motion .carrossel__palco .carrossel__head{padding-inline:var(--recuo);margin-bottom:0;}
 html.motion .carrossel__palco .track{overflow:visible;scroll-snap-type:none;
-  padding:0 var(--recuo);transform-style:preserve-3d;will-change:transform;}
-/* a foto passa a ser medida pela ALTURA do palco (o 3/4 do CSS resolve a largura) */
-html.motion .carrossel__palco .dish{height:min(64vh,560px);width:auto;}
+  padding:0 var(--recuo);transform-style:preserve-3d;will-change:transform;
+  /* o track fica com TODA a altura que sobra depois do cabecalho; o min-height:0
+     e o que permite ele encolher dentro do flex (sem isso o palco estoura) */
+  flex:1;min-height:0;align-items:center;}
+/* A foto ocupa a altura inteira do track. Era `min(64vh,560px)` em 3/4, que
+   deixava ~250px de tela vazia acima e abaixo e ficava bem menor que a do
+   cardapio de doces, com que o consultor comparou (2026-08-08).
+   O 1/1 e o mesmo do doces e e o que fecha a diferenca de LARGURA: em 3/4 a
+   foto ficava 497px contra 684px la. E as fotos de origem sao mais largas que
+   altas, entao o quadrado MOSTRA MAIS do prato do que o retrato, nao menos.
+   Se alguma foto ficar mal enquadrada, o ajuste e o 3o item da tupla em
+   NIVEIS[].fotos (object-position), nao mexer nesta regra. */
+html.motion .carrossel__palco .dish{height:100%;max-height:min(82vh,780px);
+  width:auto;aspect-ratio:1/1;}
 
 /* fotos grandes: a camera passa a ser o scrub do GSAP, entao a transicao do CSS
    (que existe pro reveal) precisa sair de cena senao as duas brigam */
@@ -2450,7 +2474,8 @@ function render(nv){
      para antes (ou depois) do fim e a trava solta na hora errada */
   if(window.ScrollTrigger && document.documentElement.classList.contains('motion')){
     if(window.__acordarFotos) window.__acordarFotos();
-    requestAnimationFrame(()=>ScrollTrigger.refresh());
+    if(window.__remedirTrilho) window.__remedirTrilho();
+    else requestAnimationFrame(()=>ScrollTrigger.refresh());
   }
 
   const dot = d=>`<i class="d d--${d}"></i>`;
@@ -2735,6 +2760,21 @@ if(man && !matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.documentElement.classList.add('motion');
   gsap.registerPlugin(ScrollTrigger);
 
+  /* o CSS desligou o `scroll-behavior:smooth` (o ScrollTrigger não convive com
+     ele), então o deslize das âncoras passa a ser feito aqui. `scrollIntoView`
+     com behavior:'smooth' não depende daquela propriedade. Os links que abrem a
+     lojinha de extras têm handler próprio e não são destino de rolagem. */
+  document.querySelectorAll('a[href^="#"]:not([data-abre-extras])').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const href = a.getAttribute('href');
+      if(href === '#') return;
+      const destino = document.querySelector(href);
+      if(!destino) return;
+      e.preventDefault();
+      destino.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
   /* ---- 1 · TRILHO: o palco prende na tela e as fotos desfilam de lado ----
      A rolagem vertical vira deslocamento horizontal da fila. Cada foto gira e
      recua conforme se afasta do centro, então quem está no meio é a que se lê.
@@ -2805,6 +2845,34 @@ if(man && !matchMedia('(prefers-reduced-motion: reduce)').matches){
       onEnter:()=>{ fotosAcordadas = true; acordarFotos(); }});
     /* trocar de menu recria as fotos: se o trilho já foi alcançado, acorda as novas */
     window.__acordarFotos = ()=>{ if(fotosAcordadas) acordarFotos(); };
+
+    /* Remedir o trilho com o pin ATIVO desalinha tudo. Medido ao vivo: trocando
+       de menu de dentro do trilho, o `start` ia de 4118 pra -400 (o ScrollTrigger
+       lê a posição do elemento, que naquele momento está `position:fixed`, e
+       perde o scroll acumulado), a trava soltava e a página saltava pra fora da
+       seção, com o hero aparecendo por baixo. Então, se a pessoa trocou de menu
+       de DENTRO do trilho, primeiro sai dele, remede, e volta pro começo do
+       trilho novo. Que é também o que se espera: menu novo, fila do começo. */
+    /* O salto tem que ser INSTANTÂNEO. O CSS tem `html{scroll-behavior:smooth}`
+       (é o que faz os links do menu deslizarem), e com ele o `scrollTo` vira uma
+       animação de centenas de ms: o `refresh` rodava antes de a página ter saído
+       do pin e media errado do mesmo jeito. Desliga só durante o salto. */
+    const saltarPara = y=>{
+      const html = document.documentElement;
+      const antes = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      scrollTo(0, Math.max(0, y));
+      html.style.scrollBehavior = antes;
+    };
+    window.__remedirTrilho = ()=>{
+      const st = tl.scrollTrigger;
+      const dentro = st && scrollY >= st.start && scrollY <= st.end;
+      if(dentro) saltarPara(st.start - 1);
+      ScrollTrigger.update();   /* sincroniza o estado do pin com o novo scroll */
+      ScrollTrigger.refresh();
+      const novo = tl.scrollTrigger;
+      if(dentro && novo) saltarPara(novo.start - 1);
+    };
 
     /* a dica muda: agora não se arrasta o carrossel, ele anda com a rolagem */
     const dica = document.getElementById('carrosselHint');
