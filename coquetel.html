@@ -84,7 +84,12 @@ a{color:inherit;}
 .dish{position:relative;flex:0 0 auto;width:min(64vw,290px);aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);scroll-snap-align:start;}
 .dish img{width:100%;height:100%;object-fit:cover;}
 .dish__cap{position:absolute;left:.9rem;bottom:.9rem;right:.9rem;z-index:2;color:#fff;}
-.dish__cap::before{content:"";position:absolute;inset:-1rem -.9rem -.9rem;z-index:-1;background:linear-gradient(0deg,rgba(8,5,12,.82),transparent);}
+/* degrade sob a legenda. Alto e em varias paradas de proposito: as fotos do
+   coquetel tem uma faixa clara decorativa no rodape, e com o degrade curto a
+   legenda branca sumia nela. Mesma regra nos dois arquivos. */
+.dish__cap::before{content:"";position:absolute;left:-.9rem;right:-.9rem;bottom:-.9rem;top:auto;
+  height:560%;z-index:-1;background:linear-gradient(0deg,rgba(8,11,14,.95),rgba(8,11,14,.9) 14%,
+  rgba(8,11,14,.62) 44%,rgba(8,11,14,.28) 70%,transparent);}
 .dish__nome{font-family:var(--serif);font-size:1.15rem;line-height:1.12;text-shadow:0 1px 10px rgba(0,0,0,.5);}
 .dish__tag{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;}
 .trocando{opacity:.25;transition:opacity .25s;}
@@ -112,6 +117,77 @@ a{color:inherit;}
 .footer__links a{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,232,220,.7);text-decoration:none;}
 .footer__links a:hover{color:var(--accent);}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.pacote{transition:none;}}
+
+/* ===== PACOTES NO ESCURO (2026-08-08) =====
+   Espelho do bloco "MENUS NO ESCURO" do buffet (index.html), com `.pacote` no
+   lugar de `.nivel`. Manter os dois lados iguais: se mexer aqui, mexer la.
+   REGRA: aqui so se remapeia COR. Peso e tamanho ja foram calibrados nas
+   rodadas de legibilidade; toda cor que dependia de --ink ou --accent-txt
+   (tokens feitos pro fundo claro) morre no escuro e precisa de par. */
+.sec--dark{background:var(--night);color:var(--cream);}
+.sec--dark .sec__title{color:var(--cream);}
+.sec--dark .sec__eyebrow{color:var(--accent);}
+.menus{padding-block:clamp(3.5rem,9vh,7rem) clamp(2.5rem,6vh,4rem);}
+.menus .sec__head{border-color:var(--line-light);}
+
+/* card do pacote: escuro sobre escuro, separado por borda.
+   O SELECIONADO inverte pra claro, que e o destaque mais forte que existe. */
+.menus .pacote{background:rgba(255,255,255,.045);border-color:rgba(240,232,220,.2);color:var(--cream);}
+.menus .pacote:hover{border-color:rgba(240,232,220,.45);background:rgba(255,255,255,.075);}
+.menus .pacote__res{color:var(--cream);}
+.menus .pacote__preco{color:var(--accent);}
+.menus .pacote__preco small,.menus .pacote__base,
+.menus .carrossel__hint{color:rgba(240,232,220,.82);}
+.menus .pacote[aria-pressed="true"]{background:var(--cream);color:var(--ink);
+  border-color:var(--cream);box-shadow:0 3px 0 var(--accent);}
+.menus .pacote[aria-pressed="true"] .pacote__nome{color:var(--ink);}
+.menus .pacote[aria-pressed="true"] .pacote__res{color:var(--ink);}
+.menus .pacote[aria-pressed="true"] .pacote__preco{color:var(--accent-txt);}
+.menus .pacote[aria-pressed="true"] .pacote__preco small{color:var(--ink-soft);}
+
+/* as listas do cardapio no escuro: linha creme, categoria em accent claro */
+.menus .carrossel__titulo em{color:var(--accent);}
+.menus .cat__head{border-top-color:var(--cream);}
+.menus .cat__n{color:var(--accent);border-color:var(--accent);}
+.menus .cat li{border-bottom-color:rgba(240,232,220,.16);}
+.menus .nota{color:rgba(240,232,220,.92);background:rgba(255,255,255,.05);}
+.menus .nota strong{color:var(--accent);}
+/* o bege do card de foto sumiria no claro: no escuro ele e o vazio da foto */
+.menus .dish{background:#221c26;}
+
+/* ===== MOVIMENTO (2026-08-08) =====
+   Espelho do bloco do buffet. As imagens se movem conforme a pagina rola e o
+   carrossel de fotos prende na tela: a pagina so desce depois que a ultima foto
+   passou. TUDO depende da classe `.motion`, que o JS so poe no <html> quando
+   GSAP + ScrollTrigger carregaram E o usuario nao pediu menos movimento — sem
+   ela nada disso vale e a pagina volta a ser o carrossel arrastavel de sempre.
+
+   O ScrollTrigger NAO convive com `scroll-behavior:smooth` no <html>: pra medir
+   ele salta pro topo e volta, e com o smooth esses saltos viram animacao e ele
+   mede no lugar errado (no buffet isso quebrava a troca de pacote dentro do
+   trilho). Sem motion o smooth continua valendo; com motion, quem desliza e o JS. */
+html.motion{scroll-behavior:auto;}
+
+/* trilho: o palco (titulo + fotos) prende na tela e a rolagem empurra a fila.
+   O recorte (overflow) fica no PALCO, que esta parado. Se ficasse no .track, que e
+   o elemento que anda, a janela de recorte andaria junto e so uma foto apareceria. */
+html.motion .carrossel__palco{height:100vh;height:100svh;display:flex;flex-direction:column;
+  justify-content:center;gap:clamp(.8rem,2.2vh,1.5rem);overflow:hidden;perspective:1500px;
+  /* diferente do buffet: aqui nao ha nav fixo nem tierbar por cima, entao o
+     recuo e so respiro. La ele existe pra nao esconder titulo e legenda. */
+  padding-block:3.5rem 3rem;
+  /* de ponta a ponta da tela, pra foto entrar pela borda e nao pela margem do texto */
+  width:100vw;margin-inline:calc(50% - 50vw);
+  --recuo:calc(max(0px,(100vw - var(--maxw))/2) + var(--pad));}
+html.motion .carrossel__palco .carrossel__head{padding-inline:var(--recuo);margin:0;}
+html.motion .carrossel__palco .track{overflow:visible;scroll-snap-type:none;
+  padding:0 var(--recuo);transform-style:preserve-3d;will-change:transform;
+  flex:1;min-height:0;align-items:center;}
+/* a foto ocupa a altura inteira do track, em 1/1 (mesma proporcao do buffet e
+   do cardapio de doces). Se alguma ficar mal enquadrada, o ajuste e a foto, nao
+   esta regra. */
+html.motion .carrossel__palco .dish{height:100%;max-height:min(82vh,780px);
+  width:auto;aspect-ratio:1/1;}
 
 /* ===== LEGIBILIDADE (pedido do consultor, 2026-08-08) =====
    A apresentacao roda em monitor secundario, que lava cinza claro e fonte
@@ -195,7 +271,12 @@ html{font-size:18px;}
   </div>
 </header>
 
-<main class="wrap sec" id="pacotes">
+<!-- ===== PACOTES =====
+     Mesma estrutura do buffet: a seção é FULL-BLEED (fundo escuro de ponta a
+     ponta) e o `.wrap` foi pra dentro. Se o `wrap` voltar pra cá o fundo vira
+     uma faixa de 1800px com papel dos dois lados. -->
+<main class="menus sec--dark" id="pacotes">
+ <div class="wrap">
   <div class="sec__head">
     <p class="eyebrow sec__eyebrow">Escolham o de vocês</p>
     <h2 class="sec__title">Quatro <em>coquetéis</em></h2>
@@ -203,15 +284,21 @@ html{font-size:18px;}
   </div>
   <div class="grid4" id="grid" role="group" aria-label="Pacotes de coquetel"></div>
 
-  <div class="carrossel__head">
-    <h3 class="carrossel__titulo">À mesa no <em id="nomeSel"></em></h3>
-    <p class="carrossel__hint">Deslize para o lado →</p>
+  <div class="carrossel" id="carrossel">
+    <!-- o palco e o que fica preso na tela enquanto as fotos desfilam (ver MOVIMENTO) -->
+    <div class="carrossel__palco" id="carrosselPalco">
+      <div class="carrossel__head">
+        <h3 class="carrossel__titulo">À mesa no <em id="nomeSel"></em></h3>
+        <p class="carrossel__hint" id="carrosselHint">Deslize para o lado →</p>
+      </div>
+      <div class="track" id="track"></div>
+    </div>
   </div>
-  <div class="track" id="track"></div>
 
   <div class="cardapio" id="cardapio"></div>
 
   <p class="nota"><strong>Sem pressa.</strong> As escolhas são feitas na Reunião Final, cerca de 30 dias antes do evento, e podem ser alteradas até essa data sem qualquer transtorno. Consulte a disponibilidade de acordo com o ambiente do seu evento.</p>
+ </div>
 </main>
 
 <section class="fim wrap">
@@ -231,6 +318,11 @@ html{font-size:18px;}
     </div>
   </div>
 </footer>
+
+<!-- motor de movimento: mesmos builds do buffet e da apresentação do Cristal.
+     Locais de propósito (o material roda em apresentação, às vezes com internet ruim). -->
+<script src="assets/lib/gsap.min.js"></script>
+<script src="assets/lib/ScrollTrigger.min.js"></script>
 
 <script>
 /* Dados extraídos do PDF oficial "Coquetel Volante" (matriz da última página). */
@@ -892,10 +984,137 @@ function selecionar(id, rolar){
         <ul>${s.itens.map(i=>`<li>${i.n}</li>`).join('')}</ul>
       </div>`).join('');
     alvos.forEach(el=>el.classList.remove('trocando'));
+    /* trocar de pacote troca a quantidade de fotos, logo o comprimento do
+       trilho: o ScrollTrigger precisa remedir, senão a fila para antes (ou
+       depois) do fim e a trava solta na hora errada */
+    if(window.ScrollTrigger && document.documentElement.classList.contains('motion')){
+      if(window.__acordarFotos) window.__acordarFotos();
+      if(window.__remedirTrilho) window.__remedirTrilho();
+      else requestAnimationFrame(()=>ScrollTrigger.refresh());
+    }
   },160);
-  if(rolar) document.querySelector('.carrossel__head').scrollIntoView({behavior:'smooth',block:'start'});
+  if(rolar) document.getElementById('carrossel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 selecionar(atual,false);
+
+/* ============================================================
+   MOTOR DE MOVIMENTO — espelho do buffet (index.html)
+   ============================================================
+   As imagens se movem conforme a página rola e o carrossel prende na tela: a
+   página só desce depois que todas as fotos passaram. Prender é INTENCIONAL.
+
+   Regra de ouro: se GSAP ou ScrollTrigger não carregarem (rede caindo no meio de
+   uma apresentação, bloqueador, arquivo corrompido) OU se o sistema pedir menos
+   movimento, este bloco sai INTEIRO de cena. A classe `.motion` nunca entra no
+   <html>, o CSS de movimento não vale, e a página vira o carrossel arrastável de
+   sempre — inclusive sem a trava, que é o comportamento seguro.
+   ============================================================ */
+(function(){
+  const libsOk = !!(window.gsap && window.ScrollTrigger);
+  const menosMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!libsOk || menosMovimento) return;
+
+  document.documentElement.classList.add('motion');
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* o CSS desligou o `scroll-behavior:smooth` (o ScrollTrigger não convive com
+     ele), então o deslize das âncoras passa a ser feito aqui */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const href = a.getAttribute('href');
+      if(href === '#') return;
+      const destino = document.querySelector(href);
+      if(!destino) return;
+      e.preventDefault();
+      destino.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  /* ---- TRILHO: o palco prende na tela e as fotos desfilam de lado ---- */
+  const carrossel = document.getElementById('carrossel');
+  const palco = document.getElementById('carrosselPalco');
+  const track = document.getElementById('track');
+  if(carrossel && palco && track){
+    /* `scrollWidth` não serve: o track é overflow:visible (quem recorta é o
+       palco) e reporta só a largura da caixa. offsetWidth é layout puro e não
+       sofre com as transforms 3D que o scrub aplica nas fotos. */
+    const distancia = ()=>{
+      const fotos = [...track.children];
+      if(!fotos.length) return 0;
+      const cs = getComputedStyle(track);
+      const gap = parseFloat(cs.columnGap) || 0;
+      const padL = parseFloat(cs.paddingLeft) || 0;
+      const padR = parseFloat(cs.paddingRight) || 0;
+      const fila = fotos.reduce((s,f)=>s + f.offsetWidth, 0) + gap*(fotos.length-1);
+      return Math.max(0, fila - (track.clientWidth - padL - padR));
+    };
+
+    const profundidade = ()=>{
+      const meio = innerWidth/2;
+      track.querySelectorAll('.dish').forEach(foto=>{
+        const r = foto.getBoundingClientRect();
+        let t = ((r.left + r.width/2) - meio) / innerWidth;
+        t = Math.max(-1.1, Math.min(1.1, t));
+        const a = Math.abs(t);
+        gsap.set(foto, {rotateY: -18*t, z: -240*a, scale: 1 - .09*a, opacity: 1 - .28*a});
+      });
+    };
+
+    const tl = gsap.timeline({scrollTrigger:{
+      trigger: carrossel,
+      start: 'top top',
+      /* o fator 0.45 faz a fila andar mais que a rolagem: 1:1 exigia 4 voltinhas
+         de mouse por foto. Calibrado SEM rolagem com inércia. */
+      end: ()=> '+=' + (distancia()*0.45 + innerHeight*0.45),
+      pin: palco,
+      scrub: .4,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+      onUpdate: profundidade,
+      onRefresh: profundidade
+    }});
+    tl.to(track, {x: ()=> -distancia(), ease:'none', duration:1})
+      .to({}, {duration:.3});
+    profundidade();
+
+    /* no trilho a foto ENTRA sozinha na tela e, enquanto baixa, mostra o fundo
+       do card, que parece um buraco. Uma tela antes, todas viram eager. */
+    let fotosAcordadas = false;
+    const acordarFotos = ()=> track.querySelectorAll('img[loading="lazy"]')
+                                   .forEach(im=>{ im.loading = 'eager'; });
+    ScrollTrigger.create({trigger:carrossel, start:'top bottom+=80%', once:true,
+      onEnter:()=>{ fotosAcordadas = true; acordarFotos(); }});
+    window.__acordarFotos = ()=>{ if(fotosAcordadas) acordarFotos(); };
+
+    /* Remedir com o pin ATIVO desalinha tudo: o ScrollTrigger lê a posição do
+       elemento, que naquele momento está `position:fixed`, e o `start` vira
+       negativo — a trava solta e a página salta pra fora da seção. Então sai do
+       trilho, remede, e volta pro começo dele. O salto tem que ser INSTANTÂNEO
+       (o `scroll-behavior:smooth` transformaria em animação e o refresh rodaria
+       antes de a página ter saído do pin). */
+    const saltarPara = y=>{
+      const html = document.documentElement;
+      const antes = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      scrollTo(0, Math.max(0, y));
+      html.style.scrollBehavior = antes;
+    };
+    window.__remedirTrilho = ()=>{
+      const st = tl.scrollTrigger;
+      const dentro = st && scrollY >= st.start && scrollY <= st.end;
+      if(dentro) saltarPara(st.start - 1);
+      ScrollTrigger.update();
+      ScrollTrigger.refresh();
+      const novo = tl.scrollTrigger;
+      if(dentro && novo) saltarPara(novo.start - 1);
+    };
+
+    const dica = document.getElementById('carrosselHint');
+    if(dica) dica.textContent = 'Role · as fotos passam de lado';
+
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>ScrollTrigger.refresh());
+  }
+})();
 </script>
 </body>
 </html>

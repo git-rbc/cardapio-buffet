@@ -188,7 +188,12 @@ a{color:inherit;}
 .dish img{width:100%;height:100%;object-fit:cover;filter:saturate(.98) contrast(1.03);transform:scale(1.08);transition:transform 1.2s var(--ease);}
 .dish.in img{transform:scale(1);}
 .dish__cap{position:absolute;left:.9rem;bottom:.9rem;right:.9rem;z-index:2;color:#fff;}
-.dish__cap::before{content:"";position:absolute;inset:-1rem -.9rem -.9rem;z-index:-1;background:linear-gradient(0deg,rgba(8,5,12,.82),transparent);}
+/* degrade sob a legenda. Alto e em varias paradas de proposito: as fotos do
+   coquetel tem uma faixa clara decorativa no rodape, e com o degrade curto a
+   legenda branca sumia nela. Mesma regra nos dois arquivos. */
+.dish__cap::before{content:"";position:absolute;left:-.9rem;right:-.9rem;bottom:-.9rem;top:auto;
+  height:560%;z-index:-1;background:linear-gradient(0deg,rgba(8,11,14,.95),rgba(8,11,14,.9) 14%,
+  rgba(8,11,14,.62) 44%,rgba(8,11,14,.28) 70%,transparent);}
 .dish__nome{font-family:var(--serif);font-size:1.25rem;line-height:1.1;text-shadow:0 1px 10px rgba(0,0,0,.5);}
 .dish__tag{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;}
 .trocando{opacity:.25;transition:opacity .25s;}
