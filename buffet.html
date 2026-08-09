@@ -529,25 +529,25 @@ html{font-size:18px;}
   <a href="#topo" aria-label="Início"><img class="nav__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá"></a>
   <div class="nav__right">
     <div class="nav__links">
-      <a href="#menus">Menus</a>
       <a href="#entradas">Entradas</a>
+      <a href="#menus">Menus</a>
       <a href="#cuidado">Restrições</a>
       <a href="#regras">Como funciona</a>
       <a href="#extras" data-abre-extras>Extras</a>
     </div>
-    <a class="nav__cta" href="#fechamento">Montar nosso menu</a>
+    <a class="nav__cta" href="#menus">Montar nosso menu</a>
     <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
   </div>
 </nav>
 
 <div class="menu" id="menu">
   <div class="menu__in">
-    <a href="#menus">Menus</a>
     <a href="#entradas">Entradas</a>
+    <a href="#menus">Menus</a>
     <a href="#cuidado">Restrições</a>
     <a href="#regras">Como funciona</a>
     <a href="#extras" data-abre-extras>Extras</a>
-    <a href="#fechamento">Montar nosso menu</a>
+    <a href="#menus">Montar nosso menu</a>
   </div>
 </div>
 
@@ -587,6 +587,29 @@ html{font-size:18px;}
   </div>
 </section>
 
+<!-- ===== ENTRADAS ===== -->
+<section class="sec wrap" id="entradas">
+  <div class="sec__head">
+    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Enquanto isso, no salão</p></div>
+    <h2 class="sec__title reveal">As <em>entradas</em></h2>
+    <p class="sec__lead reveal" data-d="1">Depois do "sim", vocês saem pras fotos mais bonitas da vida, e os convidados ficam. É aí que as entradas entram: circulando pelo salão enquanto todo mundo se acomoda, conversa e brinda. Quando vocês voltarem, ninguém ficou esperando: a festa já começou.</p>
+  </div>
+  <div class="gal">
+    <div class="gal__col">
+      <figure class="frame frame--54 reveal">
+        <img class="frame__img" src="fotos/entradinhas.jpg" alt="Entradinhas da casa com patês" loading="lazy">
+        <figcaption class="frame__cap">Entradinhas da casa, foto real</figcaption>
+      </figure>
+    </div>
+    <div class="gal__col gal__col--offset">
+      <figure class="frame frame--34 reveal" data-d="1">
+        <img class="frame__img" src="fotos/entrada-premium.jpg" alt="Escondidinho de camarão em taça de vidro" loading="lazy">
+        <figcaption class="frame__cap">Escondidinho de camarão, foto real</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ===== MENUS =====
      A seção é FULL-BLEED (fundo escuro de ponta a ponta) e o `.wrap` foi pra
      dentro. Se o `wrap` voltar pra cá o fundo vira uma faixa de 1360px com
@@ -594,7 +617,7 @@ html{font-size:18px;}
 <section class="menus sec--dark" id="menus">
  <div class="wrap">
   <div class="sec__head">
-    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
+    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
     <h2 class="sec__title reveal">Cinco <em>menus</em></h2>
     <p class="sec__lead reveal" data-d="1">O que muda de um menu pro outro é o tamanho da experiência: mais sabores, mais surpresas, mais momentos na noite. E a certeza de impressionar em qualquer uma das escolhas.</p>
   </div>
@@ -640,28 +663,6 @@ html{font-size:18px;}
   <p class="band__cap">Foto de evento real</p>
 </section>
 
-<!-- ===== ENTRADAS ===== -->
-<section class="sec wrap" id="entradas">
-  <div class="sec__head">
-    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Enquanto isso, no salão</p></div>
-    <h2 class="sec__title reveal">As <em>entradas</em></h2>
-    <p class="sec__lead reveal" data-d="1">Depois do "sim", vocês saem pras fotos mais bonitas da vida, e os convidados ficam. É aí que as entradas entram: circulando pelo salão enquanto todo mundo se acomoda, conversa e brinda. Quando vocês voltarem, ninguém ficou esperando: a festa já começou.</p>
-  </div>
-  <div class="gal">
-    <div class="gal__col">
-      <figure class="frame frame--54 reveal">
-        <img class="frame__img" src="fotos/entradinhas.jpg" alt="Entradinhas da casa com patês" loading="lazy">
-        <figcaption class="frame__cap">Entradinhas da casa, foto real</figcaption>
-      </figure>
-    </div>
-    <div class="gal__col gal__col--offset">
-      <figure class="frame frame--34 reveal" data-d="1">
-        <img class="frame__img" src="fotos/entrada-premium.jpg" alt="Escondidinho de camarão em taça de vidro" loading="lazy">
-        <figcaption class="frame__cap">Escondidinho de camarão, foto real</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
 
 <!-- ===== RESTRIÇÕES ===== -->
 <section class="sec sec--dark" id="cuidado">
@@ -776,17 +777,6 @@ html{font-size:18px;}
   </div>
 </section>
 
-<!-- ===== FECHAMENTO ===== -->
-<section class="valor wrap" id="fechamento">
-  <div class="valor__card reveal">
-    <p class="eyebrow valor__selo">O próximo passo</p>
-    <h2 class="valor__titulo">É a mesa que junta todo mundo que veio celebrar com vocês.</h2>
-    <p class="valor__txt">Escolham o menu que o resto a gente monta com vocês: na Reunião Final, cerca de 30 dias antes do evento, o nosso time do Pós Vendas passa prato por prato e registra as escolhas. Leva menos de meia hora e sai de lá decidido.</p>
-    <a class="btn btn--dark" href="#menus">Rever os menus
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-  </div>
-</section>
 
 </main>
 
