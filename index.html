@@ -9,6 +9,7 @@
 <style>
 @font-face{font-family:'Cormorant Garamond';font-weight:400;font-display:swap;src:url('assets/fonts/cormorant-garamond-400.woff2') format('woff2');}
 @font-face{font-family:'Cormorant Garamond';font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-garamond-600.woff2') format('woff2');}
+@font-face{font-family:'Cormorant Garamond';font-weight:700;font-display:swap;src:url('assets/fonts/cormorant-garamond-700.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-weight:300;font-display:swap;src:url('assets/fonts/montserrat-300.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-weight:500;font-display:swap;src:url('assets/fonts/montserrat-500.woff2') format('woff2');}
 :root{
@@ -19,8 +20,8 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{background:var(--night);}
-body{background:var(--night);color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.65;
-  -webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;}
+body{background:var(--night);color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.65;
+min-height:100svh;display:flex;flex-direction:column;}
 img{display:block;max-width:100%;}
 a{color:inherit;}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
@@ -55,6 +56,61 @@ h1 em{font-style:italic;color:var(--accent);}
   text-transform:uppercase;color:rgba(240,232,220,.4);border-top:1px solid var(--line-light);}
 @media(max-width:600px){h1{white-space:normal;}.head p{white-space:normal;}}
 @media(prefers-reduced-motion:reduce){.exp,.exp img{transition:none;}}
+
+/* ===== LEGIBILIDADE (pedido do consultor, 2026-08-08) =====
+   A apresentacao roda em monitor secundario, que lava cinza claro e fonte
+   fina. Peso e contraste do texto ficam TODOS aqui, num bloco so: e o lugar
+   de mexer se pedirem mais (ou menos) reforco. */
+.cat li,.bloco li,.item,.lista li{font-weight:700;}
+.det-bloco li{font-weight:600;}  /* fundo escuro ja tem contraste; 700 borra */
+.num{opacity:.72;}
+.nivel__res,.carrossel__hint,.legenda,.pacote__base,
+.nivel__preco small,.pacote__preco small{color:var(--ink-soft);}
+.sec--dark .num{color:rgba(240,232,220,.72);}
+.overture__sub,.hero__sub,.sec--dark .sec__lead,.sec--dark .nota,
+.band__note,.stage__head p,.head p{color:rgba(240,232,220,.92);}
+.tierbar__opt,.det-tab,.footer__links a{color:rgba(240,232,220,.9);}
+.tierbar__lbl,.det-bloco .meta,.det-preco span,.band__cap,
+.frase__assin,.scrollcue{color:rgba(240,232,220,.8);}
+.stage__hint,.footer__fine,.rodape{color:rgba(240,232,220,.72);}
+
+/* 2a rodada (mesmo dia): "ainda ta dificil de visualizar por conta da tela
+   branca". O peso 400 do Montserrat continuava sumindo no monitor secundario.
+   Os textos de EXPLICACAO (nao os rotulos, nao os titulos) vao pra 500, cor
+   cheia, e ganham ~8% de corpo. Isso e o teto do que peso+cor resolvem: se
+   ainda faltar, o proximo passo e tamanho, nao mais preto. */
+.sec__lead,.regras p,.nota,.valor__txt,.legenda__txt,.escopo,
+.pilares p,.destaque p,.det-bloco p{font-weight:500;color:var(--ink);}
+.nota strong,.regras strong,.escopo strong,
+.band__note strong,.sec--dark .nota strong{font-weight:700;}
+.regras p{font-size:1rem;}
+.nota{font-size:.94rem;}
+.legenda__txt{font-size:.86rem;}
+.valor__txt{font-size:1.02rem;}
+/* nos fundos escuros a mesma enfase, mas com creme cheio no lugar do preto */
+.sec--dark .sec__lead,.sec--dark .nota,.band__note,.stage__head p,
+.head p,.det-bloco p,.overture__sub,.hero__sub{font-weight:500;}
+.sec--dark .sec__lead,.sec--dark .nota,.band__note,
+.stage__head p,.head p{color:var(--cream);}
+
+/* 3a rodada: os CARDS de menu/pacote ("negrita essa parte e aumenta a letra um
+   pouco"). Sao os menores textos da tela dos menus: nome e preco em serif 600,
+   composicao e "inclui" com peso 600 e ~12% de corpo. A composicao vai pra cor
+   cheia porque e o que o cliente compara entre um menu e outro. */
+.nivel__nome,.pacote__nome{font-weight:600;font-size:clamp(1.38rem,2.05vw,1.68rem);}
+.nivel__preco,.pacote__preco{font-weight:600;font-size:1.18rem;}
+.nivel__preco small,.pacote__preco small{font-weight:600;font-size:.64rem;}
+.nivel__res,.pacote__res{font-weight:600;font-size:.74rem;color:var(--ink);}
+.nivel__inclui,.pacote__base{font-weight:600;font-size:.7rem;}
+
+/* ===== ESCALA E LARGURA (2026-08-08, ref: cardapio-doces) =====
+   Base era 16px num container de 1360px: em monitor grande sobrava tela vazia
+   dos dois lados e faltava corpo de letra. Subir o font-size do <html> escala
+   TUDO que esta em rem de uma vez (a calibragem de legibilidade das rodadas
+   anteriores sobe junto, mantendo as proporcoes). Nao repetir tamanho a mao. */
+html{font-size:18px;}
+:root{--maxw:1680px;}
+@media(min-width:1600px){:root{--maxw:1800px;}}
 </style>
 </head>
 <body>
