@@ -99,21 +99,24 @@ a{color:inherit;}
 .trocando{opacity:.25;transition:opacity .25s;}
 
 /* listas */
-.cardapio{margin-top:clamp(1.2rem,3vh,2rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(1.3rem,2.4vw,2rem);}
+/* Mesma rolagem lateral do buffet. Em grade, com a letra no tamanho novo, a 5a
+   categoria caia pra segunda fila e deixava tres colunas vazias do lado. Aqui
+   todas ficam numa linha so e a pessoa desliza. */
+.cardapio{margin-top:.5rem;display:flex;gap:clamp(1.6rem,3.5vw,3rem);overflow-x:auto;
+  scroll-snap-type:x mandatory;padding-bottom:1.4rem;
+  scrollbar-width:thin;scrollbar-color:var(--accent) transparent;}
+.cardapio::-webkit-scrollbar{height:3px;}
+.cardapio::-webkit-scrollbar-thumb{background:var(--accent);}
+.cat{flex:0 0 auto;width:min(88vw,470px);scroll-snap-align:start;}
 .cat__head{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;border-top:1px solid var(--ink);padding-top:.8rem;margin-bottom:.35rem;}
-.cat__nome{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;}
+.cat__nome{font-size:.82rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;}
 .cat ul{list-style:none;}
-.cat li{padding:.45rem 0;border-bottom:1px solid var(--line-dark);font-family:var(--serif);font-size:1rem;line-height:1.3;}
+.cat li{padding:.68rem 0;border-bottom:1px solid var(--line-dark);
+  font-family:var(--serif);font-size:clamp(1.2rem,1.55vw,1.5rem);line-height:1.28;}
 .nota{margin-top:1.8rem;padding:1rem 1.2rem;border-left:2px solid var(--accent);background:rgba(192,138,87,.07);
   font-size:.84rem;line-height:1.7;color:var(--ink-soft);max-width:62ch;}
 .nota strong{color:var(--ink);font-weight:500;}
 
-/* fechamento + footer */
-.fim{padding-block:clamp(3rem,7vh,5rem);text-align:center;}
-.fim__card{max-width:640px;margin-inline:auto;padding:clamp(2rem,5vw,3.5rem) clamp(1.5rem,4vw,3rem);
-  border:1px solid var(--accent);background:linear-gradient(160deg,rgba(192,138,87,.08),transparent);}
-.fim__t{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.3rem,3vw,1.9rem);margin-bottom:1rem;line-height:1.3;}
-.fim__s{color:var(--ink-soft);font-size:.92rem;max-width:44ch;margin:0 auto;}
 .footer{background:var(--night);color:var(--cream);padding:2.2rem 0;}
 .footer__in{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;}
 .footer__logo{height:26px;width:auto;opacity:.9;}
@@ -301,18 +304,16 @@ html{font-size:18px;}
     </div>
   </div>
 
+  <div class="carrossel__head cardapio__head">
+    <h3 class="carrossel__titulo">Tudo o que está <em>incluído</em></h3>
+    <p class="carrossel__hint">Deslize para o lado →</p>
+  </div>
   <div class="cardapio" id="cardapio"></div>
 
   <p class="nota"><strong>Sem pressa.</strong> As escolhas são feitas na Reunião Final, cerca de 30 dias antes do evento, e podem ser alteradas até essa data sem qualquer transtorno. Consulte a disponibilidade de acordo com o ambiente do seu evento.</p>
  </div>
 </main>
 
-<section class="fim wrap">
-  <div class="fim__card">
-    <p class="fim__t">Cada escolha conta uma história. Cada prato vira lembrança.</p>
-    <p class="fim__s">O nosso time apresenta valores, combinações e o formato ideal pro seu grande dia.</p>
-  </div>
-</section>
 
 <footer class="footer">
   <div class="footer__in">
