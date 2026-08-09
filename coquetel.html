@@ -153,11 +153,20 @@ a{color:inherit;}
    pouco"). Sao os menores textos da tela dos menus: nome e preco em serif 600,
    composicao e "inclui" com peso 600 e ~12% de corpo. A composicao vai pra cor
    cheia porque e o que o cliente compara entre um menu e outro. */
-.nivel__nome,.pacote__nome{font-weight:600;font-size:clamp(1.38rem,2.05vw,1.68rem);}
-.nivel__preco,.pacote__preco{font-weight:600;font-size:1.18rem;}
-.nivel__preco small,.pacote__preco small{font-weight:600;font-size:.64rem;}
-.nivel__res,.pacote__res{font-weight:600;font-size:.74rem;color:var(--ink);}
-.nivel__inclui,.pacote__base{font-weight:600;font-size:.7rem;}
+.nivel__nome,.pacote__nome{font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);}
+.nivel__preco,.pacote__preco{font-weight:600;font-size:1.22rem;}
+.nivel__preco small,.pacote__preco small{font-weight:600;font-size:.6rem;letter-spacing:.1em;}
+.nivel__res,.pacote__res{font-weight:600;font-size:.82rem;color:var(--ink);}
+.nivel__inclui,.pacote__base{font-weight:600;font-size:.75rem;}
+/* 4a rodada: medido card a card contra o cardapio-doces na mesma largura de
+   tela. A largura do card ja era igual (215px); o que estava menor era o texto
+   dentro dele e o recuo. Subiu o que estava ABAIXO do doces (composicao .74 ->
+   .82rem, inclui .7 -> .75rem, preco 1.18 -> 1.22rem, recuo 1.4/1.2 -> 1.5/1.3);
+   o que ja estava maior (nome do menu, "por pessoa", entrelinha) ficou como
+   estava. O doces tambem tira o CAIXA ALTA da composicao, o que faz ele parecer
+   ainda maior; aqui a caixa alta foi mantida de proposito, e o que o consultor
+   aprovou nas rodadas de legibilidade. */
+.nivel,.pacote{padding:1.5rem 1.3rem 1.3rem;}
 
 /* ===== ESCALA E LARGURA (2026-08-08, ref: cardapio-doces) =====
    Base era 16px num container de 1360px: em monitor grande sobrava tela vazia
