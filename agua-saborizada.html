@@ -170,6 +170,23 @@ a{color:inherit;}
 .preco__txt{font-size:1.02rem;font-weight:500;line-height:1.75;color:var(--cream);max-width:46ch;}
 .preco__txt strong{font-weight:700;color:var(--accent);}
 
+/* ===== CABECALHO DA GALERIA =====
+   o trilho sozinho parecia UMA foto so: quem rolava rapido passava batido e
+   achava que a pagina tinha duas imagens. o titulo diz quantas sao e o
+   contador dentro do pin mostra que elas estao correndo. */
+.galhead{border-top:1px solid rgba(240,232,220,.24);padding-top:1.3rem;margin-top:clamp(2.4rem,6vh,3.6rem);
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.galhead__eyebrow{color:var(--accent);}
+.galhead__titulo{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.6rem);
+  line-height:1.05;margin-top:.5rem;}
+.galhead__titulo em{font-style:italic;color:var(--accent);}
+.galhead__hint{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(240,232,220,.78);}
+.trilho__contador{position:absolute;right:clamp(1.25rem,5vw,4.5rem);bottom:clamp(1.4rem,4vh,2.4rem);z-index:3;
+  font-size:.62rem;letter-spacing:.24em;font-weight:600;color:rgba(240,232,220,.82);
+  font-variant-numeric:lining-nums;}
+.trilho__contador b{color:var(--accent);font-weight:600;}
+@media(prefers-reduced-motion:reduce){.trilho__contador{display:none;}}
+
 /* ===== PAINEIS (o que vem no pacote / os sabores) ===== */
 .paineis{margin-top:clamp(2.4rem,6vh,3.6rem);}
 .paineis__head{border-top:1px solid rgba(240,232,220,.24);padding-top:1.3rem;margin-bottom:1.6rem;}
@@ -307,14 +324,34 @@ a{color:inherit;}
     <p class="sec__lead reveal" data-d="1">As três suqueiras ficam abertas ao mesmo tempo, com fruta e erva de verdade dentro. Cada convidado escolhe o que quiser e volta quantas vezes quiser.</p>
   </div>
 
-  <div class="preco">
-    <div class="preco__box">
-      <span class="preco__selo">Pacote único</span>
-      <p class="preco__lbl">Água Saborizada</p>
-      <p class="preco__num">R$ 1.200,00</p>
-      <p class="preco__pp">valor fixo por evento</p>
+  <div class="galhead">
+    <div>
+      <p class="eyebrow galhead__eyebrow">Sete fotos</p>
+      <h3 class="galhead__titulo">Como ela <em>fica</em></h3>
     </div>
-    <p class="preco__txt">Não é valor por pessoa: <strong>o preço é o mesmo para 80 ou para 300 convidados</strong>. A mesa vem montada, decorada, iluminada e acompanhada pela nossa equipe do começo ao fim do serviço.</p>
+    <p class="galhead__hint">Role para as fotos correrem →</p>
+  </div>
+
+  <div class="trilho" id="trilho">
+    <div class="trilho__pin">
+      <div class="trilho__track" id="track">
+        <figure class="pc"><img src="fotos/agua/salao.jpg" alt="Mesa de água saborizada montada no salão, com arranjo de flores">
+          <figcaption class="pc__meta"><p class="pc__nome">A mesa</p><p class="pc__sub">Montada no ponto de chegada dos convidados.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/agua/sabores.jpg" alt="As três suqueiras com abacaxi e hortelã, morango e manjericão, laranja e alecrim" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Os três sabores</p><p class="pc__sub">Abertos ao mesmo tempo, a festa inteira do serviço.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/agua/mesa.jpg" alt="Suqueiras sobre bases de madeira com luzes acesas" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Decoração e luz</p><p class="pc__sub">Verdes, flores e LEDs já inclusos no pacote.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/agua/copos.jpg" alt="Detalhe das suqueiras de cristal com fruta e erva dentro" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Fruta de verdade</p><p class="pc__sub">Fruta fatiada e erva fresca dentro da suqueira.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/agua/flores.jpg" alt="Copos alinhados ao lado das suqueiras, com flores ao fundo" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Os copos</p><p class="pc__sub">Postos e repostos pela equipe durante o serviço.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/agua/detalhe.jpg" alt="Suqueiras servidas na recepção sob os lustres" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Na chegada</p><p class="pc__sub">Pronta 30 minutos antes da cerimônia.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/agua/completa.jpg" alt="Mesa completa de água saborizada com os copos postos" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">A mesa inteira</p><p class="pc__sub">Do jeito que o convidado encontra ao chegar.</p></figcaption></figure>
+      </div>
+      <p class="trilho__contador" aria-hidden="true"><b id="contAtual">1</b> / 7</p>
+    </div>
   </div>
 
   <div class="paineis">
@@ -364,6 +401,16 @@ a{color:inherit;}
     </div>
   </div>
 
+  <div class="preco">
+    <div class="preco__box">
+      <span class="preco__selo">Pacote único</span>
+      <p class="preco__lbl">Água Saborizada</p>
+      <p class="preco__num">R$ 1.200,00</p>
+      <p class="preco__pp">valor fixo por evento</p>
+    </div>
+    <p class="preco__txt">Não é valor por pessoa: <strong>o preço é o mesmo para 80 ou para 300 convidados</strong>. A mesa vem montada, decorada, iluminada e acompanhada pela nossa equipe do começo ao fim do serviço.</p>
+  </div>
+
   <div class="nota">
     <strong>Bom saber.</strong>
     <ul>
@@ -374,26 +421,6 @@ a{color:inherit;}
     </ul>
   </div>
 
-  <div class="trilho" id="trilho">
-    <div class="trilho__pin">
-      <div class="trilho__track" id="track">
-        <figure class="pc"><img src="fotos/agua/salao.jpg" alt="Mesa de água saborizada montada no salão, com arranjo de flores">
-          <figcaption class="pc__meta"><p class="pc__nome">A mesa</p><p class="pc__sub">Montada no ponto de chegada dos convidados.</p></figcaption></figure>
-        <figure class="pc"><img src="fotos/agua/sabores.jpg" alt="As três suqueiras com abacaxi e hortelã, morango e manjericão, laranja e alecrim" loading="lazy">
-          <figcaption class="pc__meta"><p class="pc__nome">Os três sabores</p><p class="pc__sub">Abertos ao mesmo tempo, a festa inteira do serviço.</p></figcaption></figure>
-        <figure class="pc"><img src="fotos/agua/mesa.jpg" alt="Suqueiras sobre bases de madeira com luzes acesas" loading="lazy">
-          <figcaption class="pc__meta"><p class="pc__nome">Decoração e luz</p><p class="pc__sub">Verdes, flores e LEDs já inclusos no pacote.</p></figcaption></figure>
-        <figure class="pc"><img src="fotos/agua/copos.jpg" alt="Detalhe das suqueiras de cristal com fruta e erva dentro" loading="lazy">
-          <figcaption class="pc__meta"><p class="pc__nome">Fruta de verdade</p><p class="pc__sub">Fruta fatiada e erva fresca dentro da suqueira.</p></figcaption></figure>
-        <figure class="pc"><img src="fotos/agua/flores.jpg" alt="Copos alinhados ao lado das suqueiras, com flores ao fundo" loading="lazy">
-          <figcaption class="pc__meta"><p class="pc__nome">Os copos</p><p class="pc__sub">Postos e repostos pela equipe durante o serviço.</p></figcaption></figure>
-        <figure class="pc"><img src="fotos/agua/detalhe.jpg" alt="Suqueiras servidas na recepção sob os lustres" loading="lazy">
-          <figcaption class="pc__meta"><p class="pc__nome">Na chegada</p><p class="pc__sub">Pronta 30 minutos antes da cerimônia.</p></figcaption></figure>
-        <figure class="pc"><img src="fotos/agua/completa.jpg" alt="Mesa completa de água saborizada com os copos postos" loading="lazy">
-          <figcaption class="pc__meta"><p class="pc__nome">A mesa inteira</p><p class="pc__sub">Do jeito que o convidado encontra ao chegar.</p></figcaption></figure>
-      </div>
-    </div>
-  </div>
 </section>
 
 <section class="sec wrap" id="funciona">
@@ -492,6 +519,7 @@ addEventListener('scroll', ()=>{
 (function(){
   var trilho = document.getElementById('trilho');
   var track  = document.getElementById('track');
+  var cont   = document.getElementById('contAtual');
   if (!trilho || !track) return;
   var anima = !window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   /* quanto o trilho anda por pixel de rolagem. a 1:1 as sete fotos pediam quase
@@ -522,14 +550,19 @@ addEventListener('scroll', ()=>{
     track.style.transform = 'translate3d(' + (-andado) + 'px,0,0)';
     var meio = window.innerWidth / 2;
     var base = caixa.left + pad - andado;
+    var perto = 0, menor = Infinity;
     for (var i = 0; i < pcs.length; i++){
-      var t = ((base + i * (larg + gap) + larg / 2) - meio) / window.innerWidth;
+      var centro = base + i * (larg + gap) + larg / 2;
+      var t = (centro - meio) / window.innerWidth;
       t = Math.max(-1.1, Math.min(1.1, t));
       var a = Math.abs(t);
       pcs[i].style.transform = 'rotateY(' + (-20 * t) + 'deg) translateZ(' + (-260 * a) +
                                'px) scale(' + (1 - 0.1 * a) + ')';
       pcs[i].style.opacity = 1 - 0.3 * a;
+      /* qual peca esta mais perto do meio da tela: e o numero do contador */
+      if (Math.abs(centro - meio) < menor){ menor = Math.abs(centro - meio); perto = i; }
     }
+    if (cont && cont.textContent !== String(perto + 1)) cont.textContent = perto + 1;
   }
 
   addEventListener('scroll', function(){
