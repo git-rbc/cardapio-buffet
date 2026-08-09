@@ -67,7 +67,11 @@ a{color:inherit;}
 .pacote__nome{font-family:var(--serif);font-size:clamp(1.35rem,2.2vw,1.7rem);line-height:1.05;}
 .pacote__preco{font-family:var(--serif);font-size:1.1rem;color:var(--accent-txt);}
 .pacote__preco small{font-family:var(--sans);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute-txt);margin-left:.3rem;}
-.pacote__res{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute-txt);}
+.pacote__res{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute-txt);line-height:1.9;}
+/* o total ("7 itens, 3 categorias") vira rodape do card: continua util como
+   resumo, mas depois da composicao, nao no lugar dela */
+.pacote__total{margin-top:auto;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent-txt);line-height:1.8;border-top:1px solid var(--line-dark);padding-top:.6rem;}
 .pacote[aria-pressed="true"]{border-color:var(--accent);background:linear-gradient(160deg,rgba(192,138,87,.1),transparent);}
 .pacote[aria-pressed="true"]::after{content:"Selecionado";position:absolute;top:-1px;right:-1px;
   font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;background:var(--accent);color:#fff;padding:.35rem .6rem;}
@@ -138,6 +142,8 @@ a{color:inherit;}
 .menus .pacote__preco{color:var(--accent);}
 .menus .pacote__preco small,.menus .pacote__base,
 .menus .carrossel__hint{color:rgba(240,232,220,.82);}
+.menus .pacote__total{color:var(--accent);border-top-color:rgba(240,232,220,.18);}
+.menus .pacote[aria-pressed="true"] .pacote__total{color:var(--accent-txt);border-top-color:var(--line-dark);}
 .menus .pacote[aria-pressed="true"]{background:var(--cream);color:var(--ink);
   border-color:var(--cream);box-shadow:0 3px 0 var(--accent);}
 .menus .pacote[aria-pressed="true"] .pacote__nome{color:var(--ink);}
@@ -233,7 +239,7 @@ html.motion .carrossel__palco .dish{height:100%;max-height:min(82vh,780px);
 .nivel__preco,.pacote__preco{font-weight:600;font-size:1.22rem;}
 .nivel__preco small,.pacote__preco small{font-weight:600;font-size:.6rem;letter-spacing:.1em;}
 .nivel__res,.pacote__res{font-weight:600;font-size:.82rem;color:var(--ink);}
-.nivel__inclui,.pacote__base{font-weight:600;font-size:.75rem;}
+.nivel__inclui,.pacote__base,.pacote__total{font-weight:600;font-size:.75rem;}
 /* 4a rodada: medido card a card contra o cardapio-doces na mesma largura de
    tela. A largura do card ja era igual (215px); o que estava menor era o texto
    dentro dele e o recuo. Subiu o que estava ABAIXO do doces (composicao .74 ->
@@ -953,14 +959,37 @@ const COQ = [
  }
 ];
 
+/* "1 CARNES" fica errado no card. Só as categorias que aparecem com 1 item
+   precisam de par no singular; o que não estiver aqui cai no rótulo original. */
+const SINGULAR = {
+  'Crocantes e entradas':'Crocante ou entrada',
+  'Massas e risotos':'Massa ou risoto',
+  'Frutos do mar':'Fruto do mar',
+  'Ilhas de serviço':'Ilha de serviço',
+  'Racletteiras':'Racletteira',
+  'Saladas':'Salada',
+  'Carnes':'Carne',
+  'Doces':'Doce'
+};
+
 let atual = 'c2';
 const grid = document.getElementById('grid');
 COQ.forEach(c=>{
   const b = document.createElement('button');
   b.type='button'; b.className='pacote'; b.dataset.id=c.id; b.setAttribute('aria-pressed','false');
+  /* A composição vem das SEÇÕES, não do campo `resumo` do PDF. "7 itens, 3
+     categorias" é abstrato: não diz o que o cliente leva nem deixa comparar um
+     pacote com o outro. Quebrado por categoria (igual ao buffet), a diferença
+     entre os quatro fica visível no próprio card, sem precisar abrir a lista.
+     Gerado a partir dos dados, então nunca desencontra do que está embaixo. */
+  const composicao = c.secoes.map(s=>{
+    const n = s.itens.length;
+    return `${n} ${n===1 ? (SINGULAR[s.label] || s.label) : s.label}`;
+  }).join('<br>');
   b.innerHTML = `<p class="pacote__nome">${c.nome}</p>
     <p class="pacote__preco">${c.preco}<small>por pessoa</small></p>
-    <p class="pacote__res">${c.resumo}</p>`;
+    <p class="pacote__res">${composicao}</p>
+    <p class="pacote__total">${c.resumo}</p>`;
   b.addEventListener('click',()=>selecionar(c.id,true));
   grid.appendChild(b);
 });
