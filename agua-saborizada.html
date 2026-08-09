@@ -170,17 +170,15 @@ a{color:inherit;}
 .preco__txt{font-size:1.02rem;font-weight:500;line-height:1.75;color:var(--cream);max-width:46ch;}
 .preco__txt strong{font-weight:700;color:var(--accent);}
 
-/* ===== CABECALHO DA GALERIA =====
-   o trilho sozinho parecia UMA foto so: quem rolava rapido passava batido e
-   achava que a pagina tinha duas imagens. o titulo diz quantas sao e o
-   contador dentro do pin mostra que elas estao correndo. */
-.galhead{border-top:1px solid rgba(240,232,220,.24);padding-top:1.3rem;margin-top:clamp(2.4rem,6vh,3.6rem);
-  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
-.galhead__eyebrow{color:var(--accent);}
-.galhead__titulo{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.6rem);
-  line-height:1.05;margin-top:.5rem;}
-.galhead__titulo em{font-style:italic;color:var(--accent);}
-.galhead__hint{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(240,232,220,.78);}
+/* ===== GALERIA (secao 01) =====
+   as fotos vem ANTES do preco e como secao propria ("primeiro encantar, depois
+   mostrar preco"). o trilho sozinho lia como UMA foto so: quem rolava rapido
+   passava batido. dai o dizer quantas sao no eyebrow e o contador no pin. */
+.pacotes--fotos{padding-bottom:0;}                 /* cola no bloco 02, sem costura */
+.pacotes--fotos + .pacotes{padding-top:clamp(2.5rem,6vh,4rem);}
+.pacotes--fotos + .pacotes .sec__head{border-color:rgba(240,232,220,.24);}
+.galhead__hint{display:inline-block;margin-left:.2rem;font-size:.58rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--accent);white-space:nowrap;}
 .trilho__contador{position:absolute;right:clamp(1.25rem,5vw,4.5rem);bottom:clamp(1.4rem,4vh,2.4rem);z-index:3;
   font-size:.62rem;letter-spacing:.24em;font-weight:600;color:rgba(240,232,220,.82);
   font-variant-numeric:lining-nums;}
@@ -281,6 +279,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
   <div class="nav__right">
     <div class="nav__links">
       <a href="./">Gastronomia</a>
+      <a href="#fotos">Fotos</a>
       <a href="#pacote">O pacote</a>
       <a href="#funciona">Como funciona</a>
     </div>
@@ -288,7 +287,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
   </div>
 </nav>
 <div class="menu" id="menu"><div class="menu__in">
-  <a href="./">Gastronomia</a><a href="#pacote">O pacote</a><a href="#funciona">Como funciona</a>
+  <a href="./">Gastronomia</a><a href="#fotos">Fotos</a><a href="#pacote">O pacote</a><a href="#funciona">Como funciona</a>
 </div></div>
 
 <header class="overture" id="topo">
@@ -303,9 +302,9 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
     </h1>
     <p class="overture__sub">O primeiro gole do dia de vocês, servido na chegada dos convidados, antes mesmo da cerimônia.</p>
     <div class="overture__cta-row">
-      <a class="btn btn--beam" href="#pacote">Ver o pacote
+      <a class="btn btn--beam" href="#fotos">Ver as fotos
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn--ghost" href="#funciona">Como funciona</a>
+      <a class="btn btn--ghost" href="#pacote">O que vem junto</a>
     </div>
   </div>
   <p class="scrollcue" aria-hidden="true">Role</p>
@@ -320,19 +319,12 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
   <span class="accent">A festa começa no primeiro gole.</span></p>
 </section>
 
-<section class="sec pacotes wrap" id="pacote">
+<section class="sec pacotes pacotes--fotos wrap" id="fotos">
   <div class="sec__head">
-    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Um pacote só</p></div>
-    <h2 class="sec__title reveal">Três <em>sabores</em></h2>
-    <p class="sec__lead reveal" data-d="1">As três suqueiras ficam abertas ao mesmo tempo, com fruta e erva de verdade dentro. Cada convidado escolhe o que quiser e volta quantas vezes quiser.</p>
-  </div>
-
-  <div class="galhead">
-    <div>
-      <p class="eyebrow galhead__eyebrow">Sete fotos</p>
-      <h3 class="galhead__titulo">Como ela <em>fica</em></h3>
-    </div>
-    <p class="galhead__hint">Role para as fotos correrem →</p>
+    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Sete fotos</p></div>
+    <h2 class="sec__title reveal">Como ela <em>fica</em></h2>
+    <p class="sec__lead reveal" data-d="1">As três suqueiras ficam abertas ao mesmo tempo, com fruta e erva de verdade dentro.
+      <span class="galhead__hint">Role para as fotos correrem →</span></p>
   </div>
 
   <div class="trilho" id="trilho">
@@ -357,11 +349,16 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
     </div>
   </div>
 
+</section>
+
+<section class="sec pacotes wrap" id="pacote">
+  <div class="sec__head">
+    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Um pacote só</p></div>
+    <h2 class="sec__title reveal">O que vem <em>junto</em></h2>
+    <p class="sec__lead reveal" data-d="1">Tudo o que está na foto entra no mesmo pacote: a mesa, os três sabores, a decoração e a luz.</p>
+  </div>
+
   <div class="paineis">
-    <div class="paineis__head">
-      <p class="eyebrow paineis__eyebrow">O pacote por dentro</p>
-      <h3 class="paineis__titulo">O que vem <em>junto</em></h3>
-    </div>
     <div class="paineis__grid">
       <section class="painel">
         <p class="painel__quem">Está incluso</p>
@@ -428,7 +425,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 
 <section class="sec wrap" id="funciona">
   <div class="sec__head">
-    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Simples assim</p></div>
+    <div class="sec__meta"><span class="num">03</span><p class="eyebrow sec__eyebrow">Simples assim</p></div>
     <h2 class="sec__title reveal">Como <em>funciona</em></h2>
   </div>
   <ul class="regras">
@@ -461,7 +458,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
   <div class="footer__in">
     <img class="footer__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
     <div class="footer__links">
-      <a href="#topo">Topo</a><a href="./">Gastronomia</a><a href="#pacote">O pacote</a><a href="#funciona">Como funciona</a>
+      <a href="#topo">Topo</a><a href="./">Gastronomia</a><a href="#fotos">Fotos</a><a href="#pacote">O pacote</a><a href="#funciona">Como funciona</a>
       <a href="https://www.eventosindaia.com.br" target="_blank" rel="noopener">eventosindaia.com.br</a>
     </div>
   </div>
