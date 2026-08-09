@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Open Bar Indaiá · Gastronomia Indaiá</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141019'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='18' fill='%23C08A57' text-anchor='middle'%3E%26amp;%3C/text%3E%3C/svg%3E">
+<title>Open Bar Indaiá · Casamento</title>
+<meta name="description" content="Os seis pacotes de open bar da Indaiá para o casamento de vocês.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141019'/%3E%3Cg stroke='%23C08A57' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 9h14l-7 7z'/%3E%3Cpath d='M16 16v7'/%3E%3Cpath d='M12.5 23h7'/%3E%3C/g%3E%3C/svg%3E">
 <style>
 @font-face{font-family:'Cormorant Garamond';font-weight:400;font-display:swap;src:url('assets/fonts/cormorant-garamond-400.woff2') format('woff2');}
 @font-face{font-family:'Cormorant Garamond';font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-garamond-600.woff2') format('woff2');}
@@ -13,547 +14,699 @@
 @font-face{font-family:'Montserrat';font-weight:300;font-display:swap;src:url('assets/fonts/montserrat-300.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-weight:400;font-display:swap;src:url('assets/fonts/montserrat-400.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-weight:500;font-display:swap;src:url('assets/fonts/montserrat-500.woff2') format('woff2');}
+
 :root{
-  --paper:#F2EFEA;--paper-2:#E7E1D7;--ink:#1A1714;--ink-soft:#463F37;--ink-mute-txt:#564D43;
-  --night:#141019;--cream:#F0E8DC;--accent:#C08A57;--accent-txt:#7A5129;
-  --line-dark:rgba(26,23,20,.14);--line-light:rgba(240,232,220,.16);
+  --paper:#F2EFEA;--paper-2:#E7E1D7;--ink:#1A1714;--ink-soft:#3E372F;--ink-mute-txt:#4A4238;
+  --night:#141019;--night-2:#0C0910;--cream:#F0E8DC;
+  --accent:#C08A57;--accent-txt:#7A5129;--gold:#C08A57;
+  --line-dark:rgba(26,23,20,.16);--line-light:rgba(240,232,220,.18);
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat','Segoe UI',system-ui,sans-serif;
-  --maxw:1360px;--pad:clamp(1.25rem,5vw,4.5rem);--ease:cubic-bezier(.16,1,.3,1);
+  --maxw:1680px;--pad:clamp(1.25rem,5vw,4.5rem);--ease:cubic-bezier(.16,1,.3,1);
 }
+@media(min-width:1600px){:root{--maxw:1800px;}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{background:var(--paper);scroll-behavior:smooth;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--paper);font-size:18px;}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.65;
-overflow-x:hidden;}
+  text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;}
 img{display:block;max-width:100%;}
 a{color:inherit;}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+/* a Cormorant usa algarismos antigos por padrao: preco fica ruim de ler */
+.pacote__preco,.preco-grande,.tierbar__opt{font-variant-numeric:lining-nums;}
+
 .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;z-index:400;background:var(--accent);}
+.skip{position:absolute;left:-9999px;}
+.skip:focus{left:1rem;top:1rem;z-index:9999;background:var(--night);color:var(--cream);padding:.8rem 1.2rem;}
+
 .eyebrow{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;font-weight:500;}
+.num{font-family:var(--serif);font-size:.95rem;letter-spacing:.1em;opacity:.72;}
 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
 
-/* hero */
-.hero{position:relative;min-height:88svh;background:var(--night);display:flex;align-items:flex-end;overflow:hidden;color:var(--cream);}
-.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.98) contrast(1.03);}
-/* dois gradientes: o horizontal segura a leitura do título sobre o vídeo claro */
-.hero__scrim{position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(12,9,16,.9) 0%,rgba(12,9,16,.52) 46%,rgba(12,9,16,.14) 100%),
-             linear-gradient(180deg,rgba(12,9,16,.45),transparent 32%,rgba(12,9,16,.92) 100%);}
-.hero__in{position:relative;z-index:2;width:100%;padding:6rem var(--pad) clamp(2.5rem,7vh,4.5rem);max-width:var(--maxw);margin-inline:auto;}
-.hero__logo{height:32px;width:auto;margin-bottom:2rem;opacity:.95;}
-.hero__kicker{color:var(--accent);display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;}
-.hero__kicker::before{content:"";width:44px;height:1px;background:var(--accent);}
-.hero h1{font-family:var(--serif);font-weight:400;line-height:.92;font-size:clamp(3rem,11vw,7.5rem);text-transform:uppercase;}
-.hero h1 em{font-style:italic;color:var(--accent);text-transform:none;}
-.hero__sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2.4vw,1.55rem);color:rgba(240,232,220,.85);margin-top:1.2rem;max-width:36ch;}
-.hero__volta{position:absolute;top:1.2rem;left:1.4rem;z-index:3;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--cream);text-decoration:none;border:1px solid var(--line-light);padding:.7rem 1rem;transition:.3s;}
-.hero__volta:hover{background:var(--accent);border-color:var(--accent);}
+.reveal{opacity:0;transform:translateY(28px);filter:blur(6px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);}
+.reveal.in{opacity:1;transform:none;filter:none;}
+.reveal[data-d="1"]{transition-delay:.12s}.reveal[data-d="2"]{transition-delay:.24s}
+.reveal[data-d="3"]{transition-delay:.36s}
 
-/* seletor */
-.sec{padding-block:clamp(3rem,8vh,5rem) clamp(2rem,5vh,3rem);}
-.sec__head{border-top:1px solid var(--line-dark);padding-top:1.4rem;margin-bottom:clamp(1.8rem,4vh,2.6rem);}
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:flex-end;
+  padding:1rem clamp(1rem,4vw,2.4rem);transition:background .4s,backdrop-filter .4s,border-color .4s;
+  border-bottom:1px solid transparent;}
+.nav.scrolled{background:rgba(242,239,234,.86);backdrop-filter:blur(12px);border-color:var(--line-dark);}
+.nav.scrolled.sobre-escuro{background:rgba(20,16,25,.9);border-color:var(--line-light);}
+.nav__logo{height:26px;width:auto;}
+.nav.scrolled .nav__logo{filter:brightness(0);}
+.nav.scrolled.sobre-escuro .nav__logo{filter:none;}
+.nav__right{display:flex;align-items:center;gap:1.6rem;}
+.nav__links{display:flex;gap:1.5rem;}
+.nav__links a{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:color .3s;font-weight:500;}
+.nav.scrolled .nav__links a{color:var(--ink);}
+.nav.scrolled.sobre-escuro .nav__links a{color:var(--cream);}
+.nav__links a:hover{color:var(--accent);}
+.nav__burger{display:none;flex-direction:column;align-items:center;justify-content:center;
+  width:44px;height:44px;background:transparent;border:0;padding:0;cursor:pointer;color:var(--cream);}
+.nav.scrolled .nav__burger{color:var(--ink);}
+.nav.scrolled.sobre-escuro .nav__burger{color:var(--cream);}
+.nav__burger span{display:block;width:22px;height:1px;background:currentColor;transition:transform .35s var(--ease);}
+.nav__burger span+span{margin-top:6px;}
+.nav__burger[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg);}
+.nav__burger[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg);}
+.menu{position:fixed;inset:0;z-index:460;background:var(--night);display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s;}
+.menu.aberto{opacity:1;visibility:visible;}
+.menu__in{display:flex;flex-direction:column;gap:.2rem;text-align:center;padding:2rem;}
+.menu__in a{font-family:var(--serif);font-size:clamp(2rem,8.5vw,3rem);line-height:1.3;color:var(--cream);text-decoration:none;padding:.55rem 1rem;}
+.menu__in a:active{color:var(--accent);}
+
+/* ===== ABERTURA ===== */
+/* texto embaixo: a foto tem os rostos e as taças no meio, e titulo centralizado
+   passava por cima da cara dos noivos */
+.overture{position:relative;min-height:100vh;min-height:100svh;background:var(--night);display:flex;align-items:flex-end;overflow:hidden;color:var(--cream);}
+.overture__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%;
+  filter:saturate(1.02) contrast(1.05);transform:scale(1.06);}
+.overture__scrim{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(12,9,16,.86) 0%,rgba(12,9,16,.46) 50%,rgba(12,9,16,.08) 100%),
+             linear-gradient(180deg,rgba(12,9,16,.5),transparent 24%,rgba(12,9,16,.86) 82%,var(--night) 100%);}
+.overture__in{position:relative;z-index:2;padding:7rem var(--pad) clamp(3.5rem,9vh,5.5rem);max-width:var(--maxw);margin-inline:auto;width:100%;}
+.overture__logo{height:34px;width:auto;margin-bottom:2.2rem;opacity:.95;}
+.overture__kicker{color:var(--accent);margin-bottom:1.6rem;display:flex;gap:1rem;align-items:center;}
+.overture__kicker::before{content:"";width:44px;height:1px;background:var(--accent);}
+/* teto de 7rem: com 9rem a palavra BRINDE atravessava o rosto da noiva. neste
+   tamanho o titulo para no noivo (terno escuro) e ela fica limpa na direita */
+.hero-title{font-family:var(--serif);font-weight:400;line-height:.92;font-size:clamp(2.9rem,11vw,7rem);text-transform:uppercase;}
+.hero-title .row{display:block;overflow:hidden;}
+.hero-title .row i{display:inline-block;font-style:normal;transform:translateY(115%);}
+.hero-title .row.it{font-style:italic;color:var(--accent);text-transform:none;}
+.overture__sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2.6vw,1.7rem);
+  color:rgba(240,232,220,.94);margin-top:1.6rem;max-width:36ch;}
+.overture__cta-row{display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap;margin-top:2.6rem;}
+.scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:2;
+  font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(240,232,220,.8);}
+.scrollcue::after{content:"";display:block;width:1px;height:32px;margin:.6rem auto 0;background:linear-gradient(var(--accent),transparent);}
+
+.btn{position:relative;display:inline-flex;align-items:center;gap:.7rem;font-family:var(--sans);
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:1.05rem 1.9rem;
+  color:var(--cream);text-decoration:none;border:1px solid var(--line-light);background:rgba(255,255,255,.03);
+  overflow:hidden;transition:color .4s,background .4s;cursor:pointer;}
+.btn svg{width:15px;height:15px;}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg;}
+@keyframes spin{to{--a:360deg}}
+.btn--beam::before{content:"";position:absolute;inset:0;padding:1px;
+  background:conic-gradient(from var(--a,0deg),transparent 25%,var(--accent) 50%,transparent 75%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite;}
+.btn:hover{background:rgba(192,138,87,.18);color:#fff;}
+.btn--ghost{border-color:rgba(240,232,220,.32);}
+
+.dawn{height:22vh;background:linear-gradient(180deg,var(--night) 0%,#3a2f30 42%,#8a7566 70%,var(--paper) 100%);}
+
+/* ===== FRASE DE ABERTURA ===== */
+.statement{padding-block:clamp(3.5rem,9vh,6rem);}
+/* sem o fiozinho do accent: colado no texto ele lia como um hifen ("-O que fica") */
+.statement__eyebrow{color:var(--accent-txt);margin-bottom:2rem;}
+.statement__text{font-family:var(--serif);font-weight:400;line-height:1.22;
+  font-size:clamp(1.6rem,4.2vw,3.1rem);max-width:26ch;letter-spacing:-.01em;}
+.statement__text .accent{color:var(--accent-txt);font-style:italic;}
+
+/* ===== SEÇÃO ===== */
+.sec{padding-block:clamp(3.5rem,9vh,7rem);}
+.sec__head{border-top:1px solid var(--line-dark);padding-top:1.4rem;margin-bottom:clamp(2rem,4.5vh,3.2rem);}
+.sec__meta{display:flex;gap:1.4rem;align-items:baseline;}
 .sec__eyebrow{color:var(--accent-txt);}
-.sec__title{font-family:var(--serif);font-weight:400;line-height:.98;font-size:clamp(2.2rem,6.5vw,4.6rem);margin-top:.6rem;}
+.sec__title{font-family:var(--serif);font-weight:400;line-height:.98;font-size:clamp(2.4rem,7vw,5.4rem);letter-spacing:-.01em;margin-top:.6rem;}
 .sec__title em{font-style:italic;}
-.sec__lead{max-width:48ch;color:var(--ink-soft);margin-top:1rem;font-size:clamp(1rem,1.5vw,1.1rem);}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.6rem,1.2vw,1rem);margin-top:1.6rem;}
-@media(max-width:900px){.grid4{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:520px){.grid4{grid-template-columns:1fr;}}
-.pacote{position:relative;text-align:left;background:none;cursor:pointer;font-family:inherit;color:inherit;
-  border:1px solid var(--line-dark);padding:1.4rem 1.2rem 1.2rem;transition:border-color .4s,background .4s,transform .4s var(--ease);
-  display:flex;flex-direction:column;gap:.5rem;}
-.pacote:hover{transform:translateY(-4px);border-color:var(--ink-mute-txt);}
-.pacote__nome{font-family:var(--serif);font-size:clamp(1.35rem,2.2vw,1.7rem);line-height:1.05;}
-.pacote__preco{font-family:var(--serif);font-size:1.1rem;color:var(--accent-txt);}
-.pacote__preco small{font-family:var(--sans);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute-txt);margin-left:.3rem;}
-.pacote__res{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute-txt);}
-.pacote[aria-pressed="true"]{border-color:var(--accent);background:linear-gradient(160deg,rgba(192,138,87,.1),transparent);}
-.pacote[aria-pressed="true"]::after{content:"Selecionado";position:absolute;top:-1px;right:-1px;
-  font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;background:var(--accent);color:#fff;padding:.35rem .6rem;}
-
-/* carrossel */
-.carrossel__head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:2.2rem 0 1rem;}
-.carrossel__titulo{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,2rem);}
-.carrossel__titulo em{font-style:italic;color:var(--accent-txt);}
-.carrossel__hint{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-mute-txt);}
-.track{display:flex;gap:clamp(.8rem,1.8vw,1.4rem);overflow-x:auto;scroll-snap-type:x mandatory;
-  padding-bottom:1.2rem;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;}
-.track::-webkit-scrollbar{height:3px;}
-.track::-webkit-scrollbar-thumb{background:var(--accent);}
-.dish{position:relative;flex:0 0 auto;width:min(64vw,290px);aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);scroll-snap-align:start;}
-.dish img{width:100%;height:100%;object-fit:cover;}
-.dish__cap{position:absolute;left:.9rem;bottom:.9rem;right:.9rem;z-index:2;color:#fff;}
-.dish__cap::before{content:"";position:absolute;inset:-1rem -.9rem -.9rem;z-index:-1;background:linear-gradient(0deg,rgba(8,5,12,.82),transparent);}
-.dish__nome{font-family:var(--serif);font-size:1.15rem;line-height:1.12;text-shadow:0 1px 10px rgba(0,0,0,.5);}
-.dish__tag{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;}
-.trocando{opacity:.25;transition:opacity .25s;}
-
-/* listas */
-.cardapio{margin-top:clamp(1.2rem,3vh,2rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(1.3rem,2.4vw,2rem);}
-.cat__head{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;border-top:1px solid var(--ink);padding-top:.8rem;margin-bottom:.35rem;}
-.cat__nome{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;}
-.cat ul{list-style:none;}
-.cat li{padding:.45rem 0;border-bottom:1px solid var(--line-dark);font-family:var(--serif);font-size:1rem;line-height:1.3;}
+.sec__lead{max-width:52ch;color:var(--ink);font-weight:500;margin-top:1.1rem;font-size:clamp(1rem,1.5vw,1.1rem);}
 .nota{margin-top:1.8rem;padding:1rem 1.2rem;border-left:2px solid var(--accent);background:rgba(192,138,87,.07);
-  font-size:.84rem;line-height:1.7;color:var(--ink-soft);max-width:62ch;}
-.nota strong{color:var(--ink);font-weight:500;}
+  font-size:.94rem;line-height:1.7;color:var(--ink);font-weight:500;max-width:66ch;}
+.nota strong{font-weight:700;}
 
-/* fechamento + footer */
-.fim{padding-block:clamp(3rem,7vh,5rem);text-align:center;}
-.fim__card{max-width:640px;margin-inline:auto;padding:clamp(2rem,5vw,3.5rem) clamp(1.5rem,4vw,3rem);
-  border:1px solid var(--accent);background:linear-gradient(160deg,rgba(192,138,87,.08),transparent);}
-.fim__t{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.3rem,3vw,1.9rem);margin-bottom:1rem;line-height:1.3;}
-.fim__s{color:var(--ink-soft);font-size:.92rem;max-width:44ch;margin:0 auto;}
-.footer{background:var(--night);color:var(--cream);padding:2.2rem 0;}
-.footer__in{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;}
-.footer__logo{height:26px;width:auto;opacity:.9;}
+/* ===== PACOTES (bloco escuro, sangra até a borda) ===== */
+.pacotes{background:var(--night);color:var(--cream);
+  padding-block:clamp(3.5rem,8vh,6rem) clamp(3rem,7vh,5rem);
+  box-shadow:0 0 0 100vmax var(--night);clip-path:inset(0 -100vmax);}
+.pacotes .sec__head{border-color:var(--line-light);}
+.pacotes .sec__title{color:var(--cream);}
+.pacotes .sec__eyebrow{color:var(--accent);}
+.pacotes .num{color:rgba(240,232,220,.72);}
+.pacotes .sec__lead{color:var(--cream);}
+.pacotes .nota{color:var(--cream);background:rgba(255,255,255,.05);}
+.pacotes .nota strong{color:var(--accent);}
+
+/* ===== TABELA COMPARATIVA: as seis opções lado a lado =====
+   a marca de cada categoria fica escrita em TODA coluna (nao "=" nem "idem"),
+   e o dourado marca o que entra ou troca de marca em relacao ao pacote anterior:
+   e ali que o olho para pra entender a diferenca de um pacote pro outro. */
+.tab__hint{display:none;font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(240,232,220,.78);margin-top:1.6rem;}
+.tab__wrap{overflow-x:auto;margin-top:1.6rem;padding-bottom:.6rem;
+  scrollbar-width:thin;scrollbar-color:var(--accent) transparent;}
+.tab__wrap::-webkit-scrollbar{height:3px;}
+.tab__wrap::-webkit-scrollbar-thumb{background:var(--accent);}
+/* tabela DE VERDADE, nao grid: em CSS grid o position:sticky de uma celula so
+   anda dentro da propria coluna, entao o rotulo nunca gruda quando rola de lado */
+/* 1120 = o maior valor que ainda cabe sem rolagem lateral num monitor de 1280 */
+.tab{width:100%;min-width:1120px;table-layout:fixed;border-collapse:separate;border-spacing:0;}
+.tab th,.tab td{vertical-align:top;text-align:left;}
+.tab__corner,.lin{position:sticky;left:0;z-index:2;background:var(--night);width:140px;}
+.cabc{padding:0;border-left:1px solid rgba(240,232,220,.14);}
+
+.cab{position:relative;display:flex;flex-direction:column;gap:.1rem;text-align:left;cursor:pointer;
+  width:100%;font-family:inherit;color:var(--cream);background:rgba(255,255,255,.04);border:0;
+  padding:1.4rem 1rem 1.1rem;transition:background .35s,color .35s;}
+.cab:hover{background:rgba(192,138,87,.2);}
+.cab__nome{font-family:var(--serif);font-weight:600;font-size:1.34rem;line-height:1.05;}
+.cab__preco{font-family:var(--serif);font-weight:600;font-size:1.64rem;line-height:1.15;color:var(--gold);
+  font-variant-numeric:lining-nums;margin-top:.2rem;}
+.cab__pp{font-family:var(--sans);font-weight:600;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(240,232,220,.82);}
+.cab__selo{position:absolute;top:0;right:0;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--accent);color:#fff;padding:.3rem .5rem;font-weight:500;}
+/* a coluna escolhida inverte pra claro, igual ao cartao selecionado */
+.cab[aria-pressed="true"]{background:var(--cream);color:var(--ink);}
+.cab[aria-pressed="true"] .cab__nome{color:var(--ink);}
+.cab[aria-pressed="true"] .cab__preco{color:#7A5129;}
+.cab[aria-pressed="true"] .cab__pp{color:var(--ink-mute-txt);}
+.cab[aria-pressed="true"] .cab__selo{background:var(--night);color:var(--cream);}
+
+.lin{font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--accent);
+  padding:1.05rem .9rem 1.05rem 0;border-top:1px solid rgba(240,232,220,.24);line-height:1.45;}
+.cel{padding:1rem .85rem;border-top:1px solid rgba(240,232,220,.24);border-left:1px solid rgba(240,232,220,.14);}
+.cel ul{list-style:none;}
+.cel li{font-size:.88rem;font-weight:500;line-height:1.42;color:rgba(240,232,220,.86);padding:.11rem 0;}
+/* so a linha que de fato mudou fica dourada: no soft do 5 muda o suco, nao a coca */
+.cel li.novo{color:var(--gold);font-weight:600;}
+.cel--sel{background:rgba(255,255,255,.07);}
+/* o selo vem DEPOIS do valor: assim as marcas comecam na mesma altura em toda a linha */
+.cel__tag{display:inline-block;margin-top:.55rem;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;background:var(--gold);color:#141019;padding:.2rem .45rem;}
+.cel__tag--sobe{background:none;color:var(--gold);border:1px solid var(--gold);padding:.14rem .4rem;}
+.tracinho{display:block;width:20px;height:1px;background:rgba(240,232,220,.36);margin-top:.55rem;}
+
+.tab__legenda{display:flex;gap:.6rem 1.8rem;flex-wrap:wrap;align-items:center;margin-top:1.3rem;
+  font-size:.82rem;font-weight:500;color:rgba(240,232,220,.92);}
+.tab__legenda span{display:inline-flex;align-items:center;gap:.5rem;}
+
+/* ===== OS OPENS POR DENTRO =====
+   quatro cartoes soltos depois da tabela confundiam: nao diziam a quem pertenciam,
+   repetiam "Pacote 5 e 6" em cada um e misturavam lista com paragrafo em alturas
+   diferentes. viraram DOIS paineis, na pergunta que o cliente faz: o que os dois
+   pacotes de cima tem, e o que so o 6 tem. */
+.opens{margin-top:clamp(2.4rem,6vh,3.6rem);}
+.opens__head{border-top:1px solid rgba(240,232,220,.24);padding-top:1.3rem;margin-bottom:1.6rem;}
+.opens__eyebrow{color:var(--accent);}
+.opens__titulo{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.6rem);
+  line-height:1.05;margin-top:.5rem;}
+.opens__titulo em{font-style:italic;color:var(--accent);}
+.opens__grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(1.2rem,2.4vw,2rem);align-items:start;}
+@media(max-width:900px){.opens__grid{grid-template-columns:1fr;}}
+.painel{border:1px solid rgba(240,232,220,.22);background:rgba(255,255,255,.03);padding:1.5rem 1.4rem 1.6rem;}
+.painel--up{border-color:rgba(192,138,87,.6);background:linear-gradient(160deg,rgba(192,138,87,.11),transparent);}
+.painel__quem{display:inline-block;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  background:rgba(240,232,220,.16);color:var(--cream);padding:.32rem .62rem;margin-bottom:1.3rem;}
+.painel--up .painel__quem{background:var(--accent);color:#fff;}
+.item+.item{margin-top:1.5rem;padding-top:1.3rem;border-top:1px solid rgba(240,232,220,.16);}
+.item h4{font-family:var(--serif);font-weight:600;font-size:1.36rem;line-height:1.15;
+  display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;}
+.item h4 span{font-family:var(--sans);font-weight:600;font-size:.58rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);}
+.item p{margin-top:.5rem;font-size:.9rem;font-weight:500;line-height:1.65;color:rgba(240,232,220,.94);}
+.item ul{list-style:none;margin-top:.7rem;column-count:2;column-gap:1.6rem;}
+@media(max-width:560px){.item ul{column-count:1;}}
+.item li{break-inside:avoid;font-size:.88rem;font-weight:500;line-height:1.4;color:rgba(240,232,220,.94);
+  padding:.34rem 0;border-bottom:1px solid rgba(240,232,220,.14);}
+
+@media(max-width:1180px){
+  .tab__corner,.lin{width:112px;}
+  .lin{padding:.9rem .6rem .9rem 0;font-size:.58rem;letter-spacing:.1em;}
+  .cel{padding:.9rem .75rem;}
+  .cel li{font-size:.84rem;}
+  .cab{padding:1.1rem .75rem .9rem;}
+  .cab__nome{font-size:1.2rem;}
+  .cab__preco{font-size:1.42rem;}
+  .tab__hint{display:block;}
+}
+
+/* ===== TRILHO (o bloco prende na tela e as fotos correm de lado) ===== */
+.trilho{position:relative;margin-top:clamp(2.5rem,6vh,4rem);margin-inline:calc(50% - 50vw);}
+.trilho__pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  display:flex;align-items:center;perspective:1500px;}
+.trilho__track{display:flex;gap:clamp(1.4rem,3.2vw,3rem);align-items:center;
+  padding-inline:clamp(1.25rem,5vw,4.5rem);transform-style:preserve-3d;will-change:transform;}
+.pc{position:relative;flex:0 0 auto;width:min(88vw,72vh,820px);aspect-ratio:1/1;
+  overflow:hidden;background:#221c26;backface-visibility:hidden;
+  box-shadow:0 42px 80px -38px rgba(8,5,12,.6),0 14px 30px -18px rgba(8,5,12,.42);}
+.pc img{width:100%;height:100%;object-fit:cover;display:block;}
+.pc__meta{position:absolute;left:1.3rem;right:1.3rem;bottom:1.2rem;z-index:2;color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 20px rgba(0,0,0,.78);}
+.pc__meta::before{content:"";position:absolute;left:-1.3rem;right:-1.3rem;bottom:-1.2rem;top:auto;
+  height:380%;z-index:-1;background:linear-gradient(0deg,rgba(8,11,14,.95),rgba(8,11,14,.9) 14%,
+  rgba(8,11,14,.62) 44%,rgba(8,11,14,.28) 70%,transparent);}
+.pc__nome{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,3.2vw,2.15rem);line-height:1.12;}
+.pc__sub{font-size:.72rem;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.94);margin-top:.15rem;}
+@media(max-width:760px){.pc{width:min(88vw,58vh);aspect-ratio:4/5;}}
+@media(prefers-reduced-motion:reduce){
+  .trilho{height:auto!important;margin-inline:0;}
+  .trilho__pin{position:static;height:auto;overflow-x:auto;}
+  .trilho__track{transform:none!important;}
+  .pc{transform:none!important;opacity:1!important;width:min(80vw,520px);}
+}
+
+/* barra fixa pra trocar de pacote sem voltar */
+.tierbar{position:fixed;left:0;right:0;bottom:0;z-index:290;transform:translateY(105%);
+  transition:transform .5s var(--ease);background:rgba(20,16,25,.95);backdrop-filter:blur(12px);color:var(--cream);
+  border-top:1px solid var(--line-light);}
+.tierbar.on{transform:none;}
+.tierbar__in{max-width:var(--maxw);margin-inline:auto;padding:.7rem var(--pad);display:flex;align-items:center;gap:1rem;justify-content:space-between;flex-wrap:wrap;}
+.tierbar__lbl{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(240,232,220,.8);}
+.tierbar__opts{display:flex;gap:.4rem;flex-wrap:wrap;}
+.tierbar__opt{background:none;border:1px solid var(--line-light);color:rgba(240,232,220,.9);cursor:pointer;
+  font-family:inherit;font-size:.66rem;font-weight:500;letter-spacing:.1em;padding:.5rem .8rem;transition:.3s;}
+.tierbar__opt:hover{color:#fff;border-color:var(--accent);}
+.tierbar__opt[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* ===== COMO FUNCIONA ===== */
+.regras{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.2rem,3vw,2.4rem);margin-top:1rem;}
+.regras li{border-top:1px solid var(--line-dark);padding-top:1.4rem;}
+.regras__ic{display:block;width:36px;height:36px;color:var(--accent);margin-bottom:1rem;}
+.regras__ic svg{display:block;width:36px;height:36px;}
+.regras h3{font-family:var(--serif);font-weight:600;font-size:1.45rem;margin-bottom:.5rem;line-height:1.15;}
+.regras p{color:var(--ink);font-weight:500;font-size:1rem;line-height:1.7;max-width:50ch;}
+.regras strong{font-weight:700;}
+@media(max-width:820px){.regras{grid-template-columns:1fr;}}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--night);color:var(--cream);padding:clamp(2.5rem,6vh,4rem) 0 2rem;}
+.footer__in{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;}
+.footer__logo{height:28px;width:auto;opacity:.9;}
 .footer__links{display:flex;gap:1.4rem;flex-wrap:wrap;}
-.footer__links a{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,232,220,.7);text-decoration:none;}
+.footer__links a{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,232,220,.9);text-decoration:none;}
 .footer__links a:hover{color:var(--accent);}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.pacote{transition:none;}}
+.footer__fine{max-width:var(--maxw);margin:2.2rem auto 0;padding-inline:var(--pad);font-size:.7rem;line-height:1.9;color:rgba(240,232,220,.72);border-top:1px solid var(--line-light);padding-top:1.4rem;}
 
-/* pilares (a experiência) */
-.pilares{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.3rem,3vw,2.2rem);margin-top:1rem;}
-@media(max-width:900px){.pilares{grid-template-columns:1fr;}}
-.pilares li{border-top:1px solid var(--line-dark);padding-top:1.3rem;}
-.pilares h3{font-family:var(--serif);font-weight:600;font-size:1.42rem;line-height:1.15;margin-bottom:.5rem;}
-.pilares p{color:var(--ink-soft);font-size:.94rem;line-height:1.7;}
-/* blocos de tabela (menu avulso, adicionais, valores, regras) */
-.blocos{display:flex;gap:clamp(1.6rem,3.5vw,3rem);overflow-x:auto;scroll-snap-type:x mandatory;
-  padding-bottom:1.4rem;margin-top:.5rem;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;}
-.blocos::-webkit-scrollbar{height:3px;}
-.blocos::-webkit-scrollbar-thumb{background:var(--accent);}
-.bloco{flex:0 0 auto;width:min(88vw,430px);scroll-snap-align:start;}
-.bloco h4{font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
-  border-top:1px solid var(--ink);padding-top:.9rem;margin-bottom:.5rem;}
-.bloco ul{list-style:none;}
-.bloco li{padding:.6rem 0;border-bottom:1px solid var(--line-dark);
-  font-family:var(--serif);font-size:clamp(1.08rem,1.4vw,1.32rem);line-height:1.3;}
-/* pacote: rótulo do que o valor representa */
-.pacote__base{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute-txt);}
-.pacote__selo{position:absolute;top:-1px;left:-1px;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
-  background:var(--ink);color:var(--paper);padding:.3rem .55rem;}
-.grid4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
-
-/* ===== LEGIBILIDADE (pedido do consultor, 2026-08-08) =====
-   A apresentacao roda em monitor secundario, que lava cinza claro e fonte
-   fina. Peso e contraste do texto ficam TODOS aqui, num bloco so: e o lugar
-   de mexer se pedirem mais (ou menos) reforco. */
-.cat li,.bloco li,.item,.lista li{font-weight:700;}
-.det-bloco li{font-weight:600;}  /* fundo escuro ja tem contraste; 700 borra */
-.num{opacity:.72;}
-.nivel__res,.carrossel__hint,.legenda,.pacote__base,
-.nivel__preco small,.pacote__preco small{color:var(--ink-soft);}
-.sec--dark .num{color:rgba(240,232,220,.72);}
-.overture__sub,.hero__sub,.sec--dark .sec__lead,.sec--dark .nota,
-.band__note,.stage__head p,.head p{color:rgba(240,232,220,.92);}
-.tierbar__opt,.det-tab,.footer__links a{color:rgba(240,232,220,.9);}
-.tierbar__lbl,.det-bloco .meta,.det-preco span,.band__cap,
-.frase__assin,.scrollcue{color:rgba(240,232,220,.8);}
-.stage__hint,.footer__fine,.rodape{color:rgba(240,232,220,.72);}
-
-/* 2a rodada (mesmo dia): "ainda ta dificil de visualizar por conta da tela
-   branca". O peso 400 do Montserrat continuava sumindo no monitor secundario.
-   Os textos de EXPLICACAO (nao os rotulos, nao os titulos) vao pra 500, cor
-   cheia, e ganham ~8% de corpo. Isso e o teto do que peso+cor resolvem: se
-   ainda faltar, o proximo passo e tamanho, nao mais preto. */
-.sec__lead,.regras p,.nota,.valor__txt,.legenda__txt,.escopo,
-.pilares p,.destaque p,.det-bloco p{font-weight:500;color:var(--ink);}
-.nota strong,.regras strong,.escopo strong,
-.band__note strong,.sec--dark .nota strong{font-weight:700;}
-.regras p{font-size:1rem;}
-.nota{font-size:.94rem;}
-.legenda__txt{font-size:.86rem;}
-.valor__txt{font-size:1.02rem;}
-/* nos fundos escuros a mesma enfase, mas com creme cheio no lugar do preto */
-.sec--dark .sec__lead,.sec--dark .nota,.band__note,.stage__head p,
-.head p,.det-bloco p,.overture__sub,.hero__sub{font-weight:500;}
-.sec--dark .sec__lead,.sec--dark .nota,.band__note,
-.stage__head p,.head p{color:var(--cream);}
-
-/* 3a rodada: os CARDS de menu/pacote ("negrita essa parte e aumenta a letra um
-   pouco"). Sao os menores textos da tela dos menus: nome e preco em serif 600,
-   composicao e "inclui" com peso 600 e ~12% de corpo. A composicao vai pra cor
-   cheia porque e o que o cliente compara entre um menu e outro. */
-.nivel__nome,.pacote__nome{font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);}
-.nivel__preco,.pacote__preco{font-weight:600;font-size:1.22rem;}
-.nivel__preco small,.pacote__preco small{font-weight:600;font-size:.6rem;letter-spacing:.1em;}
-.nivel__res,.pacote__res{font-weight:600;font-size:.82rem;color:var(--ink);}
-.nivel__inclui,.pacote__base{font-weight:600;font-size:.75rem;}
-/* 4a rodada: medido card a card contra o cardapio-doces na mesma largura de
-   tela. A largura do card ja era igual (215px); o que estava menor era o texto
-   dentro dele e o recuo. Subiu o que estava ABAIXO do doces (composicao .74 ->
-   .82rem, inclui .7 -> .75rem, preco 1.18 -> 1.22rem, recuo 1.4/1.2 -> 1.5/1.3);
-   o que ja estava maior (nome do menu, "por pessoa", entrelinha) ficou como
-   estava. O doces tambem tira o CAIXA ALTA da composicao, o que faz ele parecer
-   ainda maior; aqui a caixa alta foi mantida de proposito, e o que o consultor
-   aprovou nas rodadas de legibilidade. */
-.nivel,.pacote{padding:1.5rem 1.3rem 1.3rem;}
-
-/* ===== ESCALA E LARGURA (2026-08-08, ref: cardapio-doces) =====
-   Base era 16px num container de 1360px: em monitor grande sobrava tela vazia
-   dos dois lados e faltava corpo de letra. Subir o font-size do <html> escala
-   TUDO que esta em rem de uma vez (a calibragem de legibilidade das rodadas
-   anteriores sobe junto, mantendo as proporcoes). Nao repetir tamanho a mao. */
-html{font-size:18px;}
-:root{--maxw:1680px;}
-@media(min-width:1600px){:root{--maxw:1800px;}}
+@media(max-width:820px){
+  .nav__links{display:none;}
+  .nav__burger{display:flex;}
+  /* com os botoes empilhados a coluna encosta no "Role" */
+  .scrollcue{display:none;}
+  .tierbar__in{gap:.5rem;justify-content:center;}
+  .tierbar__lbl{width:100%;text-align:center;}
+  .tierbar__opt{padding:.45rem .6rem;font-size:.62rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;filter:none;}
+}
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
 
-<header class="hero">
-  <a class="hero__volta" href="./">‹ Gastronomia</a>
-  <img class="hero__bg" src="fotos/beb/openbar-p7-0.jpg" alt="OPEN BAR Indaiá" fetchpriority="high">
-  <div class="hero__scrim" aria-hidden="true"></div>
-  <div class="hero__in">
-    <img class="hero__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
-    <p class="eyebrow hero__kicker">Gastronomia Indaiá</p>
-    <h1>OPEN BAR<br><em>Indaiá</em></h1>
-    <p class="hero__sub">Drinks, serviço e atmosfera em perfeito equilíbrio.</p>
-  </div>
-</header>
-
-<main>
-<section class="sec wrap">
-  <div class="sec__head">
-    <p class="eyebrow sec__eyebrow">A experiência que o seu evento merece</p>
-    <h2 class="sec__title reveal">Do primeiro ao <em>último brinde</em></h2>
-  </div>
-  <ul class="pilares"><li class="reveal"><h3>Bebidas selecionadas para o seu evento</h3><p>Cada pacote inclui uma seleção cuidadosa de bebidas, pensada para valorizar o estilo e o perfil do seu evento, do mais simples ao mais completo.</p></li><li class="reveal"><h3>Serviço com ritmo, presença e cuidado</h3><p>Equipe preparada para atender com agilidade, apresentação impecável e consistência no serviço, mantendo a experiência organizada e memorável.</p></li><li class="reveal"><h3>Estrutura integrada ao seu evento</h3><p>Insumos, montagem e finalização visual pensados para se integrar ao ambiente, criando uma presença estética de alto valor percebido.</p></li></ul>
-</section>
-
-<section class="wrap sec" id="pacotes">
-  <div class="sec__head">
-    <p class="eyebrow sec__eyebrow">Escolham o de vocês</p>
-    <h2 class="sec__title reveal">Seis <em>pacotes</em></h2>
-    <p class="sec__lead reveal" data-d="1">De um pacote pro outro muda o que entra na taça: começa nos refrigerantes e águas e chega no open de drinks completo, com welcome drink e caipirinha.</p>
-  </div>
-  <div class="grid4" id="grid" role="group" aria-label="Pacotes"></div>
-
-  <div id="carrosselBloco" hidden>
-    <div class="carrossel__head">
-      <h3 class="carrossel__titulo">Conheça o <em id="nomeSel"></em></h3>
-      <p class="carrossel__hint">Deslize para o lado →</p>
+<nav class="nav" id="nav">
+  <div class="nav__right">
+    <div class="nav__links">
+      <a href="./">Gastronomia</a>
+      <a href="#pacotes">Pacotes</a>
+      <a href="#funciona">Como funciona</a>
     </div>
-    <div class="track" id="track"></div>
+    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
   </div>
+</nav>
+<div class="menu" id="menu"><div class="menu__in">
+  <a href="./">Gastronomia</a><a href="#pacotes">Pacotes</a><a href="#funciona">Como funciona</a>
+</div></div>
 
-  <div class="carrossel__head cardapio__head">
-    <h3 class="carrossel__titulo">O que <em id="nomeSel2"></em> inclui</h3>
-    <p class="carrossel__hint">Deslize para o lado →</p>
+<header class="overture" id="topo">
+  <img class="overture__bg" src="fotos/openbar/hero-noivos.jpg" alt="Noivos brindando na pista com os convidados" fetchpriority="high">
+  <div class="overture__scrim" aria-hidden="true"></div>
+  <div class="overture__in">
+    <img class="overture__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
+    <p class="eyebrow overture__kicker">Open Bar Indaiá</p>
+    <h1 class="hero-title" id="heroTitle" aria-label="Open bar do dia de vocês">
+      <span class="row"><i>OPEN BAR</i></span>
+      <span class="row it"><i>do dia de vocês.</i></span>
+    </h1>
+    <p class="overture__sub">A bebida do casamento de vocês servida a noite inteira, no valor por pessoa, sem surpresas no fim da festa.</p>
+    <div class="overture__cta-row">
+      <a class="btn btn--beam" href="#pacotes">Ver os pacotes
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--ghost" href="#funciona">Como funciona</a>
+    </div>
   </div>
-  <div class="cardapio" id="cardapio"></div>
+  <p class="scrollcue" aria-hidden="true">Role</p>
+</header>
+<div class="dawn" aria-hidden="true"></div>
 
-  <p class="nota"><strong>Bom saber.</strong> Aos valores é somada a taxa de serviço de 15% sobre o consumo. Os valores de tabela podem ser reajustados até a data do evento, mas quem já tem contrato fechado mantém os preços combinados.</p>
+<main id="conteudo">
+
+<section class="statement wrap">
+  <p class="eyebrow statement__eyebrow">O que fica</p>
+  <p class="statement__text">O brinde não é um detalhe da festa.
+  <span class="accent">É o instante em que todo mundo olha para vocês.</span></p>
 </section>
 
-<section class="sec wrap">
+<section class="sec pacotes wrap" id="pacotes">
   <div class="sec__head">
-    <h2 class="sec__title reveal">Menu de bebidas avulsas</h2>
-    <p class="sec__lead reveal" data-d="1">Pra montar o open bar do jeito de vocês, item a item.</p>
+    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
+    <h2 class="sec__title reveal">Seis <em>pacotes</em></h2>
+    <p class="sec__lead reveal" data-d="1">Um valor por convidado, servido do começo ao fim da festa. Os seis lado a lado, com a marca de cada bebida escrita. Em dourado está o que o pacote adiciona ou faz upgrade em relação ao anterior.</p>
   </div>
-  <p class="carrossel__hint" style="text-align:right;margin-bottom:.5rem">Deslize para o lado →</p>
-  <div class="blocos"><div class="bloco"><h4>Cervejas</h4><ul><li>Heineken · R$ 16,00</li><li>Budweiser · R$ 16,00</li></ul></div><div class="bloco"><h4>Energéticos</h4><ul><li>Red Bull · R$ 19,00</li><li>Red Bull Tropical · R$ 19,00</li></ul></div><div class="bloco"><h4>Sem álcool</h4><ul><li>Heineken Zero · R$ 16,00</li><li>Espumante sem álcool · R$ 117,00</li></ul></div><div class="bloco"><h4>Refrigerantes e águas</h4><ul><li>Coca-Cola · R$ 12,00</li><li>Coca-Cola Light · R$ 12,00</li><li>Guaraná · R$ 12,00</li><li>Guaraná Light · R$ 12,00</li><li>Água com gás · R$ 12,00</li><li>Água sem gás · R$ 12,00</li><li>Água tônica · R$ 12,00</li><li>Suco de laranja · R$ 13,00</li></ul></div><div class="bloco"><h4>Destilados</h4><ul><li>Smirnoff · R$ 182,00</li><li>Absolut · R$ 234,00</li><li>Seagers · R$ 182,00</li><li>Tanqueray · R$ 338,00</li></ul></div><div class="bloco"><h4>Whisky</h4><ul><li>Passport · R$ 208,00</li><li>J.W. Red Label · R$ 234,00</li><li>J.W. Black Label · R$ 364,00</li></ul></div><div class="bloco"><h4>Vinhos e espumantes</h4><ul><li>Veuve Clicquot Brut · R$ 780,00</li><li>Perini Moscatel · R$ 130,00</li><li>Perini Brut · R$ 130,00</li><li>Chandon Rosé · R$ 208,00</li><li>Chandon Brut · R$ 208,00</li><li>Vinho Tinto Merlot · R$ 104,00</li><li>Vinho Tinto Cabernet · R$ 104,00</li><li>Vinho Branco Moscato · R$ 104,00</li></ul></div><div class="bloco"><h4>Rolhas</h4><ul><li>Espumantes e vinhos · R$ 65,00</li><li>Destilados · R$ 104,00</li></ul></div></div>
+
+  <p class="tab__hint">Arraste para o lado para comparar</p>
+  <div class="tab__wrap" id="tabWrap">
+    <table class="tab" id="tab" aria-label="Comparativo dos seis pacotes de open bar"></table>
+  </div>
+  <p class="tab__legenda">
+    <span><span class="cel__tag">Adiciona</span> a bebida aparece pela primeira vez</span>
+    <span><span class="cel__tag cel__tag--sobe">Upgrade para</span> a mesma bebida sobe de marca</span>
+  </p>
+
+  <div class="opens">
+    <div class="opens__head">
+      <p class="eyebrow opens__eyebrow">Os opens por dentro</p>
+      <h3 class="opens__titulo">O que vem <em>junto</em></h3>
+    </div>
+    <div class="opens__grid">
+      <section class="painel">
+        <p class="painel__quem">Nos pacotes 5 e 6</p>
+        <div class="item">
+          <h4>Open Drinks Classic <span>10 drinks</span></h4>
+          <ul id="listaDrinks"></ul>
+        </div>
+        <div class="item">
+          <h4>Balcão de pista</h4>
+          <p>Um balcão de apoio montado perto da pista, com as bebidas que vocês já escolheram no pacote. O convidado pega ali mesmo, sem sair da festa, e o garçom segue passando e servindo.</p>
+        </div>
+      </section>
+      <section class="painel painel--up">
+        <p class="painel__quem">Só no pacote 6</p>
+        <div class="item">
+          <h4>Open Caipirinha Classic <span>5 sabores</span></h4>
+          <p>Vinho, Morango, Tropical, Limão e Framboesa.</p>
+        </div>
+        <div class="item">
+          <h4>Welcome Drink</h4>
+          <p>O garçom recepciona os convidados com taça de espumante logo na chegada.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <p class="nota"><strong>Bom saber.</strong> Aos valores é somada a taxa de serviço de 15% sobre o consumo. Os valores de tabela podem ser reajustados até a data do evento, e quem já tem contrato fechado mantém o preço combinado.</p>
+
+  <div class="trilho" id="trilho">
+    <div class="trilho__pin">
+      <div class="trilho__track" id="track">
+        <figure class="pc"><img src="fotos/openbar/bar.jpg" alt="Drinks no balcão do bar">
+          <figcaption class="pc__meta"><p class="pc__nome">O bar</p><p class="pc__sub">Montado e operado pela nossa equipe do começo ao fim.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/openbar/cerveja.jpg" alt="Cervejas no gelo" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Sempre gelada</p><p class="pc__sub">Cerveja a partir do Pacote 2.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/openbar/bandeja.jpg" alt="Garçom servindo drinks de bandeja" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">O serviço</p><p class="pc__sub">O garçom passa servindo a noite inteira.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/openbar/drinks.jpg" alt="Drinks do open bar" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">Os drinks</p><p class="pc__sub">Open Drinks Classic nos Pacotes 5 e 6.</p></figcaption></figure>
+        <figure class="pc"><img src="fotos/openbar/caipirinha.jpg" alt="Caipirinhas servidas na festa" loading="lazy">
+          <figcaption class="pc__meta"><p class="pc__nome">A caipirinha</p><p class="pc__sub">Open Caipirinha Classic no Pacote 6.</p></figcaption></figure>
+      </div>
+    </div>
+  </div>
 </section>
-<section class="sec wrap">
+
+<section class="sec wrap" id="funciona">
   <div class="sec__head">
-    <h2 class="sec__title reveal">Adicionais e upgrades</h2>
-    <p class="sec__lead reveal" data-d="1">Pra subir o nível das bebidas já contratadas.</p>
+    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Simples assim</p></div>
+    <h2 class="sec__title reveal">Como <em>funciona</em></h2>
   </div>
-  <p class="carrossel__hint" style="text-align:right;margin-bottom:.5rem">Deslize para o lado →</p>
-  <div class="blocos"><div class="bloco"><h4>Vodka e trocas</h4><ul><li>Vodka Smirnoff · R$ 26,00</li><li>Vodka Absolut · R$ 40,00</li><li>Troca de Smirnoff p/ Absolut · R$ 26,00</li></ul></div><div class="bloco"><h4>Whisky e trocas</h4><ul><li>Passport · R$ 26,00</li><li>Red Label · R$ 40,00</li><li>Black Label · R$ 52,00</li><li>Troca de Passport p/ Red Label · R$ 32,00</li><li>Troca de Passport p/ Black Label · R$ 46,00</li><li>Troca de Red Label p/ Black Label · R$ 26,00</li></ul></div><div class="bloco"><h4>Vinhos e espumantes</h4><ul><li>Espumante Perini (Brut ou Moscatel) · R$ 71,00</li><li>Vinho Macaw (Tinto ou Branco) · R$ 46,00</li></ul></div><div class="bloco"><h4>Cervejas</h4><ul><li>Budweiser (litro) · R$ 20,00</li><li>Heineken (long neck) · R$ 39,00</li></ul></div><div class="bloco"><h4>Energéticos e complementos</h4><ul><li>Nitrix · R$ 20,00</li><li>Red Bull · R$ 46,00</li><li>Suco de laranja · R$ 20,00</li></ul></div></div>
+  <ul class="regras">
+    <li class="reveal">
+      <span class="regras__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8h4M19 6v4"/></svg></span>
+      <h3>Um valor por convidado</h3>
+      <p>O pacote vale para <strong>todos os convidados do casamento</strong> e é cobrado por pessoa. Ninguém abre conta e ninguém paga nada durante a festa.</p>
+    </li>
+    <li class="reveal" data-d="1">
+      <span class="regras__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M5 4h14l-1.5 6.5a3 3 0 0 1-2.9 2.3H9.4a3 3 0 0 1-2.9-2.3z"/><path d="M12 12.8V20M8.5 20h7"/></svg></span>
+      <h3>A noite inteira, sem limite de doses</h3>
+      <p>Enquanto a festa durar, o convidado bebe <strong>a quantidade que quiser</strong> dentro do que o pacote inclui, sem custo extra.</p>
+    </li>
+    <li class="reveal">
+      <span class="regras__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <h3>Definido na Reunião Final</h3>
+      <p>As marcas e os detalhes do bar são registrados na <strong>Reunião Final</strong>, cerca de 30 dias antes do evento. Até lá, o pacote pode ser trocado sem transtorno.</p>
+    </li>
+    <li class="reveal" data-d="1">
+      <span class="regras__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 19h16M6 19V9l6-4 6 4v10"/><path d="M9 19v-5h6v5"/></svg></span>
+      <h3>Bar montado por nós</h3>
+      <p>Estrutura, insumos, equipe e acabamento visual são <strong>da Indaiá</strong>. Nos Pacotes 5 e 6 entra também o balcão de apoio perto da pista, que deixa as bebidas já escolhidas ao alcance de quem está dançando.</p>
+    </li>
+  </ul>
 </section>
-<section class="fim wrap">
-  <div class="fim__card">
-    <p class="fim__t">Cada brinde, uma memória.</p>
-    <p class="fim__s">Mais do que bebidas, é sobre criar momentos que ficam. Do primeiro ao último brinde com a nossa assinatura.</p>
-  </div>
-</section>
+
 </main>
 
 <footer class="footer">
   <div class="footer__in">
     <img class="footer__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
     <div class="footer__links">
-      <a href="./">Gastronomia</a>
-      <a href="buffet.html">Buffet</a>
+      <a href="./">Gastronomia</a><a href="#topo">Topo</a><a href="#pacotes">Pacotes</a><a href="#funciona">Como funciona</a>
       <a href="https://www.eventosindaia.com.br" target="_blank" rel="noopener">eventosindaia.com.br</a>
     </div>
   </div>
+  <p class="footer__fine">Open Bar Indaiá. Fotos ilustrativas. Aos valores é somada a taxa de serviço de 15% sobre o consumo e eles podem ser reajustados até a data do evento. Este material não substitui o contrato: em caso de divergência, valem os valores e itens registrados no contrato.</p>
 </footer>
 
+<div class="tierbar" id="tierbar">
+  <div class="tierbar__in">
+    <span class="tierbar__lbl">Pacote exibido</span>
+    <div class="tierbar__opts" id="tierbarOpts" role="group" aria-label="Trocar pacote"></div>
+  </div>
+</div>
+
 <script>
+/* Conteudo dos pacotes: a tabela comparativa do slide (Pacotes 1 a 6).
+   Cada celula guarda a MARCA daquele pacote:
+     null  nao incluso
+     '='   mesma coisa do pacote anterior (o render repete a marca, sem destaque)
+     {v:[linhas], t:'entra'|'sobe', rot:'rotulo opcional', so:[linhas que mudaram]}
+           entra ou troca de marca. sem 'so', a celula inteira e novidade */
+const SOFT   = ['Coca-Cola e Coca Zero','Guaraná e Guaraná Zero','Água com e sem gás'];
+const SOFT_S = SOFT.concat(['Suco de laranja']);
+/* Os drinks são os do OPEN CLASSIC do material de drinks
+   (https://git-rbc.github.io/open-drinks/), que é o que entra no open bar.
+   Mexeu lá, mexe aqui: a lista antiga do PDF ficou desatualizada. */
+const DRINKS = ['Bourbon Peach','Cosmopolitan','Gin Tônica Clássico','Gin Tônica Maracujá',
+  'Gin Tônica Morango','Strawberry Julep Cremoso','New York Sour','Moscow Mule',
+  'Negroni','Mojito'];
+
 const PACOTES = [
- {
-  "nome": "Pacote 1",
-  "preco": "R$ 75,90",
-  "base": "Refrigerantes e água",
-  "destaque": "",
-  "secoes": [
-   {
-    "label": "Produtos",
-    "itens": [
-     "Refrigerantes",
-     "Água"
-    ]
-   },
-   {
-    "label": "Marcas",
-    "itens": [
-     "Coca-Cola, Coca-Cola Zero",
-     "Guaraná, Guaraná Zero",
-     "Água c/ gás, Água s/ gás"
-    ]
-   }
-  ],
-  "fotos": []
- },
- {
-  "nome": "Pacote 2",
-  "preco": "R$ 89,90",
-  "base": "Entra a cerveja",
-  "destaque": "",
-  "secoes": [
-   {
-    "label": "Produtos",
-    "itens": [
-     "Refrigerantes",
-     "Água",
-     "Cerveja"
-    ]
-   },
-   {
-    "label": "Marcas",
-    "itens": [
-     "Coca-Cola, Coca-Cola Zero",
-     "Guaraná, Guaraná Zero",
-     "Água c/ gás, Água s/ gás",
-     "Brahma"
-    ]
-   }
-  ],
-  "fotos": []
- },
- {
-  "nome": "Pacote 3",
-  "preco": "R$ 119,90",
-  "base": "Entram vodka e whisky",
-  "destaque": "",
-  "secoes": [
-   {
-    "label": "Produtos",
-    "itens": [
-     "Refrigerantes",
-     "Água",
-     "Cerveja",
-     "Vodka",
-     "Whisky"
-    ]
-   },
-   {
-    "label": "Marcas",
-    "itens": [
-     "Coca-Cola, Coca-Cola Zero",
-     "Guaraná, Guaraná Zero",
-     "Brahma",
-     "Smirnoff",
-     "Passport"
-    ]
-   }
-  ],
-  "fotos": []
- },
- {
-  "nome": "Pacote 4",
-  "preco": "R$ 179,90",
-  "base": "Entram espumante e energético",
-  "destaque": "",
-  "secoes": [
-   {
-    "label": "Produtos",
-    "itens": [
-     "Refrigerantes",
-     "Água",
-     "Cerveja",
-     "Vodka",
-     "Whisky",
-     "Espumante",
-     "Energético"
-    ]
-   },
-   {
-    "label": "Marcas",
-    "itens": [
-     "Coca-Cola, Coca-Cola Zero",
-     "Guaraná Zero, Água c/ gás",
-     "Brahma",
-     "Smirnoff ou Absolut",
-     "Passport ou J.W. Red Label",
-     "Perini (Moscatel ou Brut)",
-     "Nitrix"
-    ]
-   }
-  ],
-  "fotos": []
- },
- {
-  "nome": "Pacote 5",
-  "preco": "R$ 269,90",
-  "base": "Entra o Open Drinks",
-  "destaque": "",
-  "secoes": [
-   {
-    "label": "Produtos",
-    "itens": [
-     "Refrigerantes",
-     "Água",
-     "Suco",
-     "Cerveja",
-     "Vodka",
-     "Whisky",
-     "Espumante",
-     "Energético",
-     "Open Drinks"
-    ]
-   },
-   {
-    "label": "Marcas",
-    "itens": [
-     "Coca-Cola, Coca-Cola Zero",
-     "Guaraná, Guaraná Zero",
-     "Água c/ gás, Água s/ gás, Laranja",
-     "Heineken Long Neck",
-     "Absolut, J.W. Red Label",
-     "Perini (Moscatel ou Brut)",
-     "Red Bull"
-    ]
-   },
-   {
-    "label": "Drinks",
-    "itens": [
-     "Big Buff Cremoso",
-     "Bourbon Peach",
-     "Cosmopolitan",
-     "Gin Tônica Clássico",
-     "Gin Tônica c/ morango e hortelã",
-     "Moscow Mule",
-     "Moscow Mule Cranberry",
-     "Negroni",
-     "Negroni Club Soda",
-     "Mojito Clássico",
-     "Mojito Maçã Verde"
-    ]
-   }
-  ],
-  "fotos": []
- },
- {
-  "nome": "Pacote 6",
-  "preco": "R$ 309,90",
-  "base": "O completo: Welcome Drink, Open Caipirinha e Open Drinks",
-  "destaque": "Mais completo",
-  "secoes": [
-   {
-    "label": "Produtos",
-    "itens": [
-     "Refrigerantes",
-     "Água",
-     "Suco",
-     "Cerveja",
-     "Vodka",
-     "Whisky",
-     "Espumante",
-     "Energético",
-     "Welcome Drink",
-     "Open Caipirinha",
-     "Open Drinks"
-    ]
-   },
-   {
-    "label": "Marcas",
-    "itens": [
-     "Coca-Cola, Coca-Cola Zero (latas)",
-     "Guaraná, Guaraná Zero (latas)",
-     "Água c/ gás, Água s/ gás (garrafinhas), Laranja",
-     "Heineken Long Neck",
-     "Absolut, J.W. Red Label",
-     "Perini (Moscatel ou Brut)",
-     "Red Bull"
-    ]
-   },
-   {
-    "label": "Welcome Drink",
-    "itens": [
-     "Garçom recepciona os convidados com taça de espumante"
-    ]
-   },
-   {
-    "label": "Sabores do Open Caipirinha",
-    "itens": [
-     "Vinho",
-     "Morango",
-     "Tropical",
-     "Limão",
-     "Framboesa"
-    ]
-   },
-   {
-    "label": "Drinks",
-    "itens": [
-     "Big Buff Cremoso",
-     "Bourbon Peach",
-     "Cosmopolitan",
-     "Gin Tônica Clássico",
-     "Gin Tônica c/ morango e hortelã",
-     "Negroni",
-     "Negroni Club Soda",
-     "Mojito Clássico",
-     "Mojito Maçã Verde"
-    ]
-   }
-  ],
-  "fotos": []
- }
+  { nome:'Pacote 1', preco:'R$ 75,90' },
+  { nome:'Pacote 2', preco:'R$ 89,90' },
+  { nome:'Pacote 3', preco:'R$ 119,90' },
+  { nome:'Pacote 4', preco:'R$ 169,90' },
+  { nome:'Pacote 5', preco:'R$ 259,90' },
+  { nome:'Pacote 6', preco:'R$ 309,90', selo:'Mais completo' }
 ];
-const grid = document.getElementById('grid');
-PACOTES.forEach((p,i)=>{
-  const b = document.createElement('button');
-  b.type='button'; b.className='pacote'; b.dataset.i=i; b.setAttribute('aria-pressed','false');
-  b.innerHTML = (p.destaque?`<span class="pacote__selo">${p.destaque}</span>`:'')
-    + `<p class="pacote__nome">${p.nome}</p>
-       <p class="pacote__preco">${p.preco}</p>
-       <p class="pacote__base">${p.base}</p>`;
-  b.addEventListener('click',()=>selecionar(i,true));
-  grid.appendChild(b);
-});
-function selecionar(i, rolar){
-  const p = PACOTES[i];
-  document.querySelectorAll('.pacote').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.i===i)));
-  document.getElementById('nomeSel').textContent = p.nome;
-  document.getElementById('nomeSel2').textContent = p.nome;
-  const bloco = document.getElementById('carrosselBloco');
-  bloco.hidden = !p.fotos.length;
-  if(p.fotos.length){
-    const t = document.getElementById('track');
-    t.innerHTML = p.fotos.map(([src,cap])=>`
-      <figure class="dish"><img src="${src}" alt="${cap}" loading="lazy">
-        <figcaption class="dish__cap"><p class="dish__nome">${cap}</p><p class="dish__tag">Foto ilustrativa</p></figcaption>
-      </figure>`).join('');
-    t.scrollLeft = 0;
+
+const CATS = [
+  { l:'Soft', cels:[
+      {v:SOFT}, '=', '=', '=',
+      {v:SOFT_S, t:'entra', rot:'Adiciona o suco', so:['Suco de laranja']}, '=' ] },
+
+  { l:'Cerveja', cels:[
+      null, {v:['Brahma litro'], t:'entra'}, '=', '=',
+      {v:['Heineken long neck'], t:'sobe'}, '=' ] },
+
+  { l:'Destilados', cels:[
+      null, null, {v:['Vodka Smirnoff','Whisky Passport'], t:'entra'}, '=',
+      {v:['Vodka Absolut','Whisky J. Walker Red Label'], t:'sobe'}, '=' ] },
+
+  { l:'Espumante', cels:[
+      null, null, null, {v:['Sanjo, Moscatel ou Brut'], t:'entra'},
+      {v:['Perini, Moscatel ou Brut'], t:'sobe'}, '=' ] },
+
+  { l:'Energético', cels:[
+      null, null, null, {v:['Baly litro'], t:'entra'},
+      {v:['Red Bull'], t:'sobe'}, '=' ] },
+
+  { l:'Open Drinks Classic', cels:[
+      null, null, null, null, {v:['10 drinks'], t:'entra'}, '=' ] },
+
+  { l:'Balcão de pista', cels:[
+      null, null, null, null, {v:['Balcão de apoio perto da pista'], t:'entra'}, '=' ] },
+
+  { l:'Open Caipirinha Classic', cels:[
+      null, null, null, null, null, {v:['5 sabores'], t:'entra'} ] },
+
+  { l:'Welcome Drink', cels:[
+      null, null, null, null, null, {v:['Incluso'], t:'entra'} ] }
+];
+
+let atual = 0;
+const $ = (s) => document.querySelector(s);
+
+/* '=' herda a marca da coluna anterior que tinha valor */
+function heranca(cels, i){
+  for (let j = i; j >= 0; j--){
+    const c = cels[j];
+    if (c && c !== '=') return c.v;
   }
-  const c = document.getElementById('cardapio');
-  c.innerHTML = p.secoes.map(s=>`
-    <div class="cat">
-      <div class="cat__head"><span class="cat__nome">${s.label}</span></div>
-      <ul>${s.itens.map(x=>`<li>${x}</li>`).join('')}</ul>
-    </div>`).join('');
-  c.scrollLeft = 0;
-  if(rolar) document.querySelector('.cardapio__head').scrollIntoView({behavior:'smooth',block:'start'});
+  return [];
 }
-selecionar(0,false);
+
+function celula(cels, i){
+  const c = cels[i];
+  const sel = (i === atual) ? ' cel--sel' : '';
+  if (!c) return `<td class="cel cel--vazio${sel}"><span class="tracinho" role="img" aria-label="Não incluso"></span></td>`;
+  const mudou = (c !== '=' && !!c.t);
+  const val = (c === '=') ? heranca(cels, i) : c.v;
+  const novo = (x) => mudou && (!c.so || c.so.indexOf(x) > -1);
+  const tag = mudou
+    ? `<span class="cel__tag${c.t === 'sobe' ? ' cel__tag--sobe' : ''}">${c.rot || (c.t === 'sobe' ? 'Upgrade para' : 'Adiciona')}</span>`
+    : '';
+  return `<td class="cel${sel}">
+    <ul>${val.map(x=>`<li${novo(x) ? ' class="novo"' : ''}>${x}</li>`).join('')}</ul>${tag}</td>`;
+}
+
+function pintaTabela(){
+  const cab = PACOTES.map((p,i)=>`
+    <th class="cabc" scope="col">
+      <button type="button" class="cab" data-i="${i}" aria-pressed="${i===atual}">
+        ${p.selo ? `<span class="cab__selo">${p.selo}</span>` : ''}
+        <span class="cab__nome">${p.nome}</span>
+        <span class="cab__preco">${p.preco}</span>
+        <span class="cab__pp">por pessoa</span>
+      </button>
+    </th>`).join('');
+  const linhas = CATS.map(c=>
+    `<tr><th class="lin" scope="row">${c.l}</th>` +
+    c.cels.map((_,i)=>celula(c.cels,i)).join('') + `</tr>`).join('');
+  $('#tab').innerHTML = `<thead><tr><td class="tab__corner"></td>${cab}</tr></thead><tbody>${linhas}</tbody>`;
+}
+
+function pintaTierbar(){
+  $('#tierbarOpts').innerHTML = PACOTES.map((p,i)=>
+    `<button type="button" class="tierbar__opt" data-i="${i}" aria-pressed="${i===atual}">${p.nome.replace('Pacote ','')} &middot; ${p.preco}</button>`).join('');
+}
+
+/* na tela estreita a tabela rola de lado: trazer a coluna escolhida pra vista */
+function focaColuna(){
+  const w = $('#tabWrap');
+  const cab = w.querySelector('.cab[data-i="' + atual + '"]');
+  if (!cab || w.scrollWidth <= w.clientWidth + 4) return;
+  const alvo = cab.getBoundingClientRect().left - w.getBoundingClientRect().left + w.scrollLeft;
+  w.scrollTo({ left: Math.max(0, alvo - 124), behavior:'smooth' });
+}
+
+function troca(i, rolar){ atual = i; pintaTabela(); pintaTierbar(); if (rolar) focaColuna(); }
+
+document.getElementById('listaDrinks').innerHTML = DRINKS.map(d=>`<li>${d}</li>`).join('');
+
+document.addEventListener('click', (e)=>{
+  const b = e.target.closest('.tierbar__opt, .cab');
+  if (b){ troca(Number(b.dataset.i), true); return; }
+  if (e.target.closest('#burger')){
+    const m = $('#menu'), bt = $('#burger');
+    const abre = bt.getAttribute('aria-expanded') !== 'true';
+    bt.setAttribute('aria-expanded', String(abre));
+    m.classList.toggle('aberto', abre);
+  } else if (e.target.closest('.menu__in a')){
+    $('#menu').classList.remove('aberto');
+    $('#burger').setAttribute('aria-expanded','false');
+  }
+});
+
+troca(0, false);
+
+const io = new IntersectionObserver((es)=>es.forEach((x)=>{
+  if (x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); }
+}), { rootMargin:'0px 0px -12% 0px' });
+document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
+
+addEventListener('load', ()=>{
+  document.querySelectorAll('#heroTitle .row i').forEach((el,i)=>{
+    el.style.transition = `transform 1.1s cubic-bezier(.16,1,.3,1) ${.15 + i*.12}s`;
+    requestAnimationFrame(()=>{ el.style.transform = 'none'; });
+  });
+});
+
+/* a nav clara vira barra branca no meio de um bloco escuro: detecta a sobreposicao */
+const ESCUROS = () => document.querySelectorAll('.pacotes,.footer');
+addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+  $('#progress').style.transform = `scaleX(${p})`;
+  const nav = $('#nav');
+  nav.classList.toggle('scrolled', h.scrollTop > 40);
+  /* quem decide a cor da barra e o bloco que passa pela LINHA DO MEIO dela:
+     por borda, os 40px finais de um bloco escuro ja deixavam a nav preta no claro */
+  let sobre = false;
+  const cx = nav.getBoundingClientRect();
+  const meio = (cx.top + cx.bottom) / 2;
+  ESCUROS().forEach((el)=>{ const r = el.getBoundingClientRect(); if (r.top <= meio && r.bottom >= meio) sobre = true; });
+  nav.classList.toggle('sobre-escuro', sobre);
+  $('#tierbar').classList.toggle('on', h.scrollTop > innerHeight * 0.85);
+}, { passive:true });
+</script>
+
+<script>
+/* ===== TRILHO =====
+   sem GSAP: o arquivo precisa continuar autocontido. o pin e position:sticky e o
+   deslocamento vem da distancia ja rolada. a posicao de cada peca vem do LAYOUT
+   (offsetWidth + gap), nunca de getBoundingClientRect, senao o transform que
+   acabamos de aplicar realimenta a conta. */
+(function(){
+  var trilho = document.getElementById('trilho');
+  var track  = document.getElementById('track');
+  if (!trilho || !track) return;
+  var anima = !window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* quanto o trilho anda por pixel de rolagem. a 1:1 as seis fotos pediam quase
+     cinco telas de scroll e a secao ficava mais longa que o resto da pagina */
+  var VEL = 1.5;
+  var dist = 0, larg = 0, gap = 0, pad = 0, agendado = false;
+
+  function mede(){
+    if (!anima){ trilho.style.height = 'auto'; return; }
+    var pcs = track.children;
+    if (!pcs.length){ trilho.style.height = '0px'; dist = 0; return; }
+    larg = pcs[0].offsetWidth;
+    var cs = getComputedStyle(track);
+    gap = parseFloat(cs.columnGap || cs.gap) || 0;
+    pad = parseFloat(cs.paddingLeft) || 0;
+    dist = Math.max(0, track.scrollWidth - window.innerWidth);
+    var respiro = dist ? window.innerHeight * 0.3 : 0;
+    trilho.style.height = (dist / VEL + respiro + window.innerHeight) + 'px';
+    pinta();
+  }
+
+  function pinta(){
+    if (!anima) return;
+    var pcs = track.children;
+    if (!pcs.length) return;
+    var caixa = trilho.getBoundingClientRect();
+    var andado = Math.min(Math.max(-caixa.top, 0) * VEL, dist);
+    track.style.transform = 'translate3d(' + (-andado) + 'px,0,0)';
+    var meio = window.innerWidth / 2;
+    var base = caixa.left + pad - andado;
+    for (var i = 0; i < pcs.length; i++){
+      var t = ((base + i * (larg + gap) + larg / 2) - meio) / window.innerWidth;
+      t = Math.max(-1.1, Math.min(1.1, t));
+      var a = Math.abs(t);
+      pcs[i].style.transform = 'rotateY(' + (-20 * t) + 'deg) translateZ(' + (-260 * a) +
+                               'px) scale(' + (1 - 0.1 * a) + ')';
+      pcs[i].style.opacity = 1 - 0.3 * a;
+    }
+  }
+
+  addEventListener('scroll', function(){
+    if (agendado) return;
+    agendado = true;
+    requestAnimationFrame(function(){ pinta(); agendado = false; });
+  }, { passive:true });
+  addEventListener('resize', mede);
+  addEventListener('load', mede);
+  mede();
+})();
 </script>
 </body>
 </html>

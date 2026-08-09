@@ -1,0 +1,389 @@
+- generic [active] [ref=e1]:
+  - link "Ir para o conteúdo" [ref=e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - navigation [ref=e3]:
+    - generic [ref=e5]:
+      - link "Gastronomia" [ref=e6] [cursor=pointer]:
+        - /url: ./
+      - link "Pacotes" [ref=e7] [cursor=pointer]:
+        - /url: "#pacotes"
+      - link "Como funciona" [ref=e8] [cursor=pointer]:
+        - /url: "#funciona"
+  - banner [ref=e9]:
+    - img "Noivos brindando na pista com os convidados" [ref=e10]
+    - generic [ref=e12]:
+      - img "Eventos Indaiá" [ref=e13]
+      - paragraph [ref=e14]: Open Bar Indaiá
+      - heading "Open bar do dia de vocês" [level=1] [ref=e15]:
+        - generic [ref=e16]: OPEN BAR
+        - generic [ref=e18]: do dia de vocês.
+      - paragraph [ref=e20]: A bebida do casamento de vocês servida a noite inteira, no valor por pessoa, sem surpresas no fim da festa.
+      - generic [ref=e21]:
+        - link "Ver os pacotes" [ref=e22] [cursor=pointer]:
+          - /url: "#pacotes"
+        - link "Como funciona" [ref=e25] [cursor=pointer]:
+          - /url: "#funciona"
+    - paragraph [ref=e26]: Role
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: O que fica
+      - paragraph [ref=e31]: O brinde não é um detalhe da festa. É o instante em que todo mundo olha para vocês.
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: "01"
+          - paragraph [ref=e36]: Escolham o de vocês
+        - heading [level=2] [ref=e37]:
+          - text: Seis
+          - emphasis [ref=e38]: pacotes
+        - paragraph [ref=e39]: Um valor por convidado, servido do começo ao fim da festa. Os seis lado a lado, com a marca de cada bebida escrita. Em dourado está o que o pacote adiciona ou faz upgrade em relação ao anterior.
+      - table "Comparativo dos seis pacotes de open bar" [ref=e41]:
+        - rowgroup [ref=e42]:
+          - row [ref=e43]:
+            - cell [ref=e44]
+            - columnheader [ref=e45]:
+              - button "Pacote 1 R$ 75,90 por pessoa" [pressed] [ref=e46] [cursor=pointer]:
+                - generic [ref=e47]: Pacote 1
+                - generic [ref=e48]: R$ 75,90
+                - generic [ref=e49]: por pessoa
+            - columnheader [ref=e50]:
+              - button "Pacote 2 R$ 89,90 por pessoa" [ref=e51] [cursor=pointer]:
+                - generic [ref=e52]: Pacote 2
+                - generic [ref=e53]: R$ 89,90
+                - generic [ref=e54]: por pessoa
+            - columnheader [ref=e55]:
+              - button "Pacote 3 R$ 119,90 por pessoa" [ref=e56] [cursor=pointer]:
+                - generic [ref=e57]: Pacote 3
+                - generic [ref=e58]: R$ 119,90
+                - generic [ref=e59]: por pessoa
+            - columnheader [ref=e60]:
+              - button "Pacote 4 R$ 169,90 por pessoa" [ref=e61] [cursor=pointer]:
+                - generic [ref=e62]: Pacote 4
+                - generic [ref=e63]: R$ 169,90
+                - generic [ref=e64]: por pessoa
+            - columnheader [ref=e65]:
+              - button "Pacote 5 R$ 259,90 por pessoa" [ref=e66] [cursor=pointer]:
+                - generic [ref=e67]: Pacote 5
+                - generic [ref=e68]: R$ 259,90
+                - generic [ref=e69]: por pessoa
+            - columnheader [ref=e70]:
+              - button "Mais completo Pacote 6 R$ 309,90 por pessoa" [ref=e71] [cursor=pointer]:
+                - generic [ref=e72]: Mais completo
+                - generic [ref=e73]: Pacote 6
+                - generic [ref=e74]: R$ 309,90
+                - generic [ref=e75]: por pessoa
+        - rowgroup [ref=e76]:
+          - row [ref=e77]:
+            - rowheader "Soft" [ref=e78]
+            - cell [ref=e79]:
+              - list [ref=e80]:
+                - listitem [ref=e81]: Coca-Cola e Coca Zero
+                - listitem [ref=e82]: Guaraná e Guaraná Zero
+                - listitem [ref=e83]: Água com e sem gás
+            - cell [ref=e84]:
+              - list [ref=e85]:
+                - listitem [ref=e86]: Coca-Cola e Coca Zero
+                - listitem [ref=e87]: Guaraná e Guaraná Zero
+                - listitem [ref=e88]: Água com e sem gás
+            - cell [ref=e89]:
+              - list [ref=e90]:
+                - listitem [ref=e91]: Coca-Cola e Coca Zero
+                - listitem [ref=e92]: Guaraná e Guaraná Zero
+                - listitem [ref=e93]: Água com e sem gás
+            - cell [ref=e94]:
+              - list [ref=e95]:
+                - listitem [ref=e96]: Coca-Cola e Coca Zero
+                - listitem [ref=e97]: Guaraná e Guaraná Zero
+                - listitem [ref=e98]: Água com e sem gás
+            - cell "Coca-Cola e Coca Zero Guaraná e Guaraná Zero Água com e sem gás Suco de laranja Adiciona o suco" [ref=e99]:
+              - list [ref=e100]:
+                - listitem [ref=e101]: Coca-Cola e Coca Zero
+                - listitem [ref=e102]: Guaraná e Guaraná Zero
+                - listitem [ref=e103]: Água com e sem gás
+                - listitem [ref=e104]: Suco de laranja
+              - generic [ref=e105]: Adiciona o suco
+            - cell [ref=e106]:
+              - list [ref=e107]:
+                - listitem [ref=e108]: Coca-Cola e Coca Zero
+                - listitem [ref=e109]: Guaraná e Guaraná Zero
+                - listitem [ref=e110]: Água com e sem gás
+                - listitem [ref=e111]: Suco de laranja
+          - row [ref=e112]:
+            - rowheader "Cerveja" [ref=e113]
+            - cell [ref=e114]:
+              - img "Não incluso" [ref=e115]
+            - cell "Brahma litro Adiciona" [ref=e116]:
+              - list [ref=e117]:
+                - listitem [ref=e118]: Brahma litro
+              - generic [ref=e119]: Adiciona
+            - cell [ref=e120]:
+              - list [ref=e121]:
+                - listitem [ref=e122]: Brahma litro
+            - cell [ref=e123]:
+              - list [ref=e124]:
+                - listitem [ref=e125]: Brahma litro
+            - cell "Heineken long neck Upgrade para" [ref=e126]:
+              - list [ref=e127]:
+                - listitem [ref=e128]: Heineken long neck
+              - generic [ref=e129]: Upgrade para
+            - cell [ref=e130]:
+              - list [ref=e131]:
+                - listitem [ref=e132]: Heineken long neck
+          - row [ref=e133]:
+            - rowheader "Destilados" [ref=e134]
+            - cell [ref=e135]:
+              - img "Não incluso" [ref=e136]
+            - cell [ref=e137]:
+              - img "Não incluso" [ref=e138]
+            - cell "Vodka Smirnoff Whisky Passport Adiciona" [ref=e139]:
+              - list [ref=e140]:
+                - listitem [ref=e141]: Vodka Smirnoff
+                - listitem [ref=e142]: Whisky Passport
+              - generic [ref=e143]: Adiciona
+            - cell [ref=e144]:
+              - list [ref=e145]:
+                - listitem [ref=e146]: Vodka Smirnoff
+                - listitem [ref=e147]: Whisky Passport
+            - cell "Vodka Absolut Whisky J. Walker Red Label Upgrade para" [ref=e148]:
+              - list [ref=e149]:
+                - listitem [ref=e150]: Vodka Absolut
+                - listitem [ref=e151]: Whisky J. Walker Red Label
+              - generic [ref=e152]: Upgrade para
+            - cell [ref=e153]:
+              - list [ref=e154]:
+                - listitem [ref=e155]: Vodka Absolut
+                - listitem [ref=e156]: Whisky J. Walker Red Label
+          - row [ref=e157]:
+            - rowheader "Espumante" [ref=e158]
+            - cell [ref=e159]:
+              - img "Não incluso" [ref=e160]
+            - cell [ref=e161]:
+              - img "Não incluso" [ref=e162]
+            - cell [ref=e163]:
+              - img "Não incluso" [ref=e164]
+            - cell "Sanjo, Moscatel ou Brut Adiciona" [ref=e165]:
+              - list [ref=e166]:
+                - listitem [ref=e167]: Sanjo, Moscatel ou Brut
+              - generic [ref=e168]: Adiciona
+            - cell "Perini, Moscatel ou Brut Upgrade para" [ref=e169]:
+              - list [ref=e170]:
+                - listitem [ref=e171]: Perini, Moscatel ou Brut
+              - generic [ref=e172]: Upgrade para
+            - cell [ref=e173]:
+              - list [ref=e174]:
+                - listitem [ref=e175]: Perini, Moscatel ou Brut
+          - row [ref=e176]:
+            - rowheader "Energético" [ref=e177]
+            - cell [ref=e178]:
+              - img "Não incluso" [ref=e179]
+            - cell [ref=e180]:
+              - img "Não incluso" [ref=e181]
+            - cell [ref=e182]:
+              - img "Não incluso" [ref=e183]
+            - cell "Baly litro Adiciona" [ref=e184]:
+              - list [ref=e185]:
+                - listitem [ref=e186]: Baly litro
+              - generic [ref=e187]: Adiciona
+            - cell "Red Bull Upgrade para" [ref=e188]:
+              - list [ref=e189]:
+                - listitem [ref=e190]: Red Bull
+              - generic [ref=e191]: Upgrade para
+            - cell [ref=e192]:
+              - list [ref=e193]:
+                - listitem [ref=e194]: Red Bull
+          - row [ref=e195]:
+            - rowheader "Open Drinks Classic" [ref=e196]
+            - cell [ref=e197]:
+              - img "Não incluso" [ref=e198]
+            - cell [ref=e199]:
+              - img "Não incluso" [ref=e200]
+            - cell [ref=e201]:
+              - img "Não incluso" [ref=e202]
+            - cell [ref=e203]:
+              - img "Não incluso" [ref=e204]
+            - cell "10 drinks Adiciona" [ref=e205]:
+              - list [ref=e206]:
+                - listitem [ref=e207]: 10 drinks
+              - generic [ref=e208]: Adiciona
+            - cell [ref=e209]:
+              - list [ref=e210]:
+                - listitem [ref=e211]: 10 drinks
+          - row [ref=e212]:
+            - rowheader "Balcão de pista" [ref=e213]
+            - cell [ref=e214]:
+              - img "Não incluso" [ref=e215]
+            - cell [ref=e216]:
+              - img "Não incluso" [ref=e217]
+            - cell [ref=e218]:
+              - img "Não incluso" [ref=e219]
+            - cell [ref=e220]:
+              - img "Não incluso" [ref=e221]
+            - cell "Balcão de apoio perto da pista Adiciona" [ref=e222]:
+              - list [ref=e223]:
+                - listitem [ref=e224]: Balcão de apoio perto da pista
+              - generic [ref=e225]: Adiciona
+            - cell [ref=e226]:
+              - list [ref=e227]:
+                - listitem [ref=e228]: Balcão de apoio perto da pista
+          - row [ref=e229]:
+            - rowheader "Open Caipirinha Classic" [ref=e230]
+            - cell [ref=e231]:
+              - img "Não incluso" [ref=e232]
+            - cell [ref=e233]:
+              - img "Não incluso" [ref=e234]
+            - cell [ref=e235]:
+              - img "Não incluso" [ref=e236]
+            - cell [ref=e237]:
+              - img "Não incluso" [ref=e238]
+            - cell [ref=e239]:
+              - img "Não incluso" [ref=e240]
+            - cell "5 sabores Adiciona" [ref=e241]:
+              - list [ref=e242]:
+                - listitem [ref=e243]: 5 sabores
+              - generic [ref=e244]: Adiciona
+          - row [ref=e245]:
+            - rowheader "Welcome Drink" [ref=e246]
+            - cell [ref=e247]:
+              - img "Não incluso" [ref=e248]
+            - cell [ref=e249]:
+              - img "Não incluso" [ref=e250]
+            - cell [ref=e251]:
+              - img "Não incluso" [ref=e252]
+            - cell [ref=e253]:
+              - img "Não incluso" [ref=e254]
+            - cell [ref=e255]:
+              - img "Não incluso" [ref=e256]
+            - cell "Incluso Adiciona" [ref=e257]:
+              - list [ref=e258]:
+                - listitem [ref=e259]: Incluso
+              - generic [ref=e260]: Adiciona
+      - paragraph [ref=e261]:
+        - generic [ref=e262]:
+          - generic [ref=e263]: Adiciona
+          - text: a bebida aparece pela primeira vez
+        - generic [ref=e264]:
+          - generic [ref=e265]: Upgrade para
+          - text: a mesma bebida sobe de marca
+      - generic [ref=e266]:
+        - generic [ref=e267]:
+          - paragraph [ref=e268]: Os opens por dentro
+          - heading [level=3] [ref=e269]:
+            - text: O que vem
+            - emphasis [ref=e270]: junto
+        - generic [ref=e271]:
+          - generic [ref=e272]:
+            - paragraph [ref=e273]: Nos pacotes 5 e 6
+            - generic [ref=e274]:
+              - heading "Open Drinks Classic 10 drinks" [level=4] [ref=e275]:
+                - text: Open Drinks Classic
+                - generic [ref=e276]: 10 drinks
+              - list [ref=e277]:
+                - listitem [ref=e278]: Bourbon Peach
+                - listitem [ref=e279]: Cosmopolitan
+                - listitem [ref=e280]: Gin Tônica Clássico
+                - listitem [ref=e281]: Gin Tônica Maracujá
+                - listitem [ref=e282]: Gin Tônica Morango
+                - listitem [ref=e283]: Strawberry Julep Cremoso
+                - listitem [ref=e284]: New York Sour
+                - listitem [ref=e285]: Moscow Mule
+                - listitem [ref=e286]: Negroni
+                - listitem [ref=e287]: Mojito
+            - generic [ref=e288]:
+              - heading "Balcão de pista" [level=4] [ref=e289]
+              - paragraph [ref=e290]: Um balcão de apoio montado perto da pista, com as bebidas que vocês já escolheram no pacote. O convidado pega ali mesmo, sem sair da festa, e o garçom segue passando e servindo.
+          - generic [ref=e291]:
+            - paragraph [ref=e292]: Só no pacote 6
+            - generic [ref=e293]:
+              - heading "Open Caipirinha Classic 5 sabores" [level=4] [ref=e294]:
+                - text: Open Caipirinha Classic
+                - generic [ref=e295]: 5 sabores
+              - paragraph [ref=e296]: Vinho, Morango, Tropical, Limão e Framboesa.
+            - generic [ref=e297]:
+              - heading "Welcome Drink" [level=4] [ref=e298]
+              - paragraph [ref=e299]: O garçom recepciona os convidados com taça de espumante logo na chegada.
+      - paragraph [ref=e300]:
+        - strong [ref=e301]: Bom saber.
+        - text: Aos valores é somada a taxa de serviço de 15% sobre o consumo. Os valores de tabela podem ser reajustados até a data do evento, e quem já tem contrato fechado mantém o preço combinado.
+      - generic [ref=e304]:
+        - figure [ref=e305]:
+          - img "Drinks no balcão do bar" [ref=e306]
+          - generic [ref=e307]:
+            - paragraph [ref=e308]: O bar
+            - paragraph [ref=e309]: Montado e operado pela nossa equipe do começo ao fim.
+        - figure [ref=e310]:
+          - img "Cervejas no gelo" [ref=e311]
+          - generic [ref=e312]:
+            - paragraph [ref=e313]: Sempre gelada
+            - paragraph [ref=e314]: Cerveja a partir do Pacote 2.
+        - figure [ref=e315]:
+          - img "Garçom servindo drinks de bandeja" [ref=e316]
+          - generic [ref=e317]:
+            - paragraph [ref=e318]: O serviço
+            - paragraph [ref=e319]: O garçom passa servindo a noite inteira.
+        - figure [ref=e320]:
+          - img "Drinks do open bar" [ref=e321]
+          - generic [ref=e322]:
+            - paragraph [ref=e323]: Os drinks
+            - paragraph [ref=e324]: Open Drinks Classic nos Pacotes 5 e 6.
+        - figure [ref=e325]:
+          - img "Caipirinhas servidas na festa" [ref=e326]
+          - generic [ref=e327]:
+            - paragraph [ref=e328]: A caipirinha
+            - paragraph [ref=e329]: Open Caipirinha Classic no Pacote 6.
+    - generic [ref=e330]:
+      - generic [ref=e331]:
+        - generic [ref=e332]:
+          - generic [ref=e333]: "02"
+          - paragraph [ref=e334]: Simples assim
+        - heading [level=2] [ref=e335]:
+          - text: Como
+          - emphasis [ref=e336]: funciona
+      - list [ref=e337]:
+        - listitem [ref=e338]:
+          - heading "Um valor por convidado" [level=3] [ref=e344]
+          - paragraph [ref=e345]:
+            - text: O pacote vale para
+            - strong [ref=e346]: todos os convidados do casamento
+            - text: e é cobrado por pessoa. Ninguém abre conta e ninguém paga nada durante a festa.
+        - listitem [ref=e347]:
+          - heading "A noite inteira, sem limite de doses" [level=3] [ref=e352]
+          - paragraph [ref=e353]:
+            - text: Enquanto a festa durar, o convidado bebe
+            - strong [ref=e354]: a quantidade que quiser
+            - text: dentro do que o pacote inclui, sem custo extra.
+        - listitem [ref=e355]:
+          - heading "Definido na Reunião Final" [level=3] [ref=e360]
+          - paragraph [ref=e361]:
+            - text: As marcas e os detalhes do bar são registrados na
+            - strong [ref=e362]: Reunião Final
+            - text: ", cerca de 30 dias antes do evento. Até lá, o pacote pode ser trocado sem transtorno."
+        - listitem [ref=e363]:
+          - heading "Bar montado por nós" [level=3] [ref=e368]
+          - paragraph [ref=e369]:
+            - text: Estrutura, insumos, equipe e acabamento visual são
+            - strong [ref=e370]: da Indaiá
+            - text: . Nos Pacotes 5 e 6 entra também o balcão de apoio perto da pista, que deixa as bebidas já escolhidas ao alcance de quem está dançando.
+  - contentinfo [ref=e371]:
+    - generic [ref=e372]:
+      - img "Eventos Indaiá" [ref=e373]
+      - generic [ref=e374]:
+        - link "Gastronomia" [ref=e375] [cursor=pointer]:
+          - /url: ./
+        - link "Topo" [ref=e376] [cursor=pointer]:
+          - /url: "#topo"
+        - link "Pacotes" [ref=e377] [cursor=pointer]:
+          - /url: "#pacotes"
+        - link "Como funciona" [ref=e378] [cursor=pointer]:
+          - /url: "#funciona"
+        - link "eventosindaia.com.br" [ref=e379] [cursor=pointer]:
+          - /url: https://www.eventosindaia.com.br
+    - paragraph [ref=e380]: "Open Bar Indaiá. Fotos ilustrativas. Aos valores é somada a taxa de serviço de 15% sobre o consumo e eles podem ser reajustados até a data do evento. Este material não substitui o contrato: em caso de divergência, valem os valores e itens registrados no contrato."
+  - generic [ref=e382]:
+    - generic [ref=e383]: Pacote exibido
+    - group "Trocar pacote" [ref=e384]:
+      - button "1 · R$ 75,90" [pressed] [ref=e385] [cursor=pointer]
+      - button "2 · R$ 89,90" [ref=e386] [cursor=pointer]
+      - button "3 · R$ 119,90" [ref=e387] [cursor=pointer]
+      - button "4 · R$ 169,90" [ref=e388] [cursor=pointer]
+      - button "5 · R$ 259,90" [ref=e389] [cursor=pointer]
+      - button "6 · R$ 309,90" [ref=e390] [cursor=pointer]
