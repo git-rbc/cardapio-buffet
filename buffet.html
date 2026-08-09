@@ -304,6 +304,7 @@ a{color:inherit;}
   padding-bottom:1.5rem;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;}
 .stage__track::-webkit-scrollbar{height:3px;}
 .stage__track::-webkit-scrollbar-thumb{background:var(--accent);}
+a.card{display:block;text-decoration:none;color:inherit;}
 .card{position:relative;flex:0 0 auto;width:min(74vw,400px);height:min(66vh,540px);overflow:hidden;background:#0a0710;scroll-snap-align:center;}
 .card img{width:100%;height:100%;object-fit:cover;filter:saturate(.95) contrast(1.04) brightness(.9);transform:scale(1.12);transition:transform 1.4s var(--ease);}
 .card.in img{transform:scale(1);}
@@ -696,20 +697,23 @@ html{font-size:18px;}
   </div>
 </section>
 
-<!-- ===== EXTRAS nível 1: as 4 experiências (abre pela aba "Extras") ===== -->
+<!-- ===== EXTRAS nível 1: as 5 experiências (abre pela aba "Extras") ===== -->
 <div class="extras" id="extrasOverlay" role="dialog" aria-modal="true" aria-label="Extras: experiências além do jantar" aria-hidden="true">
   <button type="button" class="extras__fechar" id="fecharExtras" aria-label="Fechar">×</button>
   <div class="stage">
     <div class="stage__head">
       <p class="eyebrow">Extras</p>
       <h2>A noite não termina<br><em>no jantar.</em></h2>
-      <p>Quatro experiências pra esticar a festa. Toque numa delas pra ver a apresentação completa. Valores e combinações, o nosso time apresenta com vocês.</p>
+      <p>Cinco experiências pra esticar a festa. Toque numa delas pra ver a apresentação completa. Valores e combinações, o nosso time apresenta com vocês.</p>
     </div>
     <div class="loja wrap">
       <figure class="card in" role="button" tabindex="0" data-extra="lanche"><img src="fotos/lanche-capa.jpg" alt="Lanche da Madrugada: mini burgers, churros, porções e coxinha"><div class="card__meta"><p class="card__t">Lanche da Madrugada</p><p class="card__s">Incluso no Privilege e no Excellence</p></div></figure>
       <figure class="card in" role="button" tabindex="0" data-extra="mediterranea"><img src="fotos/mediterranea-1.jpg" alt="Mesa Mediterrânea com queijos e antepastos"><div class="card__meta"><p class="card__t">Mesa Mediterrânea</p><p class="card__s">Inclusa no Menu Excellence</p></div></figure>
       <figure class="card in" role="button" tabindex="0" data-extra="fondue"><img src="fotos/fondue.jpg" alt="Fondue de chocolate sendo servido"><div class="card__meta"><p class="card__t">Fondue</p><p class="card__s">Experiência adicional</p></div></figure>
       <figure class="card in" role="button" tabindex="0" data-extra="ilha"><img src="fotos/ilha.jpg" alt="Ilha gourmet montada no salão"><div class="card__meta"><p class="card__t">Ilha Gourmet</p><p class="card__s">Experiência adicional</p></div></figure>
+      <!-- Doces e o unico card que leva pra outra pagina: o cardapio de doces
+           ja existe pronto e inteiro, nao cabe num painel de nivel 2. -->
+      <a class="card in" href="doces.html"><img src="fotos/doces-capa.jpg" alt="Mesa de doces decorada da Confeitaria Indaiá"><div class="card__meta"><p class="card__t">Doces</p><p class="card__s">Cardápio da Confeitaria Indaiá</p></div></a>
     </div>
     <p class="stage__hint">Toque numa experiência pra abrir a apresentação completa.</p>
   </div>
