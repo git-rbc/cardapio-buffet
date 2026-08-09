@@ -200,6 +200,9 @@ html{font-size:18px;}
 :root{--maxw:1680px;}
 @media(min-width:1600px){:root{--maxw:1800px;}}
 </style>
+<style id="emquadro">html.emquadro .nav,html.emquadro .hero__volta,html.emquadro .extras__voltar{display:none!important}</style>
+<script>/* dentro do hub o material perde a barra propria: a navegacao e a de la */
+if(self!==top){document.documentElement.className+=" emquadro";addEventListener("DOMContentLoaded",function(){document.querySelectorAll("a[href]").forEach(function(a){var h=a.getAttribute("href")||"";if(h.charAt(0)!=="#")a.target="_top";});});}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>

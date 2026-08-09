@@ -10,176 +10,175 @@
 @font-face{font-family:'Cormorant Garamond';font-weight:400;font-display:swap;src:url('assets/fonts/cormorant-garamond-400.woff2') format('woff2');}
 @font-face{font-family:'Cormorant Garamond';font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-garamond-600.woff2') format('woff2');}
 @font-face{font-family:'Cormorant Garamond';font-weight:700;font-display:swap;src:url('assets/fonts/cormorant-garamond-700.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-weight:300;font-display:swap;src:url('assets/fonts/montserrat-300.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-weight:400;font-display:swap;src:url('assets/fonts/montserrat-400.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-weight:500;font-display:swap;src:url('assets/fonts/montserrat-500.woff2') format('woff2');}
+
 :root{
   --night:#141019;--night-2:#0C0910;--cream:#F0E8DC;--accent:#C08A57;
-  --line-light:rgba(240,232,220,.16);
+  --line-light:rgba(240,232,220,.18);
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat','Segoe UI',system-ui,sans-serif;
-  --maxw:1360px;--pad:clamp(1.25rem,5vw,4.5rem);--ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(1rem,3vw,2.4rem);--ease:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{background:var(--night);}
-body{background:var(--night);color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.65;
-min-height:100svh;display:flex;flex-direction:column;}
+html{font-size:18px;background:var(--night);height:100%;}
+body{background:var(--night);color:var(--cream);font-family:var(--sans);font-weight:400;
+  height:100%;display:flex;flex-direction:column;overflow:hidden;}
 img{display:block;max-width:100%;}
 a{color:inherit;}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
-.grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-.topo{display:flex;justify-content:center;padding:clamp(2rem,6vh,3.5rem) var(--pad) 0;}
-.topo img{height:34px;width:auto;opacity:.95;}
-.head{max-width:var(--maxw);margin-inline:auto;padding:clamp(2rem,6vh,4rem) var(--pad) clamp(1.5rem,4vh,2.5rem);text-align:center;}
-.eyebrow{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--accent);}
-h1{font-family:var(--serif);font-weight:400;line-height:1.05;font-size:clamp(1.9rem,5vw,4.1rem);margin-top:.8rem;white-space:nowrap;}
-h1 em{font-style:italic;color:var(--accent);}
-.head p{margin:1.1rem auto 0;color:rgba(240,232,220,.7);font-size:clamp(.85rem,1.6vw,1rem);white-space:nowrap;}
-.bloco{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);width:100%;}
-.bloco__label{display:flex;gap:1rem;align-items:center;margin:clamp(1.5rem,4vh,2.5rem) 0 1.2rem;
-  font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--accent);}
-.bloco__label::after{content:"";flex:1;height:1px;background:var(--line-light);}
-.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(1rem,2vw,1.6rem);width:100%;}
-/* bebidas: 3 por fileira, cards do MESMO tamanho dos de comida */
-@media(min-width:760px){.grade--beb{grid-template-columns:repeat(3,1fr);}}
-.fecho{padding:clamp(2.5rem,6vh,4rem) var(--pad) 0;}
-.exp{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:var(--night-2);text-decoration:none;
-  transition:transform .5s var(--ease);}
-.exp:hover{transform:translateY(-6px);}
-.exp img{width:100%;height:100%;object-fit:cover;filter:saturate(.95) contrast(1.04) brightness(.88);
-  transform:scale(1.06);transition:transform 1.2s var(--ease);}
-.exp:hover img{transform:scale(1);}
-.exp__meta{position:absolute;left:1.2rem;right:1.2rem;bottom:1.2rem;z-index:2;}
-.exp__meta::before{content:"";position:absolute;inset:-1.2rem;top:-3rem;z-index:-1;background:linear-gradient(0deg,rgba(8,5,12,.9),transparent);}
-.exp__t{font-family:var(--serif);font-size:clamp(1.6rem,2.6vw,2rem);line-height:1.05;}
-.exp__s{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-top:.45rem;}
-.rodape{margin-top:auto;padding:1.6rem var(--pad) 2rem;text-align:center;font-size:.62rem;letter-spacing:.14em;
-  text-transform:uppercase;color:rgba(240,232,220,.4);border-top:1px solid var(--line-light);}
-@media(max-width:600px){h1{white-space:normal;}.head p{white-space:normal;}}
-@media(prefers-reduced-motion:reduce){.exp,.exp img{transition:none;}}
 
-/* ===== LEGIBILIDADE (pedido do consultor, 2026-08-08) =====
-   A apresentacao roda em monitor secundario, que lava cinza claro e fonte
-   fina. Peso e contraste do texto ficam TODOS aqui, num bloco so: e o lugar
-   de mexer se pedirem mais (ou menos) reforco. */
-.cat li,.bloco li,.item,.lista li{font-weight:700;}
-.det-bloco li{font-weight:600;}  /* fundo escuro ja tem contraste; 700 borra */
-.num{opacity:.72;}
-.nivel__res,.carrossel__hint,.legenda,.pacote__base,
-.nivel__preco small,.pacote__preco small{color:var(--ink-soft);}
-.sec--dark .num{color:rgba(240,232,220,.72);}
-.overture__sub,.hero__sub,.sec--dark .sec__lead,.sec--dark .nota,
-.band__note,.stage__head p,.head p{color:rgba(240,232,220,.92);}
-.tierbar__opt,.det-tab,.footer__links a{color:rgba(240,232,220,.9);}
-.tierbar__lbl,.det-bloco .meta,.det-preco span,.band__cap,
-.frase__assin,.scrollcue{color:rgba(240,232,220,.8);}
-.stage__hint,.footer__fine,.rodape{color:rgba(240,232,220,.72);}
+/* ===== BARRA DO HUB =====
+   e a unica coisa que fica fixa: logo, as duas frentes e o material aberto.
+   tudo o mais e conteudo do material, que roda no quadro abaixo. */
+.barra{flex:0 0 auto;background:var(--night-2);border-bottom:1px solid var(--line-light);}
+.barra__linha{display:flex;align-items:center;gap:clamp(1rem,3vw,2.4rem);padding:.75rem var(--pad);}
+.barra__logo{height:24px;width:auto;opacity:.95;flex:0 0 auto;}
 
-/* 2a rodada (mesmo dia): "ainda ta dificil de visualizar por conta da tela
-   branca". O peso 400 do Montserrat continuava sumindo no monitor secundario.
-   Os textos de EXPLICACAO (nao os rotulos, nao os titulos) vao pra 500, cor
-   cheia, e ganham ~8% de corpo. Isso e o teto do que peso+cor resolvem: se
-   ainda faltar, o proximo passo e tamanho, nao mais preto. */
-.sec__lead,.regras p,.nota,.valor__txt,.legenda__txt,.escopo,
-.pilares p,.destaque p,.det-bloco p{font-weight:500;color:var(--ink);}
-.nota strong,.regras strong,.escopo strong,
-.band__note strong,.sec--dark .nota strong{font-weight:700;}
-.regras p{font-size:1rem;}
-.nota{font-size:.94rem;}
-.legenda__txt{font-size:.86rem;}
-.valor__txt{font-size:1.02rem;}
-/* nos fundos escuros a mesma enfase, mas com creme cheio no lugar do preto */
-.sec--dark .sec__lead,.sec--dark .nota,.band__note,.stage__head p,
-.head p,.det-bloco p,.overture__sub,.hero__sub{font-weight:500;}
-.sec--dark .sec__lead,.sec--dark .nota,.band__note,
-.stage__head p,.head p{color:var(--cream);}
+.frentes{display:flex;gap:.4rem;}
+.frente{background:none;border:1px solid transparent;color:rgba(240,232,220,.72);cursor:pointer;
+  font-family:var(--serif);font-weight:600;font-size:1.24rem;line-height:1;letter-spacing:.01em;
+  padding:.5rem .95rem;transition:color .3s,border-color .3s,background .3s;}
+.frente:hover{color:var(--cream);}
+.frente[aria-selected="true"]{color:var(--night);background:var(--cream);border-color:var(--cream);}
 
-/* 3a rodada: os CARDS de menu/pacote ("negrita essa parte e aumenta a letra um
-   pouco"). Sao os menores textos da tela dos menus: nome e preco em serif 600,
-   composicao e "inclui" com peso 600 e ~12% de corpo. A composicao vai pra cor
-   cheia porque e o que o cliente compara entre um menu e outro. */
-.nivel__nome,.pacote__nome{font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);}
-.nivel__preco,.pacote__preco{font-weight:600;font-size:1.22rem;}
-.nivel__preco small,.pacote__preco small{font-weight:600;font-size:.6rem;letter-spacing:.1em;}
-.nivel__res,.pacote__res{font-weight:600;font-size:.82rem;color:var(--ink);}
-.nivel__inclui,.pacote__base{font-weight:600;font-size:.75rem;}
-/* 4a rodada: medido card a card contra o cardapio-doces na mesma largura de
-   tela. A largura do card ja era igual (215px); o que estava menor era o texto
-   dentro dele e o recuo. Subiu o que estava ABAIXO do doces (composicao .74 ->
-   .82rem, inclui .7 -> .75rem, preco 1.18 -> 1.22rem, recuo 1.4/1.2 -> 1.5/1.3);
-   o que ja estava maior (nome do menu, "por pessoa", entrelinha) ficou como
-   estava. O doces tambem tira o CAIXA ALTA da composicao, o que faz ele parecer
-   ainda maior; aqui a caixa alta foi mantida de proposito, e o que o consultor
-   aprovou nas rodadas de legibilidade. */
-.nivel,.pacote{padding:1.5rem 1.3rem 1.3rem;}
+.barra__fim{margin-left:auto;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(240,232,220,.5);flex:0 0 auto;}
 
-/* ===== ESCALA E LARGURA (2026-08-08, ref: cardapio-doces) =====
-   Base era 16px num container de 1360px: em monitor grande sobrava tela vazia
-   dos dois lados e faltava corpo de letra. Subir o font-size do <html> escala
-   TUDO que esta em rem de uma vez (a calibragem de legibilidade das rodadas
-   anteriores sobe junto, mantendo as proporcoes). Nao repetir tamanho a mao. */
-html{font-size:18px;}
-:root{--maxw:1680px;}
-@media(min-width:1600px){:root{--maxw:1800px;}}
+.pecas{display:flex;gap:.35rem;flex-wrap:wrap;padding:0 var(--pad) .75rem;}
+.peca{background:none;border:1px solid var(--line-light);color:rgba(240,232,220,.86);cursor:pointer;
+  font-family:var(--sans);font-weight:500;font-size:.68rem;letter-spacing:.1em;
+  padding:.45rem .8rem;transition:.25s;white-space:nowrap;}
+.peca:hover{color:#fff;border-color:var(--accent);}
+.peca[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* ===== QUADRO =====
+   cada material segue sendo o seu proprio documento: e o que evita as classes
+   de um (.nivel, .carta, .trilho) atropelarem as do outro quando tudo fica na
+   mesma tela. o quadro rola por dentro; a barra nunca sai. */
+.quadro{flex:1 1 auto;position:relative;background:var(--night);}
+.quadro iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
+.carregando{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:var(--night);color:rgba(240,232,220,.5);font-size:.6rem;letter-spacing:.3em;
+  text-transform:uppercase;pointer-events:none;opacity:0;transition:opacity .25s;}
+.carregando.on{opacity:1;}
+
+@media(max-width:820px){
+  html{font-size:16px;}
+  .barra__linha{gap:.9rem;padding:.6rem var(--pad);}
+  .barra__logo{height:20px;}
+  .barra__fim{display:none;}
+  .frente{font-size:1.08rem;padding:.4rem .7rem;}
+  .peca{font-size:.62rem;padding:.4rem .6rem;}
+  .pecas{gap:.3rem;padding-bottom:.6rem;}
+}
+@media(prefers-reduced-motion:reduce){.frente,.peca,.carregando{transition:none;}}
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
 
-<div class="topo"><img src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá"></div>
-
-<header class="head">
-  <p class="eyebrow">Gastronomia Indaiá</p>
-  <h1>O sabor do <em>grande dia</em></h1>
-  <p>Pra celebrar com quem viveu essa história ao lado de vocês.</p>
+<header class="barra">
+  <div class="barra__linha">
+    <img class="barra__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
+    <div class="frentes" id="frentes" role="tablist" aria-label="Frentes da gastronomia"></div>
+    <p class="barra__fim">Gastronomia Indaiá</p>
+  </div>
+  <div class="pecas" id="pecas" role="tablist" aria-label="Materiais"></div>
 </header>
 
-<main class="bloco">
-  <p class="bloco__label">Alimentação</p>
-  <div class="grade">
-    <a class="exp" href="buffet.html">
-      <img src="fotos/carre.jpg" alt="Carré empratado do buffet Indaiá">
-      <div class="exp__meta"><p class="exp__t">Buffet</p><p class="exp__s">Ver os cinco menus →</p></div>
-    </a>
-    <a class="exp" href="coquetel.html">
-      <img src="fotos/coq/camaroes-com-catupiry.jpg" alt="Camarões com catupiry do coquetel volante">
-      <div class="exp__meta"><p class="exp__t">Coquetel</p><p class="exp__s">Ver os quatro coquetéis →</p></div>
-    </a>
-    <a class="exp" href="brunch.html">
-      <img src="fotos/card-brunch.jpg" alt="Mesa de brunch com tortas e frutas">
-      <div class="exp__meta"><p class="exp__t">Brunch</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-  </div>
+<div class="quadro">
+  <p class="carregando" id="carregando">Abrindo</p>
+  <iframe id="quadro" title="Material de gastronomia" src="about:blank"></iframe>
+</div>
 
-  <p class="bloco__label">Bebidas</p>
-  <div class="grade grade--beb">
-    <a class="exp" href="open-bar.html">
-      <img src="fotos/beb-openbar5.jpg" alt="Torre de taças servidas">
-      <div class="exp__meta"><p class="exp__t">Open Bar</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-    <a class="exp" href="open-bar-drinks.html">
-      <img src="fotos/beb-caipirinha.jpg" alt="Drink em taça com flor comestível">
-      <div class="exp__meta"><p class="exp__t">Open Bar de Drinks</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-    <a class="exp" href="open-bar-caipirinha.html">
-      <img src="fotos/beb-caipirinha5.jpg" alt="Caipirinha de maracujá">
-      <div class="exp__meta"><p class="exp__t">Open Bar de Caipirinha</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-    <a class="exp" href="welcome-drinks.html">
-      <img src="fotos/beb-welcome2.jpg" alt="Taças de espumante com flores brancas">
-      <div class="exp__meta"><p class="exp__t">Welcome Drinks</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-    <a class="exp" href="agua-saborizada.html">
-      <img src="fotos/beb-agua.jpg" alt="Suqueiras de cristal com águas saborizadas">
-      <div class="exp__meta"><p class="exp__t">Água Saborizada</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-    <a class="exp" href="open-coffee.html">
-      <img src="fotos/beb-coffee.jpg" alt="Estação de café em mesa de madeira">
-      <div class="exp__meta"><p class="exp__t">Open Coffee</p><p class="exp__s">Conhecer →</p></div>
-    </a>
-  </div>
-  <div class="fecho"></div>
-</main>
+<script>
+/* Tudo mora aqui dentro: as duas frentes sao os unicos caminhos, e o material
+   escolhido abre no quadro sem sair desta pagina. O id vai pro hash, entao o
+   consultor pode salvar/mandar o link ja aberto no material certo. */
+const FRENTES = [
+  { id:'buffet', nome:'Buffet', pecas:[
+      { id:'menus',     nome:'Os cinco menus',  src:'buffet.html' },
+      { id:'coquetel',  nome:'Coquetel',        src:'coquetel.html' },
+      { id:'brunch',    nome:'Brunch',          src:'brunch.html' },
+    ]},
+  { id:'bebidas', nome:'Bebidas', pecas:[
+      { id:'open-bar',    nome:'Open Bar',        src:'open-bar.html' },
+      { id:'drinks',      nome:'Open de Drinks',  src:'open-bar-drinks.html' },
+      { id:'caipirinha',  nome:'Open Caipirinha', src:'open-bar-caipirinha.html' },
+      { id:'welcome',     nome:'Welcome Drinks',  src:'welcome-drinks.html' },
+      { id:'agua',        nome:'Água Saborizada', src:'agua-saborizada.html' },
+      { id:'coffee',      nome:'Open Coffee',     src:'open-coffee.html' },
+    ]},
+];
 
-<footer class="rodape">Eventos Indaiá · Fotos de eventos reais</footer>
+const $ = (s) => document.querySelector(s);
+const quadro = $('#quadro');
+let frente = FRENTES[0], peca = FRENTES[0].pecas[0];
+
+function acha(id){
+  for (const f of FRENTES) {
+    const p = f.pecas.find((x) => x.id === id);
+    if (p) return { f, p };
+  }
+  return null;
+}
+
+function pintaFrentes(){
+  $('#frentes').innerHTML = FRENTES.map((f) =>
+    `<button type="button" class="frente" role="tab" data-f="${f.id}" aria-selected="${f.id===frente.id}">${f.nome}</button>`).join('');
+}
+
+function pintaPecas(){
+  $('#pecas').innerHTML = frente.pecas.map((p) =>
+    `<button type="button" class="peca" role="tab" data-p="${p.id}" aria-selected="${p.id===peca.id}">${p.nome}</button>`).join('');
+}
+
+function abre(p, trocaHash){
+  peca = p;
+  pintaFrentes(); pintaPecas();
+  $('#carregando').classList.add('on');
+  quadro.src = p.src;
+  document.title = p.nome + ' · Gastronomia Indaiá';
+  if (trocaHash) location.hash = p.id;
+}
+
+quadro.addEventListener('load', () => {
+  $('#carregando').classList.remove('on');
+  /* o material tem barra e links proprios, que dentro do quadro levariam a um
+     hub dentro do hub: some com a barra e faz link de pagina abrir por cima */
+  let d;
+  try { d = quadro.contentDocument; } catch (e) { return; }
+  if (!d) return;
+  const st = d.createElement('style');
+  st.textContent = '.nav,.hero__volta,.extras__voltar{display:none!important}';
+  d.head.appendChild(st);
+  d.querySelectorAll('a[href]').forEach((a) => {
+    const h = a.getAttribute('href') || '';
+    if (!h.startsWith('#')) a.target = '_top';
+  });
+});
+
+document.addEventListener('click', (e) => {
+  const bf = e.target.closest('.frente');
+  if (bf) {
+    const f = FRENTES.find((x) => x.id === bf.dataset.f);
+    if (f && f.id !== frente.id) { frente = f; abre(f.pecas[0], true); }
+    return;
+  }
+  const bp = e.target.closest('.peca');
+  if (bp) {
+    const p = frente.pecas.find((x) => x.id === bp.dataset.p);
+    if (p && p.id !== peca.id) abre(p, true);
+  }
+});
+
+addEventListener('hashchange', () => {
+  const r = acha(location.hash.slice(1));
+  if (r && r.p.id !== peca.id) { frente = r.f; abre(r.p, false); }
+});
+
+const inicial = acha(location.hash.slice(1));
+if (inicial) { frente = inicial.f; peca = inicial.p; }
+abre(peca, false);
+</script>
 </body>
 </html>
