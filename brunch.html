@@ -271,9 +271,9 @@ html{font-size:18px;}
    medio da capa bater com o das outras (Coquetel 62, Open Coffee 44), o veu fica mais
    forte do lado do texto, e a etiqueta vira creme em vez de dourada, que e o que salva
    a leitura sem apagar a foto. Medido em 14/09/2026. */
-.hero__bg{filter:saturate(.95) contrast(1.03) brightness(.62);}
-.hero__scrim{background:linear-gradient(90deg,rgba(12,9,16,.92) 0%,rgba(12,9,16,.6) 46%,rgba(12,9,16,.16) 100%),
-             linear-gradient(180deg,rgba(12,9,16,.45),rgba(12,9,16,.2) 36%,rgba(12,9,16,.92) 100%);}
+.hero__bg{filter:saturate(.95) contrast(1.03) brightness(.88);}
+.hero__scrim{background:linear-gradient(90deg,rgba(12,9,16,.86) 0%,rgba(12,9,16,.5) 46%,rgba(12,9,16,.16) 100%),
+             linear-gradient(180deg,rgba(12,9,16,.4),rgba(12,9,16,.14) 36%,rgba(12,9,16,.92) 100%);}
 .hero__kicker{color:var(--cream);}
 </style>
 <script>/* dentro do hub o material perde a barra propria: a navegacao e a de la */
@@ -428,12 +428,16 @@ const COQ = [
     "Salgados fritos e frutas"
    ],
    [
-    "fotos/brunch/bolo-seco.jpg",
-    "Bolo seco fatiado"
+    "fotos/brunch/bolo-caseiro.jpg",
+    "Bolo caseiro fatiado"
    ],
    [
-    "fotos/brunch/cesta-de-salgados.jpg",
-    "Cestinha de salgados"
+    "fotos/brunch/mesa-servida.jpg",
+    "A mesa servida"
+   ],
+   [
+    "fotos/brunch/bolo-chocolate.jpg",
+    "Bolo fatiado"
    ],
    [
     "fotos/brunch/mesa-montada.jpg",
@@ -522,12 +526,12 @@ const COQ = [
   ],
   "fotos": [
    [
-    "fotos/brunch/ilha-quente.jpg",
-    "Ilha quente, iogurte e frutas"
+    "fotos/brunch/croissants-e-tabua.jpg",
+    "Croissants e a tábua de frios"
    ],
    [
-    "fotos/brunch/paes-frios-granola.jpg",
-    "Pães, frios e granola"
+    "fotos/brunch/ilha-quente.jpg",
+    "Ilha quente, iogurte e frutas"
    ],
    [
     "fotos/brunch/salgados-e-frutas.jpg",
@@ -632,7 +636,7 @@ const COQ = [
   "fotos": [
    [
     "fotos/brunch/croissants-pao-de-metro.jpg",
-    "Mini croissants e pão de metro recheado"
+    "Croissants, pão de metro e frios"
    ],
    [
     "fotos/brunch/tabua-de-frios.jpg",
@@ -686,7 +690,7 @@ function selecionar(id, rolar){
   setTimeout(()=>{
     document.getElementById('track').innerHTML = c.fotos.map(([src,cap])=>`
       <figure class="dish"><img src="${src}" alt="${cap}" loading="lazy">
-        <figcaption class="dish__cap"><p class="dish__nome">${cap}</p><p class="dish__tag">Foto real</p></figcaption>
+        <figcaption class="dish__cap"><p class="dish__nome">${cap}</p><p class="dish__tag">Foto ilustrativa</p></figcaption>
       </figure>`).join('');
     document.getElementById('track').scrollLeft = 0;
     document.getElementById('cardapio').innerHTML = c.secoes.map(s=>`
