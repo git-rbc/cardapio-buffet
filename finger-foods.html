@@ -638,6 +638,10 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 <div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<script>/* a raiz do site virou o buffet (vercel.json). Link antigo do hub com
+   outro material no hash (/#open-bar, /#coquetel...) segue pro hub. */
+(function(){var h=location.hash.slice(1),hub=['coquetel','brunch','open-bar','drinks','caipirinha','welcome','agua','coffee'];
+if(self===top&&hub.indexOf(h)>-1)location.replace('gastronomia.html#'+h);})();</script>
 
 <nav class="nav" id="nav">
   <a href="#topo" aria-label="Início"><img class="nav__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá"></a>
@@ -647,8 +651,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
       <a href="#comparativo">Comparativo</a>
       <a href="#regras">Como funciona</a>
     </div>
-    <a class="nav__cta" href="#menus">Escolher nosso pacote</a>
-    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
+    <a class="nav__cta" href="#menus">Escolher nosso pacote</a>    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
   </div>
 </nav>
 
@@ -657,7 +660,6 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
     <a href="#menus">Pacotes</a>
     <a href="#comparativo">Comparativo</a>
     <a href="#regras">Como funciona</a>
-    <a href="#menus">Escolher nosso pacote</a>
   </div>
 </div>
 
@@ -766,7 +768,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
   <div class="footer__in">
     <img class="footer__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
     <div class="footer__links">
-      <a href="./">Gastronomia</a>
+      <a href="gastronomia.html">Gastronomia</a>
       <a href="#topo">Topo</a>
       <a href="#menus">Pacotes</a>
       <a href="#regras">Como funciona</a>
