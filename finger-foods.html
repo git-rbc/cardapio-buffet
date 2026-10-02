@@ -586,6 +586,13 @@ html{font-size:18px;}
 
 /* ===== FINGER FOODS: ajustes do molde do buffet ===== */
 .nivel{position:relative;}
+/* página mais curta: menos respiro entre as seções (pedido 02/10/2026) */
+.menus{padding-block:clamp(2rem,5vh,3.5rem) clamp(1.5rem,4vh,2.5rem);}
+.menus .sec__head{margin-bottom:clamp(1.2rem,3vh,2rem);}
+.carrossel{margin-top:clamp(1rem,3vh,2rem);}
+.cardapio__head{margin-top:clamp(1rem,3vh,2rem);}
+.compara{margin-top:clamp(2rem,5vw,3.5rem);}
+#regras.sec{padding-block:clamp(2.5rem,6vh,4rem);}
 .volante{display:flex;align-items:center;gap:.8rem;margin-top:1.4rem;font-size:.9rem;color:rgba(240,232,220,.78);}
 .volante svg{width:26px;height:26px;flex-shrink:0;color:var(--accent);}
 .volante strong{color:var(--accent);font-weight:500;}
@@ -1390,7 +1397,7 @@ if(man && !matchMedia('(prefers-reduced-motion: reduce)').matches){
          Esse número foi calibrado SEM Lenis: se a inércia voltar um dia, ela
          multiplica a roda e este fator precisa subir junto.
          O respiro no fim evita que a última foto salte pra fora ao soltar o pin. */
-      end: ()=> '+=' + (distancia()*0.45 + innerHeight*0.45),
+      end: ()=> '+=' + (distancia()*0.45 + innerHeight*0.15),
       pin: palco,
       scrub: .4,
       invalidateOnRefresh: true,
