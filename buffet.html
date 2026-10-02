@@ -530,6 +530,81 @@ html.motion .gal__col--offset{transform:none;}
 html{font-size:18px;}
 :root{--maxw:1680px;}
 @media(min-width:1600px){:root{--maxw:1800px;}}
+
+/* ===== COMPARATIVO dos cinco menus (abaixo do cardápio) ===== */
+.compara{margin-top:clamp(3.5rem,8vw,6rem);}
+.compara__head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem;}
+.compara__rolo{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.compara table{width:100%;min-width:640px;border-collapse:collapse;color:var(--cream);}
+.compara th,.compara td{padding:.55rem .8rem;text-align:center;border-bottom:1px solid rgba(240,232,220,.14);}
+.compara thead th{font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,1.6vw,1.35rem);line-height:1.15;
+  vertical-align:bottom;border-bottom:1px solid rgba(240,232,220,.45);transition:color .3s;}
+.compara thead th small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(240,232,220,.6);font-weight:400;margin-bottom:.35rem;}
+.compara tbody th,.compara tfoot th{text-align:left;font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(240,232,220,.82);white-space:nowrap;}
+.compara td{font-family:var(--serif);font-weight:600;font-size:clamp(1.2rem,1.7vw,1.4rem);line-height:1.2;}
+.compara td.sim{font-style:italic;color:var(--accent);font-size:clamp(1.05rem,1.5vw,1.25rem);}
+.compara td.nao::after{content:"";display:inline-block;width:14px;height:1px;background:rgba(240,232,220,.35);vertical-align:middle;}
+.compara tfoot th,.compara tfoot td{border-bottom:0;padding-top:.9rem;}
+.compara tfoot td{color:var(--accent);font-size:clamp(1.2rem,1.9vw,1.55rem);white-space:nowrap;}
+.compara .on{background:rgba(192,138,87,.10);}
+.compara thead th.on{color:var(--accent);}
+.compara__nota{margin-top:.6rem;font-size:.8rem;color:rgba(240,232,220,.6);}
+.compara tr > :first-child{position:sticky;left:0;z-index:1;background:var(--night);}
+@media (max-width:720px){
+  .compara table{min-width:540px;}
+  .compara th,.compara td{padding:.6rem .5rem;}
+  .compara tbody th,.compara tfoot th{white-space:normal;width:96px;min-width:96px;font-size:.6rem;letter-spacing:.12em;line-height:1.35;
+    box-shadow:8px 0 12px -8px rgba(0,0,0,.6);}
+}
+
+/* ===== CARDÁPIO EM ABAS (02/10/2026): substitui a fileira que rolava de lado.
+   Os painéis ficam empilhados na mesma célula do grid, então a altura é a do
+   maior e trocar de aba não mexe no resto da página (nem no ScrollTrigger). */
+.cardapio{display:block;overflow:visible;scroll-snap-type:none;padding-bottom:0;}
+.abas{display:flex;flex-wrap:wrap;gap:.2rem clamp(1.2rem,3vw,2.6rem);border-bottom:1px solid rgba(240,232,220,.16);margin-bottom:.4rem;}
+.aba{background:none;border:0;cursor:pointer;padding:.9rem 0 .8rem;position:relative;text-align:left;
+  font-family:var(--sans);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:rgba(240,232,220,.55);transition:color .3s;}
+.aba small{display:block;margin-top:.3rem;font-size:.58rem;letter-spacing:.18em;color:rgba(240,232,220,.4);transition:color .3s;}
+.aba::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);}
+.aba:hover{color:var(--cream);}
+.aba[aria-selected="true"]{color:var(--cream);}
+.aba[aria-selected="true"] small{color:var(--accent);}
+.aba[aria-selected="true"]::after{transform:scaleX(1);}
+.paineis{display:grid;}
+.paineis > .cat{grid-area:1/1;width:auto;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .35s,transform .45s var(--ease),visibility 0s .35s;}
+.paineis > .cat.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .45s var(--ease);}
+.paineis .cat ul{columns:2;column-gap:clamp(2rem,5vw,4.5rem);}
+.paineis .cat li{break-inside:avoid;}
+@media (max-width:760px){
+  .abas{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;}
+  .abas::-webkit-scrollbar{display:none;}
+  .aba{flex:0 0 auto;font-size:.66rem;}
+  .paineis .cat ul{columns:1;}
+}
+
+/* ===== PAINEL DE PDF (só pra consultor) =====
+   Não tem botão: abre com a tecla P ou com 3 toques rápidos em qualquer logo
+   da página. Os arquivos ficam em /pdf e saem do pdf.html (como gerar: comentário no topo dele). */
+.pdfp{position:fixed;inset:0;z-index:200;display:flex;align-items:flex-end;justify-content:center;padding:1rem;
+  background:rgba(12,9,16,.55);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s;}
+.pdfp.on{opacity:1;visibility:visible;transition:opacity .3s;}
+.pdfp__box{width:min(420px,100%);background:var(--night-2);border:1px solid rgba(240,232,220,.14);padding:1.3rem 1.3rem 1.1rem;
+  color:var(--cream);transform:translateY(12px);transition:transform .45s var(--ease);margin-bottom:5vh;}
+.pdfp.on .pdfp__box{transform:none;}
+.pdfp__top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.9rem;}
+.pdfp__t{font-family:var(--serif);font-size:1.35rem;}
+.pdfp__t em{color:var(--accent);}
+.pdfp__x{background:none;border:0;color:rgba(240,232,220,.6);font-size:1.4rem;cursor:pointer;line-height:1;}
+.pdfp__lista{display:grid;gap:.4rem;}
+.pdfp__lista a{display:flex;justify-content:space-between;align-items:center;padding:.7rem .85rem;border:1px solid rgba(240,232,220,.14);
+  color:var(--cream);text-decoration:none;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;transition:border-color .25s,background .25s;}
+.pdfp__lista a:hover{border-color:var(--accent);}
+.pdfp__lista a.atual{border-color:var(--accent);background:rgba(192,138,87,.1);}
+.pdfp__lista a span{font-size:.62rem;color:var(--accent);letter-spacing:.12em;}
+.pdfp__lista a.todos{margin-top:.35rem;background:var(--accent);border-color:var(--accent);color:#fff;}
+.pdfp__lista a.todos span{color:#fff;}
 </style>
 <style id="emquadro">html.emquadro .nav,html.emquadro .hero__volta,html.emquadro .extras__voltar{display:none!important}</style>
 <script>/* dentro do hub o material perde a barra propria: a navegacao e a de la */
@@ -544,9 +619,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
   <a href="#topo" aria-label="Início"><img class="nav__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá"></a>
   <div class="nav__right">
     <div class="nav__links">
-      <a href="#entradas">Entradas</a>
       <a href="#menus">Menus</a>
-      <a href="#cuidado">Restrições</a>
       <a href="#regras">Como funciona</a>
       <a href="#extras" data-abre-extras>Extras</a>
     </div>
@@ -557,9 +630,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 
 <div class="menu" id="menu">
   <div class="menu__in">
-    <a href="#entradas">Entradas</a>
     <a href="#menus">Menus</a>
-    <a href="#cuidado">Restrições</a>
     <a href="#regras">Como funciona</a>
     <a href="#extras" data-abre-extras>Extras</a>
     <a href="#menus">Montar nosso menu</a>
@@ -568,15 +639,12 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 
 <!-- ===== ABERTURA ===== -->
 <header class="overture" id="topo">
-  <video class="overture__bg" autoplay muted loop playsinline poster="fotos/hero-paella.jpg" aria-hidden="true">
-    <source src="video/hero-buffet.mp4" type="video/mp4">
-  </video>
+  <img class="overture__bg" src="fotos/hero-mesa.jpg" alt="" aria-hidden="true" fetchpriority="high">
   <div class="overture__scrim" aria-hidden="true"></div>
   <div class="overture__in">
     <img class="overture__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
-    <p class="eyebrow overture__kicker">Cardápio de Buffet</p>
-    <h1 class="hero-title" id="heroTitle" aria-label="Buffet Indaiá">
-      <span class="row"><i>BUFFET</i></span>
+    <h1 class="hero-title" id="heroTitle" aria-label="Menu Indaiá">
+      <span class="row"><i>MENU</i></span>
       <span class="row it"><i>Indaiá</i></span>
     </h1>
     <p class="overture__sub">Tem prato que a gente prova uma vez e leva pra vida inteira.</p>
@@ -587,43 +655,9 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
       <a class="btn btn--ghost" href="#regras">Como funciona</a>
     </div>
   </div>
-  <p class="scrollcue" aria-hidden="true">Role</p>
 </header>
-<div class="dawn" aria-hidden="true"></div>
 
 <main id="conteudo">
-
-<!-- ===== HISTÓRIA ===== -->
-<section class="statement" id="historia">
-  <div class="statement__pin wrap">
-    <div>
-      <p class="statement__text" id="manifesto">Na mesa do casamento está quem faz parte da história de vocês: o pai que sonhou com esse dia, a avó que viu vocês crescerem, os amigos que acompanharam cada desafio. <span class="accent">Cada prato vira lembrança na memória de quem vocês mais amam.</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ENTRADAS ===== -->
-<section class="sec wrap" id="entradas">
-  <div class="sec__head">
-    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Enquanto isso, no salão</p></div>
-    <h2 class="sec__title reveal">As <em>entradas</em></h2>
-    <p class="sec__lead reveal" data-d="1">Depois do "sim", vocês saem pras fotos mais bonitas da vida, e os convidados ficam. É aí que as entradas entram: circulando pelo salão enquanto todo mundo se acomoda, conversa e brinda. Quando vocês voltarem, ninguém ficou esperando: a festa já começou.</p>
-  </div>
-  <div class="gal">
-    <div class="gal__col">
-      <figure class="frame frame--54 reveal">
-        <img class="frame__img" src="fotos/entradinhas.jpg" alt="Entradinhas da casa com patês" loading="lazy">
-        <figcaption class="frame__cap">Entradinhas da casa, foto real</figcaption>
-      </figure>
-    </div>
-    <div class="gal__col gal__col--offset">
-      <figure class="frame frame--34 reveal" data-d="1">
-        <img class="frame__img" src="fotos/entrada-premium.jpg" alt="Escondidinho de camarão em taça de vidro" loading="lazy">
-        <figcaption class="frame__cap">Escondidinho de camarão, foto real</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
 
 <!-- ===== MENUS =====
      A seção é FULL-BLEED (fundo escuro de ponta a ponta) e o `.wrap` foi pra
@@ -632,7 +666,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 <section class="menus sec--dark" id="menus">
  <div class="wrap">
   <div class="sec__head">
-    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
+    <div class="sec__meta"><span class="num">01</span><p class="eyebrow sec__eyebrow">Escolham o de vocês</p></div>
     <h2 class="sec__title reveal">Cinco <em>menus</em></h2>
     <p class="sec__lead reveal" data-d="1">O que muda de um menu pro outro é o tamanho da experiência: mais sabores, mais surpresas, mais momentos na noite. E a certeza de impressionar em qualquer uma das escolhas.</p>
   </div>
@@ -651,7 +685,6 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 
   <div class="carrossel__head cardapio__head">
     <h3 class="carrossel__titulo">O que vocês <em>escolhem</em></h3>
-    <p class="carrossel__hint">Deslize para o lado →</p>
   </div>
   <div class="cardapio" id="cardapio"></div>
 
@@ -660,45 +693,22 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
     <span><i class="d d--sg"></i> Sem glúten</span>
     <span><i class="d d--sl"></i> Sem lactose</span>
     <span><i class="d d--vg"></i> Vegetariano</span>
+    <p class="legenda__txt">Avisando a gente sobre os convidados com restrição, as escolhas certas entram no buffet.</p>
   </div>
 
   <p class="nota"><strong>Sem pressa.</strong> As escolhas do cardápio são feitas na Reunião Final, cerca de 30 dias antes do evento, e podem ser alteradas até essa data sem qualquer transtorno.</p>
+
+  <div class="compara" id="comparativo">
+    <div class="compara__head">
+      <h3 class="carrossel__titulo">Lado a <em>lado</em></h3>
+    </div>
+    <div class="compara__rolo"><table id="comparaTab" aria-label="Comparativo dos cinco menus"></table></div>
+    <p class="compara__nota">Valores por pessoa, acrescidos da taxa de serviço de 15%.</p>
+  </div>
  </div>
 </section>
 
 
-
-<!-- ===== RESTRIÇÕES ===== -->
-<section class="sec sec--dark" id="cuidado">
-  <div class="wrap">
-    <div class="sec__head">
-      <div class="sec__meta"><span class="num">03</span><p class="eyebrow sec__eyebrow">O cuidado com cada um</p></div>
-      <h2 class="sec__title reveal">Ninguém fica de <em>fora</em></h2>
-      <p class="sec__lead reveal" data-d="1">Uma gastronomia pensada em cada detalhe pra agradar todos os paladares.</p>
-    </div>
-    <div class="gal">
-      <div class="gal__col">
-        <figure class="frame frame--54 reveal">
-          <img class="frame__img" src="fotos/legumes-salteados.jpg" alt="Legumes salteados coloridos no rechaud" loading="lazy">
-          <figcaption class="frame__cap">Foto real do nosso buffet</figcaption>
-        </figure>
-      </div>
-      <div class="gal__col">
-        <p class="sec__lead reveal" data-d="1" style="max-width:44ch">O cardápio já nasce com opções pra quem tem <strong style="color:var(--accent);font-weight:500">intolerância a glúten ou lactose</strong> e pros <strong style="color:var(--accent);font-weight:500">vegetarianos</strong>. Avisando a gente sobre os convidados, as escolhas certas entram no buffet, e todo mundo aproveita a noite do mesmo jeito.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FRASE ===== -->
-<section class="frase">
-  <img class="frase__img" src="fotos/caldeirada.jpg" alt="Caldeirada de frutos do mar" loading="lazy">
-  <div class="frase__scrim" aria-hidden="true"></div>
-  <div class="frase__in">
-    <p class="frase__txt">Cada prato,<br><em>uma memória.</em></p>
-    <p class="frase__assin">Buffet Indaiá</p>
-  </div>
-</section>
 
 <!-- ===== EXTRAS nível 1: as 5 experiências (abre pela aba "Extras") ===== -->
 <div class="extras" id="extrasOverlay" role="dialog" aria-modal="true" aria-label="Extras: experiências além do jantar" aria-hidden="true">
@@ -743,7 +753,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
 <!-- ===== COMO FUNCIONA ===== -->
 <section class="sec wrap" id="regras">
   <div class="sec__head">
-    <div class="sec__meta"><span class="num">04</span><p class="eyebrow sec__eyebrow">Simples assim</p></div>
+    <div class="sec__meta"><span class="num">02</span><p class="eyebrow sec__eyebrow">Simples assim</p></div>
     <h2 class="sec__title reveal">Como <em>funciona</em></h2>
   </div>
   <ul class="regras">
@@ -768,7 +778,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
       <p>As escolhas do cardápio são registradas na <strong>Reunião Final</strong>, com o nosso time do Pós Vendas, cerca de 30 dias antes do evento. Até lá, podem ser alteradas sem transtorno.</p>
     </li>
   </ul>
-  <p class="escopo"><strong>Bom saber:</strong> aos valores de cada menu é somada a taxa de serviço de 15% sobre o consumo. Os valores de tabela podem ser reajustados até a data do evento, mas quem já tem contrato fechado <strong>mantém os preços combinados</strong>: valores atualizados valem apenas pra adicionais e alterações feitas depois da contratação. As fotos deste material são de eventos reais da Eventos Indaiá. Algum ingrediente pode mudar conforme a época do ano. Nesse caso, a troca é sempre combinada com vocês.</p>
+  <p class="escopo"><strong>Bom saber:</strong> aos valores de cada menu é somada a taxa de serviço de 15%. Os valores de tabela podem ser reajustados até a data do evento, mas quem já tem contrato fechado <strong>mantém os preços combinados</strong>: valores atualizados valem apenas pra adicionais e alterações feitas depois da contratação. As fotos deste material são de eventos reais da Eventos Indaiá. Algum ingrediente pode mudar conforme a época do ano. Nesse caso, a troca é sempre combinada com vocês.</p>
 </section>
 
 
@@ -989,28 +999,44 @@ const NIVEIS = [
     "Frango bechamel c/ bacon"
    ],
    [
+    "strog",
+    "Strogonoff"
+   ],
+   [
+    "picanha",
+    "Picanha suína mostarda e mel"
+   ],
+   [
     "penne",
     "Penne na manteiga"
    ],
    [
-    "strog",
-    "Strogonoff"
+    "arrozbranco",
+    "Arroz branco na manteiga"
+   ],
+   [
+    "arrozBrocolis",
+    "Arroz c/ brócolis e nozes"
    ],
    [
     "batataassada",
     "Batatas assadas c/ alecrim"
    ],
    [
-    "noisette",
-    "Batata noissete"
+    "batatapalha",
+    "Batata palha"
+   ],
+   [
+    "pureBatata",
+    "Purê de batata c/ ervas finas"
    ],
    [
     "legumesvapor",
     "Legumes ao vapor"
    ],
    [
-    "batatapalha",
-    "Batata palha"
+    "saladaMaca",
+    "Salada de maçã"
    ],
    [
     "saladagrande",
@@ -1262,36 +1288,44 @@ const NIVEIS = [
   ],
   "fotos": [
    [
-    "moranga",
-    "Camarão na moranga"
+    "entGorgonzola",
+    "Mini risoto de gorgonzola"
    ],
    [
     "noisette",
-    "Batata noissete"
+    "Batata noisette ao molho tártaro"
+   ],
+   [
+    "moranga",
+    "Camarão na moranga"
    ],
    [
     "filetm",
     "Filet ao molho madeira"
    ],
    [
+    "camarao",
+    "Camarão ao molho catupiry"
+   ],
+   [
+    "spagBacon",
+    "Spaghetti c/ bacon e manjericão"
+   ],
+   [
     "gnocchi",
-    "Gnocchi"
+    "Gnocchi ao molho suíço"
+   ],
+   [
+    "arrozbranco",
+    "Arroz branco na manteiga"
    ],
    [
     "batatapalha",
     "Batata palha"
    ],
    [
-    "camarao",
-    "Camarão ao molho catupiry"
-   ],
-   [
     "aipim",
     "Purê de aipim c/ bacon"
-   ],
-   [
-    "arrozbranco",
-    "Arroz branco na manteiga"
    ],
    [
     "caprese",
@@ -1571,32 +1605,36 @@ const NIVEIS = [
   ],
   "fotos": [
    [
-    "moranga",
-    "Camarões na moranga"
-   ],
-   [
     "entradinhas",
     "Bolinho de peixe"
+   ],
+   [
+    "entCogumelos",
+    "Mini risoto de alecrim c/ cogumelos"
+   ],
+   [
+    "moranga",
+    "Camarões na moranga"
    ],
    [
     "filetm",
     "Filet ao molho madeira"
    ],
    [
-    "paella",
-    "Paella de frutos do mar"
-   ],
-   [
     "camarao",
     "Camarão ao molho catupiry"
    ],
    [
-    "aipim",
-    "Purê de aipim c/ bacon"
+    "caneloni",
+    "Caneloni c/ catupiry"
    ],
    [
-    "gnocchi",
-    "Gnocchi"
+    "paella",
+    "Paella de frutos do mar"
+   ],
+   [
+    "aipim",
+    "Purê de aipim c/ bacon"
    ],
    [
     "legumesvapor",
@@ -1945,28 +1983,36 @@ const NIVEIS = [
   ],
   "fotos": [
    [
-    "carre",
-    "Carré de cordeiro"
+    "esccam",
+    "Escondidinho de camarão"
+   ],
+   [
+    "entCaldeirada",
+    "Mini caldeirada de frutos do mar"
    ],
    [
     "moranga",
     "Camarões na moranga"
    ],
    [
+    "filetm",
+    "Filet ao molho madeira"
+   ],
+   [
     "camarao",
     "Camarão ao molho catupiry"
    ],
    [
-    "esccam",
-    "Escondidinho de camarão"
+    "carre",
+    "Carré de cordeiro"
    ],
    [
-    "entradinhas",
-    "Bolinho de peixe"
+    "salmao",
+    "Salmão ao molho de camarão"
    ],
    [
-    "filetm",
-    "Filet ao molho madeira"
+    "caneloni",
+    "Caneloni c/ catupiry"
    ],
    [
     "paella",
@@ -1985,8 +2031,20 @@ const NIVEIS = [
     "Mix de folhas"
    ],
    [
+    "porcoes",
+    "Batata frita c/ cheddar e bacon (Lanche da Madrugada)"
+   ],
+   [
     "burger",
-    "Lanche da Madrugada (incluso)"
+    "Mini hambúrguer (Lanche da Madrugada)"
+   ],
+   [
+    "pipoca",
+    "Pipoca salgada (Lanche da Madrugada)"
+   ],
+   [
+    "churros",
+    "Mini churros c/ chocolate quente (Lanche da Madrugada)"
    ]
   ]
  },
@@ -2322,28 +2380,36 @@ const NIVEIS = [
   ],
   "fotos": [
    [
-    "carre",
-    "Carré de cordeiro"
+    "entSalmao",
+    "Mini risoto de salmão"
+   ],
+   [
+    "entPaella",
+    "Mini paella de frutos do mar"
    ],
    [
     "moranga",
     "Camarões na moranga"
    ],
    [
+    "filetm",
+    "Filet ao molho madeira"
+   ],
+   [
     "camarao",
     "Camarão ao molho catupiry"
    ],
    [
-    "esccam",
-    "Escondidinho de camarão"
+    "carre",
+    "Carré de cordeiro"
    ],
    [
-    "entradinhas",
-    "Bolinho de peixe"
+    "salmao",
+    "Salmão ao molho de camarão"
    ],
    [
-    "filetm",
-    "Filet ao molho madeira"
+    "caneloni",
+    "Caneloni c/ catupiry"
    ],
    [
     "paella",
@@ -2358,12 +2424,20 @@ const NIVEIS = [
     "Mesa Mediterrânea (inclusa)"
    ],
    [
-    "burger",
-    "Lanche da Madrugada (incluso)"
+    "porcoes",
+    "Batata frita c/ cheddar e bacon (Lanche da Madrugada)"
    ],
    [
-    "porcoes",
-    "Lanche da Madrugada (incluso)"
+    "burger",
+    "Mini hambúrguer (Lanche da Madrugada)"
+   ],
+   [
+    "pipoca",
+    "Pipoca salgada (Lanche da Madrugada)"
+   ],
+   [
+    "churros",
+    "Mini churros c/ chocolate quente (Lanche da Madrugada)"
    ]
   ]
  }
@@ -2373,35 +2447,48 @@ const NIVEIS = [
    A legenda de cada foto é por menu, definida em NIVEIS[].fotos. */
 const FOTO = {
   paella:       'fotos/hero-paella.jpg',
-  moranga:      'fotos/moranga.jpg',
-  entradinhas:  'fotos/entradinhas.jpg',
+  moranga:      'fotos/camarao-moranga.jpg',
+  entradinhas:  'fotos/bolinho-peixe.jpg',
   caldeirada:   'fotos/caldeirada.jpg',
   gnocchi:      'fotos/gnocchi.jpg',
   spaghetti:    'fotos/spaghetti.jpg',
   penne:        'fotos/penne.jpg',
-  caneloni:     'fotos/caneloni.jpg',
+  caneloni:     'fotos/caneloni-prato.jpg',
+  salmao:       'fotos/salmao-camarao.jpg',
+  entGorgonzola:'fotos/ent-risoto-gorgonzola.jpg',
+  entCogumelos: 'fotos/ent-risoto-cogumelos.jpg',
+  entCaldeirada:'fotos/ent-mini-caldeirada.jpg',
+  entSalmao:    'fotos/ent-risoto-salmao.jpg',
+  entPaella:    'fotos/ent-mini-paella.jpg',
+  pipoca:       'fotos/lanche-pipoca.jpg',
+  churros:      'fotos/churros.jpg',
+  pureBatata:   'fotos/pure-batata.jpg',
+  arrozBrocolis:'fotos/arroz-brocolis.jpg',
+  picanha:      'fotos/picanha-mostarda.jpg',
+  saladaMaca:   'fotos/salada-maca.jpg',
+  spagBacon:    'fotos/spaghetti-bacon.jpg',
   batataassada: 'fotos/batata-assada.jpg',
   batatapalha:  'fotos/arroz.jpg',
-  noisette:     'fotos/noisette.jpg',
+  noisette:     'fotos/noisette-prato.jpg',
   aipim:        'fotos/pure-aipim.jpg',
   legumesvapor: 'fotos/legumes-vapor.jpg',
   legumessalt:  'fotos/legumes-salteados.jpg',
-  saladagrande: 'fotos/salada-grande.jpg',
+  saladagrande: 'fotos/folhas-nobres.jpg',
   caprese:      'fotos/caprese.jpg',
-  arrozbranco:  'fotos/arroz-branco.jpg',
+  arrozbranco:  'fotos/arroz-branco-manteiga.jpg',
   esccam:       'fotos/entrada-premium.jpg',
   frango:       'fotos/frango.jpg',
   strog:        'fotos/strogonoff.jpg',
   filetm:       'fotos/filet-medalhao.jpg',
-  camarao:      'fotos/camarao.jpg',
+  camarao:      'fotos/camarao-catupiry.jpg',
   carre:        'fotos/carre.jpg',
   guarnicoes:   'fotos/batata-gratinada.jpg',
   burger:       'fotos/mini-burger.jpg',
   porcoes:      'fotos/porcoes.jpg',
-  medit1:       'fotos/mediterranea-1.jpg',
+  medit1:       'fotos/mesa-mediterranea.jpg',
 };
 
-let atual = 'premium';
+let atual = 'superior';
 
 /* ---- cards do seletor ---- */
 const grid = document.getElementById('menusGrid');
@@ -2450,12 +2537,25 @@ function render(nv){
   }
 
   const dot = d=>`<i class="d d--${d}"></i>`;
-  document.getElementById('cardapio').innerHTML = nv.secoes.map(s=>`
-    <div class="cat">
-      <div class="cat__head"><span class="cat__nome">${s.label}</span><span class="cat__n">Escolha ${s.n}</span></div>
+  const curtos = nv.secoes.map(x=>x.curto);
+  if(!curtos.includes(abaAtual)) abaAtual = curtos[0];
+  document.getElementById('cardapio').innerHTML =
+    `<div class="abas" role="tablist" aria-label="Categorias do cardápio">${nv.secoes.map(s=>`
+      <button type="button" class="aba" role="tab" data-c="${s.curto}" aria-selected="${s.curto===abaAtual}">${s.label}<small>Escolha ${s.n} de ${s.itens.length}</small></button>`).join('')}</div>
+    <div class="paineis">${nv.secoes.map(s=>`
+    <div class="cat${s.curto===abaAtual?' on':''}" role="tabpanel" data-c="${s.curto}">
       <ul>${s.itens.map(it=>`<li>${it.n}${it.d.length?`<span class="dots">${it.d.map(dot).join('')}</span>`:''}</li>`).join('')}</ul>
-    </div>`).join('');
+    </div>`).join('')}</div>`;
 }
+
+/* abas do cardápio: só troca o painel visível, sem rolar a página */
+let abaAtual = 'entradas';
+document.getElementById('cardapio').addEventListener('click',e=>{
+  const b = e.target.closest('.aba'); if(!b) return;
+  abaAtual = b.dataset.c;
+  document.querySelectorAll('#cardapio .aba').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
+  document.querySelectorAll('#cardapio .cat').forEach(x=>x.classList.toggle('on', x.dataset.c===abaAtual));
+});
 
 function rolarAte(el){
   if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
@@ -2469,11 +2569,59 @@ function selecionar(id, rolar){
 
   const alvos = [document.getElementById('track'), document.getElementById('cardapio')];
   alvos.forEach(el=>el.classList.add('trocando'));
-  setTimeout(()=>{ render(nv); alvos.forEach(el=>el.classList.remove('trocando')); }, 160);
+  setTimeout(()=>{
+    /* trocar de menu muda o número de fotos e, com ele, o comprimento do trilho
+       preso lá em cima: tudo que vem abaixo dele anda. Quem troca de menu pela
+       barra ou pela tabela não pode ser arrastado de volta pras fotos, então
+       a página é compensada pela diferença de posição de uma âncora visível. */
+    const ancora = rolar ? null : ['comparativo','cardapio'].map(id=>document.getElementById(id))
+      .find(el=>el && el.getBoundingClientRect().top < innerHeight && el.getBoundingClientRect().bottom > 0);
+    const antes = ancora ? ancora.getBoundingClientRect().top : 0;
+    render(nv); alvos.forEach(el=>el.classList.remove('trocando'));
+    if(ancora){
+      const dif = ancora.getBoundingClientRect().top - antes;
+      if(Math.abs(dif) > 1){
+        const html = document.documentElement, sb = html.style.scrollBehavior;
+        html.style.scrollBehavior = 'auto'; scrollBy(0, dif); html.style.scrollBehavior = sb;
+        if(window.ScrollTrigger) ScrollTrigger.update();
+      }
+    }
+  }, 160);
 
+  if(window.__marcarComparativo) window.__marcarComparativo(nv.id);
   if(rolar) rolarAte(document.getElementById('carrossel'));
 }
 selecionar(atual,false);
+
+/* ---- comparativo lado a lado: montado a partir de NIVEIS, nunca à mão ---- */
+(function(){
+  const tab = document.getElementById('comparaTab');
+  if(!tab) return;
+  const qtd = (nv,curto)=>{ const s = nv.secoes.find(x=>x.curto===curto); return s ? s.n : 0; };
+  const tem = (nv,nome)=> nv.inclui.includes(nome);
+  const linhas = [
+    ['Entradas', nv=>qtd(nv,'entradas')],
+    ['Saladas', nv=>qtd(nv,'saladas')],
+    ['Massas', nv=>qtd(nv,'massas')],
+    ['Guarnições', nv=>qtd(nv,'guarnições')],
+    ['Pratos principais', nv=>qtd(nv,'principais')],
+    ['Lanche da Madrugada', nv=>tem(nv,'Lanche da Madrugada')],
+    ['Decoração Elegance', nv=>tem(nv,'Decoração Elegance')],
+    ['Mesa Mediterrânea', nv=>tem(nv,'Mesa Mediterrânea')],
+  ];
+  const cel = v => v===true ? '<td class="sim">Incluso</td>' : (v ? `<td>${v}</td>` : '<td class="nao" aria-label="Não incluso"></td>');
+  tab.innerHTML =
+    `<thead><tr><th scope="col" aria-label="Item"></th>${NIVEIS.map(nv=>`<th scope="col" data-id="${nv.id}"><small>Menu</small>${nv.curtoNome}</th>`).join('')}</tr></thead>`
+    + `<tbody>${linhas.map(([rot,f])=>`<tr><th scope="row">${rot}</th>${NIVEIS.map(nv=>cel(f(nv))).join('')}</tr>`).join('')}</tbody>`
+    + `<tfoot><tr><th scope="row">Por pessoa</th>${NIVEIS.map(nv=>`<td>${nv.preco}</td>`).join('')}</tr></tfoot>`;
+  const marcar = id=>{
+    const k = NIVEIS.findIndex(nv=>nv.id===id) + 2;
+    tab.querySelectorAll('.on').forEach(el=>el.classList.remove('on'));
+    tab.querySelectorAll(`tr > :nth-child(${k})`).forEach(el=>el.classList.add('on'));
+  };
+  window.__marcarComparativo = marcar;
+  marcar(atual);
+})();
 
 /* ---- barra fixa: aparece enquanto o cardápio está na tela ---- */
 const tierbar = document.getElementById('tierbar');
@@ -2875,6 +3023,42 @@ if(man && !matchMedia('(prefers-reduced-motion: reduce)').matches){
     gsap.fromTo(colunas[0], {y:0},  {y:-70, ease:'none', scrollTrigger:st});
     gsap.fromTo(colunas[1], {y:46}, {y:-110, ease:'none', scrollTrigger:st});
   });
+})();
+</script>
+<!-- painel de PDF do consultor: tecla P ou 3 toques num logo -->
+<div class="pdfp" id="pdfPainel" aria-hidden="true">
+  <div class="pdfp__box" role="dialog" aria-label="Baixar PDF do cardápio">
+    <div class="pdfp__top"><p class="pdfp__t">PDF pro <em>cliente</em></p><button type="button" class="pdfp__x" id="pdfFechar" aria-label="Fechar">×</button></div>
+    <div class="pdfp__lista" id="pdfLista"></div>
+  </div>
+</div>
+<script>
+(function(){
+  const painel = document.getElementById('pdfPainel'), lista = document.getElementById('pdfLista');
+  const ARQ = [['superior','Menu Superior'],['superior2','Menu Superior II'],['premium','Menu Premium'],
+               ['privilege','Menu Privilege'],['excellence','Menu Excellence'],['todos','Todos os menus']];
+  const arquivo = id => 'pdf/Indaia-' + (id==='todos' ? 'Menus-Completo' : ARQ.find(a=>a[0]===id)[1].replace(/ /g,'-')) + '.pdf';
+  function abrir(){
+    const sel = (typeof atual !== 'undefined') ? atual : '';
+    lista.innerHTML = ARQ.map(([id,nome])=>`<a href="${arquivo(id)}" download="${'Eventos Indaiá · '+nome}.pdf"
+      class="${id==='todos'?'todos':''}${id===sel?' atual':''}">${nome}<span>${id===sel?'Em tela · ':''}Baixar PDF</span></a>`).join('');
+    painel.classList.add('on'); painel.setAttribute('aria-hidden','false');
+  }
+  function fechar(){ painel.classList.remove('on'); painel.setAttribute('aria-hidden','true'); }
+  document.getElementById('pdfFechar').addEventListener('click', fechar);
+  painel.addEventListener('click', e=>{ if(e.target===painel) fechar(); });
+  addEventListener('keydown', e=>{
+    if(e.key==='Escape') return fechar();
+    if((e.key==='p'||e.key==='P') && !e.ctrlKey && !e.metaKey && !e.altKey && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)){
+      painel.classList.contains('on') ? fechar() : abrir();
+    }
+  });
+  /* 3 toques em menos de 0,8s em qualquer logo (celular/tablet) */
+  let toques = [];
+  document.querySelectorAll('.nav__logo,.overture__logo,.footer__logo').forEach(img=>img.addEventListener('click', e=>{
+    const t = Date.now(); toques = toques.filter(x=>t-x<800); toques.push(t);
+    if(toques.length>=3){ e.preventDefault(); toques=[]; abrir(); }
+  }));
 })();
 </script>
 </body>
