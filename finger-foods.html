@@ -586,6 +586,9 @@ html{font-size:18px;}
 
 /* ===== FINGER FOODS: ajustes do molde do buffet ===== */
 .nivel{position:relative;}
+.volante{display:flex;align-items:center;gap:.8rem;margin-top:1.4rem;font-size:.9rem;color:rgba(240,232,220,.78);}
+.volante svg{width:26px;height:26px;flex-shrink:0;color:var(--accent);}
+.volante strong{color:var(--accent);font-weight:500;}
 .menus__grid{grid-template-columns:repeat(3,1fr);}
 @media(max-width:760px){.menus__grid{grid-template-columns:1fr;}}
 .nivel__selo{position:absolute;top:-.7rem;left:1rem;background:var(--accent);color:#fff;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .6rem;}
@@ -685,6 +688,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
     <p class="sec__lead reveal" data-d="1">Mini porções servidas de bandeja, no meio da pista: o convidado estende a mão, come em duas mordidas e continua dançando. Todos os pacotes têm serviço volante pelos garçons da casa; o que muda é a variedade de itens e o tempo de serviço.</p>
   </div>
   <div class="menus__grid" id="menusGrid" role="group" aria-label="Pacotes de finger foods"></div>
+  <p class="volante reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 15h18M5 15a7 7 0 0 1 14 0M12 8V6M9 19h6"/></svg><span><strong>Serviço volante em todos os pacotes.</strong> Os garçons da casa levam as bandejas pelo salão e pela pista, durante todo o tempo de serviço.</span></p>
 
   <div class="carrossel" id="carrossel">
     <!-- o palco e o que fica preso na tela enquanto as fotos desfilam (ver MOVIMENTO) -->
@@ -851,11 +855,6 @@ const NIVEIS = [
    [
     "churros",
     "Mini churros"
-   ],
-   [
-    "servico",
-    "Serviço volante, até a pista",
-    "50% 18%"
    ]
   ]
  },
@@ -940,11 +939,6 @@ const NIVEIS = [
    [
     "churros",
     "Mini churros"
-   ],
-   [
-    "servico",
-    "Serviço volante, até a pista",
-    "50% 18%"
    ]
   ]
  },
@@ -1065,11 +1059,6 @@ const NIVEIS = [
    [
     "casq",
     "Mini casquinha de sorvete"
-   ],
-   [
-    "servico",
-    "Serviço volante, até a pista",
-    "50% 18%"
    ]
   ]
  }
@@ -1089,7 +1078,6 @@ const FOTO = {
   fondue: 'fotos/lanche-fondue-frutas.jpg',
   nutella: 'fotos/lanche-paonutella.jpg',
   casq: 'fotos/lanche-casquinha.jpg',
-  servico: 'fotos/ff-servico.jpg',
 };
 
 let atual = 'pacote1';
