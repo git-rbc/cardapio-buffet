@@ -656,6 +656,8 @@ html{font-size:18px;}
 .cat__det.up{color:var(--accent);letter-spacing:.14em;text-transform:uppercase;font-size:.66rem;}
 .compara tbody th .up{display:inline-block;margin-left:.5rem;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:.12rem .4rem;vertical-align:middle;}
 .compara thead th small.selo{color:var(--accent);}
+/* carrossel com mais fotos: card um pouco menor pra fila andar mais rápido */
+html.motion .carrossel__palco .dish{max-height:min(66vh,600px);}
 /* tabelas de preço (consumação e upgrades), no claro */
 #consumacao.sec,#upgrades.sec{padding-block:clamp(2.5rem,6vh,4rem);}
 #upgrades{background:var(--paper-2);}
@@ -818,7 +820,7 @@ if(self!==top){document.documentElement.className+=" emquadro";addEventListener(
       <p>Fechou o pacote? Ele vira <strong>aditivo do contrato</strong>, assinado digitalmente. Na Reunião Final ainda dá pra trocar de pacote, subir de marca ou incluir bebidas por consumo.</p>
     </li>
   </ul>
-  <p class="escopo"><strong>Bom saber:</strong> crianças de <strong>0 a 12 anos</strong> têm condições diferentes; confirme com o seu consultor. Querem levar a própria bebida? Pode, mediante <strong>taxa de rolha</strong> (tabela da consumação). Os valores de tabela podem ser reajustados até a data do evento, mas quem já tem contrato fechado <strong>mantém o preço combinado</strong>. As fotos marcadas como “Foto real” são de eventos da Eventos Indaiá; as demais são ilustrativas.</p>
+  <p class="escopo"><strong>Bom saber:</strong> crianças de <strong>0 a 12 anos</strong> têm condições diferentes; confirme com o seu consultor. Querem levar a própria bebida? Pode, mediante <strong>taxa de rolha</strong> (tabela da consumação). Os valores de tabela podem ser reajustados até a data do evento, mas quem já tem contrato fechado <strong>mantém o preço combinado</strong>. Fotos ilustrativas; as marcas servidas são as de cada pacote.</p>
 </section>
 
 </main>
@@ -891,26 +893,18 @@ const TODOS = ['Bar montado e operado pela nossa equipe','Serviço volante: o ga
 const BASE = ['coca','guarana','agua'];
 const PREMIUM = ['coca','guarana','agua','suco','heineken','absolut','redlabel','perini','redbull','drinks','balcao'];
 const NIVEIS = [
-  {id:'pacote1', nome:'Pacote 1', curtoNome:'Pacote 1', preco:'R$ 84,90',  sub:'Refrigerantes e água', selo:'',
-   resumo:['Refrigerantes','e águas'], itensIds:[...BASE],
-   fotos:[['balcao','O bar, montado pra festa'],['bandeja','Servido na mão'],['gelo','Sempre bem gelada']]},
-  {id:'pacote2', nome:'Pacote 2', curtoNome:'Pacote 2', preco:'R$ 104,90', sub:'Entra a cerveja', selo:'',
-   resumo:['Tudo do 1','+ cerveja Brahma'], itensIds:[...BASE,'brahma'],
-   fotos:[['cerveja','Cerveja gelada'],['chopp','Brahma'],['balcao','O bar, montado pra festa'],['bandeja','Servido na mão']]},
-  {id:'pacote3', nome:'Pacote 3', curtoNome:'Pacote 3', preco:'R$ 134,90', sub:'Entram os destilados', selo:'',
-   resumo:['Tudo do 2','+ vodka e whisky'], itensIds:[...BASE,'brahma','smirnoff','passport'],
-   fotos:[['whisky','Whisky Passport'],['cerveja','Cerveja gelada'],['balcao','O bar, montado pra festa'],['bandeja','Servido na mão'],['gelo','Sempre bem gelada']]},
-  {id:'pacote4', nome:'Pacote 4', curtoNome:'Pacote 4', preco:'R$ 199,90', sub:'Espumante e energético', selo:'',
-   resumo:['Tudo do 3','+ espumante','e energético'], itensIds:[...BASE,'brahma','smirnoff','passport','sanjo','baly'],
-   fotos:[['espumante','Espumante Sanjo'],['whisky','Whisky Passport'],['cerveja','Cerveja gelada'],['balcao','O bar, montado pra festa'],['bandeja','Servido na mão']]},
-  {id:'pacote5', nome:'Pacote 5', curtoNome:'Pacote 5', preco:'R$ 299,90', sub:'Marcas premium e drinks', selo:'Mais escolhido',
-   resumo:['Marcas premium','+ Open Drinks','Classic'], itensIds:[...PREMIUM],
-   fotos:[['mule','Moscow Mule'],['negroni','Negroni'],['cosmo','Cosmopolitan'],['gt','Gin Tônica Clássico'],['mojito','Mojito'],
-          ['bourbon','Bourbon Peach'],['nysour','New York Sour'],['espumante','Espumante Perini'],['whisky','Red Label'],['bandeja','Servido na mão']]},
-  {id:'pacote6', nome:'Pacote 6', curtoNome:'Pacote 6', preco:'R$ 349,90', sub:'O mais completo', selo:'Mais completo',
-   resumo:['Tudo do 5','+ Open Caipirinha','+ Welcome Drink'], itensIds:[...PREMIUM,'caipi','welcome'],
-   fotos:[['welcome','Welcome Drink na chegada'],['caipLimao','Caipirinha de limão'],['caipMorango','Caipirinha de morango'],['caipVinho','Caipirinha de vinho'],
-          ['mule','Moscow Mule'],['negroni','Negroni'],['cosmo','Cosmopolitan'],['mojito','Mojito'],['bourbon','Bourbon Peach'],['espumante','Espumante Perini'],['bandeja','Servido na mão']]},
+  {id:'pacote1', nome:'Pacote 1', curtoNome:'Pacote 1', preco:'R$ 84,90',  sub:'Refrigerantes e água',
+   resumo:['Refrigerantes','e águas'], itensIds:[...BASE]},
+  {id:'pacote2', nome:'Pacote 2', curtoNome:'Pacote 2', preco:'R$ 104,90', sub:'Entra a cerveja',
+   resumo:['Tudo do 1','+ cerveja Brahma'], itensIds:[...BASE,'brahma']},
+  {id:'pacote3', nome:'Pacote 3', curtoNome:'Pacote 3', preco:'R$ 134,90', sub:'Entram os destilados',
+   resumo:['Tudo do 2','+ vodka e whisky'], itensIds:[...BASE,'brahma','smirnoff','passport']},
+  {id:'pacote4', nome:'Pacote 4', curtoNome:'Pacote 4', preco:'R$ 199,90', sub:'Espumante e energético',
+   resumo:['Tudo do 3','+ espumante','e energético'], itensIds:[...BASE,'brahma','smirnoff','passport','sanjo','baly']},
+  {id:'pacote5', nome:'Pacote 5', curtoNome:'Pacote 5', preco:'R$ 299,90', sub:'Marcas premium e drinks',
+   resumo:['Marcas premium','+ Open Drinks','Classic'], itensIds:[...PREMIUM]},
+  {id:'pacote6', nome:'Pacote 6', curtoNome:'Pacote 6', preco:'R$ 349,90', sub:'O mais completo',
+   resumo:['Tudo do 5','+ Open Caipirinha','+ Welcome Drink'], itensIds:[...PREMIUM,'caipi','welcome']},
 ];
 /* seções do cardápio de cada pacote, montadas a partir dos itens (nunca à mão) */
 NIVEIS.forEach(nv=>{
@@ -920,27 +914,41 @@ NIVEIS.forEach(nv=>{
   }).filter(s=>s.n);
 });
 
-/* r = foto de evento real da Indaiá; o resto é ilustrativa */
-const FOTO = {
-  balcao:     {src:'fotos/openbar/g-ob-balcao.webp'},
-  bandeja:    {src:'fotos/opendrinks/ind-bandeja-volante.jpg', r:1, pos:'center 62%'},
-  gelo:       {src:'fotos/openbar/g-w-gelo.webp'},
-  cerveja:    {src:'fotos/openbar/cerveja.jpg'},
-  chopp:      {src:'fotos/openbar/i-ob-chopp.webp'},
-  whisky:     {src:'fotos/openbar/i-ob-whisky.webp'},
-  espumante:  {src:'fotos/openbar/i-ob-espumante.webp'},
-  welcome:    {src:'fotos/openbar/g-ob-servico.webp'},
-  mule:       {src:'fotos/opendrinks/mule-oficial.jpg', r:1},
-  negroni:    {src:'fotos/opendrinks/ind-negroni.jpg', r:1},
-  cosmo:      {src:'fotos/opendrinks/ind-cosmopolitan.jpg', r:1},
-  gt:         {src:'fotos/opendrinks/stock-gt-classico.jpg'},
-  mojito:     {src:'fotos/opendrinks/ind-mojito.jpg', r:1},
-  bourbon:    {src:'fotos/opendrinks/ind-bourbon-peach.jpg', r:1},
-  nysour:     {src:'fotos/opendrinks/ind-ny-sour.jpg', r:1},
-  caipLimao:  {src:'fotos/opendrinks/ind-caipirinha.jpg', r:1},
-  caipMorango:{src:'fotos/opendrinks/caipirinha-morango.webp', r:1},
-  caipVinho:  {src:'fotos/openbar/g-c-vinho.webp'},
+/* Fotos: cada item tem a(s) sua(s). Produto = foto de catálogo da marca
+   (Banco de Mídias ou loja); drinks, caipirinhas e bandejas = Banco de Mídias.
+   [arquivo, legenda, etiqueta]. O carrossel de cada pacote sai dos itensIds,
+   então nunca mostra bebida que não está no pacote. */
+const F = n => 'fotos/openbar-previa/' + n + '.jpg';
+const FOTO_ITEM = {
+  welcome:  [['welcome','Welcome Drink','Na chegada dos convidados']],
+  caipi:    [['caip-limao','Caipirinha de limão','Open Caipirinha'],['caip-morango','Caipirinha de morango','Open Caipirinha'],
+             ['caip-vinho','Caipirinha de vinho','Open Caipirinha'],['caip-tropical','Caipirinha tropical','Open Caipirinha'],
+             ['caip-framboesa','Caipirinha de framboesa','Open Caipirinha']],
+  drinks:   [['bourbon','Bourbon Peach','Open Drinks'],['cosmo','Cosmopolitan','Open Drinks'],['gt-classico','Gin Tônica Clássico','Open Drinks'],
+             ['gt-maracuja','Gin Tônica Maracujá','Open Drinks'],['gt-morango','Gin Tônica Morango','Open Drinks'],['julep','Strawberry Julep Cremoso','Open Drinks'],
+             ['nysour','New York Sour','Open Drinks'],['mule','Moscow Mule','Open Drinks'],['negroni','Negroni','Open Drinks'],['mojito','Mojito','Open Drinks']],
+  balcao:   [['balcao','Balcão de apoio na pista','Perto da pista']],
+  heineken: [['heineken','Heineken long neck','Cerveja']],
+  brahma:   [['brahma','Brahma litro','Cerveja']],
+  absolut:  [['absolut','Vodka Absolut','Destilado']],
+  smirnoff: [['smirnoff','Vodka Smirnoff','Destilado']],
+  redlabel: [['redlabel','Johnnie Walker Red Label','Whisky']],
+  passport: [['passport','Whisky Passport','Whisky']],
+  perini:   [['perini','Espumante Perini','Moscatel ou brut']],
+  sanjo:    [['sanjo','Espumante Sanjo','Moscatel ou brut']],
+  redbull:  [['redbull','Red Bull','Energético']],
+  baly:     [['baly','Energético Baly litro','Energético']],
+  suco:     [['suco','Suco de laranja','Suco']],
+  coca:     [['coca','Coca-Cola e Coca-Cola Zero','Refrigerante']],
+  guarana:  [['guarana','Guaraná e Guaraná Zero','Refrigerante']],
+  agua:     [['agua','Água com e sem gás','Água']],
 };
+/* ordem no carrossel: o que o pacote tem de mais especial primeiro */
+const ORDEM_FOTOS = ['welcome','caipi','drinks','balcao','heineken','brahma','absolut','smirnoff','redlabel','passport','perini','sanjo','redbull','baly','suco','coca','guarana','agua'];
+NIVEIS.forEach(nv=>{
+  nv.fotos = [[F(nv.id), nv.nome + ' na bandeja', 'Tudo o que entra no pacote']]
+    .concat(ORDEM_FOTOS.filter(id=>nv.itensIds.includes(id)).flatMap(id=>FOTO_ITEM[id].map(([f,c,t])=>[F(f),c,t])));
+});
 
 /* tabelas de preço: [nome, valor, detalhe?] */
 const CONSUMO = [
@@ -970,7 +978,7 @@ function tabelaPrecos(el, dados, quebra){
 tabelaPrecos(document.getElementById('precosConsumo'), CONSUMO, 4);
 tabelaPrecos(document.getElementById('precosUpgrade'), UPGRADE, 2);
 
-let atual = 'pacote5';
+let atual = 'pacote1';
 
 /* ---- cards do seletor ---- */
 const grid = document.getElementById('menusGrid');
@@ -978,7 +986,7 @@ const bar  = document.getElementById('tierbarOpts');
 NIVEIS.forEach(nv=>{
   const b = document.createElement('button');
   b.type='button'; b.className='nivel'; b.dataset.id=nv.id; b.setAttribute('aria-pressed','false');
-  b.innerHTML = (nv.selo ? `<p class="nivel__selo">${nv.selo}</p>` : '') + `<p class="nivel__nome">${nv.nome}</p>
+  b.innerHTML = `<p class="nivel__nome">${nv.nome}</p>
     <p class="nivel__preco">${nv.preco}<small>por pessoa</small></p>
     <p class="nivel__res">${nv.resumo.join('<br>')}</p>`
     + `<p class="nivel__inclui">${nv.sub}</p>`;
@@ -1000,9 +1008,9 @@ function render(nv){
   document.getElementById('carrosselNome').textContent = nv.nome;
 
   const track = document.getElementById('track');
-  track.innerHTML = nv.fotos.map(([key,cap])=>{ const f = FOTO[key], pos = f.pos; return `
-    <figure class="dish"><img src="${f.src}" alt="${cap}" loading="lazy"${pos?` style="object-position:${pos}"`:''}>
-      <figcaption class="dish__cap"><p class="dish__nome">${cap}</p><p class="dish__tag">${f.r?'Foto real':'Foto ilustrativa'}</p></figcaption>
+  track.innerHTML = nv.fotos.map(([src,cap,tag])=>{ return `
+    <figure class="dish"><img src="${src}" alt="${cap}" loading="lazy">
+      <figcaption class="dish__cap"><p class="dish__nome">${cap}</p><p class="dish__tag">${tag}</p></figcaption>
     </figure>`; }).join('');
   track.scrollLeft = 0;
   track.querySelectorAll('.dish').forEach(el=>ioDish.observe(el));
@@ -1082,7 +1090,7 @@ selecionar(atual,false);
     + `<tr class="grupo"><th scope="rowgroup" colspan="${n}">Em todos os pacotes</th></tr>`
     + TODOS.map(t=>`<tr><th scope="row">${t}</th>${NIVEIS.map(()=>cel(true)).join('')}</tr>`).join('');
   tab.innerHTML =
-    `<thead><tr><th scope="col" aria-label="Item"></th>${NIVEIS.map(nv=>`<th scope="col" data-id="${nv.id}">${nv.selo?`<small class="selo">${nv.selo}</small>`:''}${nv.curtoNome}</th>`).join('')}</tr></thead>`
+    `<thead><tr><th scope="col" aria-label="Item"></th>${NIVEIS.map(nv=>`<th scope="col" data-id="${nv.id}">${nv.curtoNome}</th>`).join('')}</tr></thead>`
     + `<tbody>${corpo}</tbody>`
     + `<tfoot><tr><th scope="row">Por pessoa</th>${NIVEIS.map(nv=>`<td>${nv.preco}</td>`).join('')}</tr></tfoot>`;
   const marcar = id=>{
